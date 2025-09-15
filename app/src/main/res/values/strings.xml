@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Parkkar</string>
+    <string name="app_logo_description">Park-Kar App Logo</string>
+    <string name="welcome_text">Hi! Welcome</string>
+    <string name="subtitle_text">Please log in to continue</string>
+    <string name="username_hint">Username, Email, or Phone</string>
+    <string name="password_hint">Password</string>
+    <string name="remember_me">Remember Me</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="log_in">Log In</string>
+    <string name="no_account_text">Don\'t have an account?</string>
+    <string name="signup_text">Sign Up</string>
+</resources>
