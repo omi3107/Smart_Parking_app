@@ -39,6 +39,11 @@
             android:exported="false"
             android:label="Forgot Password"
             android:theme="@style/Theme.Parkkar" />
+        <activity
+            android:name=".ParkingResultsActivity"
+            android:exported="false"
+            android:label="Parking Results"
+            android:theme="@style/Theme.Parkkar" />
     </application>
 
 </manifest>

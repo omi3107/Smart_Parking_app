@@ -44,8 +44,6 @@ import com.example.parkkar.R // IMPORT R CLASS
 private const val PREFS_NAME = "ParkkarPrefs"
 private const val KEY_SAVED_USERNAME = "saved_username"
 
-// ParkkarTheme local definition was REMOVED from here.
-
 class LoginActivity : ComponentActivity() {
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var dbHelper: DatabaseHelper
@@ -73,17 +71,21 @@ class LoginActivity : ComponentActivity() {
                         val loginSuccess = dbHelper.checkUserCredentials(usernameInput, passwordInput)
 
                         if (loginSuccess) {
+                            val userId = dbHelper.getUserIdByUsername(usernameInput)
+                            dbHelper.addLogEntry(userId, "Successful Login") // Log successful login
+
                             showToast(context, "Login Successful")
                             if (rememberMeChecked) {
                                 sharedPreferences.edit().putString(KEY_SAVED_USERNAME, usernameInput).apply()
                             } else {
                                 sharedPreferences.edit().remove(KEY_SAVED_USERNAME).apply()
                             }
-                            val intent = Intent(context, LoginActivity::class.java)
+                            val intent = Intent(context, HomeActivity::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                             context.startActivity(intent)
                             finish()
                         } else {
+                            dbHelper.addLogEntry(null, "Failed Login") // Log failed login
                             showToast(context, "Invalid Username/E-mail/Phone Number or Password")
                         }
                     },
@@ -92,7 +94,7 @@ class LoginActivity : ComponentActivity() {
                         context.startActivity(intent)
                     },
                     onForgotPasswordClicked = {
-                        val intent = Intent(context, ForgotPasswordActivity::class.java) // Navigate to ForgotPasswordActivity
+                        val intent = Intent(context, ForgotPasswordActivity::class.java)
                         context.startActivity(intent)
                     }
                 )
@@ -167,7 +169,7 @@ fun LoginScreen(
                 OutlinedTextField(
                     value = username,
                     onValueChange = { username = it },
-                    label = { Text("Username, Email or Phone Number") },
+                    label = { Text("Username or Email") }, // Updated Label
                     modifier = Modifier.fillMaxWidth(),
                     singleLine = true,
                     colors = OutlinedTextFieldDefaults.colors(
