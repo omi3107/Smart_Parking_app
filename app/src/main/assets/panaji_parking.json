@@ -1,0 +1,384 @@
+{
+	"?xml": "",
+	"office:document": {
+		"office:meta": {
+			"meta:document-statistic": "",
+			"meta:generator": "LibreOffice/24.8.1.2$Linux_X86_64 LibreOffice_project/87fa9aec1a63e70835390b81c40bb8993f1d4ff6"
+		},
+		"office:settings": {
+			"config:config-item-set": [
+				{
+					"config:config-item": [
+						0,
+						0,
+						32948,
+						903
+					]
+				},
+				{
+					"config:config-item": [
+						true,
+						true,
+						true,
+						0,
+						true,
+						true,
+						false,
+						true,
+						false,
+						12632256,
+						true,
+						true,
+						0,
+						false,
+						false,
+						true,
+						true,
+						false,
+						3,
+						false,
+						"",
+						false,
+						"",
+						false,
+						1270,
+						1270,
+						1,
+						1,
+						true,
+						false,
+						false,
+						true,
+						true,
+						true,
+						true,
+						true,
+						true
+					],
+					"config:config-item-map-named": {
+						"config:config-item-map-entry": {
+							"config:config-item": "Sheet1"
+						}
+					}
+				}
+			]
+		},
+		"office:scripts": {
+			"office:script": {
+				"ooo:libraries": ""
+			}
+		},
+		"office:font-face-decls": {
+			"style:font-face": [
+				"",
+				"",
+				""
+			]
+		},
+		"office:styles": {
+			"style:default-style": [
+				{
+					"style:paragraph-properties": "",
+					"style:text-properties": ""
+				},
+				{
+					"style:graphic-properties": "",
+					"style:paragraph-properties": {
+						"style:tab-stops": ""
+					},
+					"style:text-properties": ""
+				}
+			],
+			"style:style": [
+				"",
+				{
+					"style:graphic-properties": "",
+					"style:text-properties": ""
+				},
+				"",
+				{
+					"style:table-cell-properties": "",
+					"style:text-properties": ""
+				},
+				{
+					"style:table-cell-properties": "",
+					"style:text-properties": ""
+				},
+				{
+					"style:table-cell-properties": "",
+					"style:text-properties": ""
+				},
+				{
+					"style:table-cell-properties": ""
+				},
+				{
+					"style:table-cell-properties": "",
+					"style:text-properties": ""
+				},
+				{
+					"style:table-cell-properties": "",
+					"style:text-properties": ""
+				},
+				{
+					"style:table-cell-properties": "",
+					"style:text-properties": ""
+				},
+				{
+					"style:table-cell-properties": ""
+				},
+				{
+					"style:table-cell-properties": "",
+					"style:text-properties": ""
+				},
+				{
+					"style:table-cell-properties": "",
+					"style:text-properties": ""
+				},
+				{
+					"style:table-cell-properties": "",
+					"style:text-properties": ""
+				},
+				{
+					"style:table-cell-properties": "",
+					"style:text-properties": ""
+				},
+				{
+					"style:table-cell-properties": "",
+					"style:text-properties": ""
+				},
+				{
+					"style:table-cell-properties": "",
+					"style:text-properties": ""
+				},
+				{
+					"style:table-cell-properties": "",
+					"style:text-properties": ""
+				},
+				{
+					"style:table-cell-properties": "",
+					"style:text-properties": ""
+				},
+				{
+					"style:table-cell-properties": ""
+				},
+				{
+					"style:table-cell-properties": "",
+					"style:text-properties": ""
+				}
+			],
+			"number:number-style": {
+				"number:number": ""
+			},
+			"draw:marker": "",
+			"loext:theme": {
+				"loext:theme-colors": {
+					"loext:color": [
+						"",
+						"",
+						"",
+						"",
+						"",
+						"",
+						"",
+						"",
+						"",
+						"",
+						"",
+						""
+					]
+				}
+			}
+		},
+		"office:automatic-styles": {
+			"style:style": [
+				{
+					"style:table-column-properties": ""
+				},
+				{
+					"style:table-column-properties": ""
+				},
+				{
+					"style:table-column-properties": ""
+				},
+				{
+					"style:table-column-properties": ""
+				},
+				{
+					"style:table-column-properties": ""
+				},
+				{
+					"style:table-column-properties": ""
+				},
+				{
+					"style:table-column-properties": ""
+				},
+				{
+					"style:table-row-properties": ""
+				},
+				{
+					"style:table-properties": ""
+				}
+			],
+			"number:number-style": {
+				"number:number": ""
+			},
+			"style:page-layout": [
+				{
+					"style:page-layout-properties": "",
+					"style:header-style": {
+						"style:header-footer-properties": ""
+					},
+					"style:footer-style": {
+						"style:header-footer-properties": ""
+					}
+				},
+				{
+					"style:page-layout-properties": "",
+					"style:header-style": {
+						"style:header-footer-properties": {
+							"style:background-image": ""
+						}
+					},
+					"style:footer-style": {
+						"style:header-footer-properties": {
+							"style:background-image": ""
+						}
+					}
+				}
+			]
+		},
+		"office:master-styles": {
+			"style:master-page": [
+				{
+					"style:header": {
+						"text:p": {
+							"text:sheet-name": "???"
+						}
+					},
+					"style:header-left": "",
+					"style:header-first": "",
+					"style:footer": {
+						"text:p": {
+							"text:page-number": 1,
+							"#text": "Page"
+						}
+					},
+					"style:footer-left": "",
+					"style:footer-first": ""
+				},
+				{
+					"style:header": {
+						"style:region-left": {
+							"text:p": {
+								"text:sheet-name": "???",
+								"text:s": "",
+								"text:title": "???",
+								"#text": "()"
+							}
+						},
+						"style:region-right": {
+							"text:p": {
+								"text:date": "00/00/0000",
+								"text:time": "00:00:00",
+								"#text": ","
+							}
+						}
+					},
+					"style:header-left": "",
+					"style:header-first": "",
+					"style:footer": {
+						"text:p": {
+							"text:page-number": 1,
+							"text:s": "",
+							"text:page-count": 99,
+							"#text": "Page/"
+						}
+					},
+					"style:footer-left": "",
+					"style:footer-first": ""
+				}
+			]
+		},
+		"office:body": {
+			"office:spreadsheet": {
+				"table:calculation-settings": "",
+				"table:table": {
+					"table:table-column": [
+						"",
+						"",
+						"",
+						"",
+						"",
+						"",
+						""
+					],
+					"table:table-row": [
+						{
+							"table:table-cell": [
+								{
+									"text:p": "CityName"
+								},
+								{
+									"text:p": "Zone Name"
+								},
+								{
+									"text:p": "Ward Name"
+								},
+								{
+									"text:p": "Name of Parking"
+								},
+								{
+									"text:p": "Parking Address"
+								},
+								{
+									"text:p": "Latitude"
+								},
+								{
+									"text:p": "Longitude"
+								},
+								{
+									"text:p": "No. of 4 wheeler parking"
+								},
+								{
+									"text:p": "No. of 2 wheeler parking"
+								}
+							]
+						},
+						{
+							"table:table-cell": [
+								{
+									"text:p": "Panaji"
+								},
+								{
+									"text:p": "North Goa"
+								},
+								{
+									"text:p": "NA"
+								},
+								{
+									"text:p": "Multi-Level Car Parking, Panaji"
+								},
+								{
+									"text:p": "Multi-Level Car Park, Patto Colony, Panaji, Goa 403521"
+								},
+								{
+									"text:p": 15.4764482
+								},
+								{
+									"text:p": 73.8281104
+								},
+								{
+									"text:p": 465
+								},
+								{
+									"text:p": "NA"
+								}
+							]
+						}
+					]
+				},
+				"table:named-expressions": ""
+			}
+		}
+	}
+}

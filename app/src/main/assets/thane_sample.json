@@ -1,0 +1,95 @@
+{
+	"?xml": "",
+	"parking_data": {
+		"parking_location": [
+			{
+				"name": "Thane Station Road",
+				"address": "Thane Station Road, Dada Patil Wadi, Thane West, Thane, Maharashtra 400602, India",
+				"latitude": 19.187,
+				"longitude": 72.9731,
+				"two_wheeler_parking": 250,
+				"four_wheeler_parking": 200
+			},
+			{
+				"name": "Gavdevi Underground Parking Naupada",
+				"address": "Gaondevi Maidan Road, Naupada, Thane West, Thane, Maharashtra, India",
+				"latitude": 19.192213,
+				"longitude": 72.972217,
+				"two_wheeler_parking": 100,
+				"four_wheeler_parking": 150
+			},
+			{
+				"name": "Kalwa Station Parking",
+				"address": "Kalwa, Thane, Maharashtra 400605, India",
+				"latitude": 19.19606,
+				"longitude": 72.997574,
+				"two_wheeler_parking": 300,
+				"four_wheeler_parking": 75
+			},
+			{
+				"name": "Ghodbunder Road",
+				"address": "Ghodbunder Road, Thane West, Thane, Maharashtra 400607, India",
+				"latitude": 19.2603,
+				"longitude": 72.9824,
+				"two_wheeler_parking": 500,
+				"four_wheeler_parking": 400
+			},
+			{
+				"name": "Pokhran Road Parking (Pokhran Road No. 1)",
+				"address": "Pokhran Road Number 1, Vartak Nagar, Thane, Maharashtra 400606, India",
+				"latitude": 19.21,
+				"longitude": 72.96,
+				"two_wheeler_parking": 180,
+				"four_wheeler_parking": 160
+			},
+			{
+				"name": "Parking Plaza",
+				"address": "Manisha Nagar, Kalwa, Thane, Maharashtra, India",
+				"latitude": 19.197022,
+				"longitude": 73.003319,
+				"two_wheeler_parking": 120,
+				"four_wheeler_parking": 110
+			},
+			{
+				"name": "Korum Mall Parking",
+				"address": "Mangal Pandey Road, Samata Nagar, Thane West, Thane, Maharashtra 400606, India",
+				"latitude": 19.202332,
+				"longitude": 72.965677,
+				"two_wheeler_parking": 350,
+				"four_wheeler_parking": 600
+			},
+			{
+				"name": "Viviana Mall Parking Facility",
+				"address": "Eastern Express Highway, Thane West, Thane, Maharashtra 400601, India",
+				"latitude": 19.20626,
+				"longitude": 72.977413,
+				"two_wheeler_parking": 400,
+				"four_wheeler_parking": 750
+			},
+			{
+				"name": "Jupiter Hospital Parking Facility",
+				"address": "Eastern Express Highway, Thane West, Thane, Maharashtra 400601, India",
+				"latitude": 19.2063,
+				"longitude": 72.9772,
+				"two_wheeler_parking": 80,
+				"four_wheeler_parking": 250
+			},
+			{
+				"name": "Upvan Lake Parking Lot",
+				"address": "Upvan Lake Road, Pokhran Road No. 2, Thane West, Thane, Maharashtra 400606, India",
+				"latitude": 19.2215,
+				"longitude": 72.9722,
+				"two_wheeler_parking": 200,
+				"four_wheeler_parking": 180
+			},
+			{
+				"name": "Thane Court Parking Area",
+				"address": "Court Naka, Thane West, Thane, Maharashtra 400602, India",
+				"latitude": 19.1894,
+				"longitude": 72.9765,
+				"two_wheeler_parking": 100,
+				"four_wheeler_parking": 150
+			}
+		]
+	}
+}
