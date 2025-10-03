@@ -86,7 +86,7 @@ class LoginActivity : ComponentActivity() {
                             finish()
                         } else {
                             dbHelper.addLogEntry(null, "Failed Login") // Log failed login
-                            showToast(context, "Invalid Username/E-mail/Phone Number or Password")
+                            showToast(context, "Invalid Username/E-mail/Password")
                         }
                     },
                     onSignUpClicked = {

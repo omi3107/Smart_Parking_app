@@ -8,7 +8,40 @@
 				"latitude": 19.187,
 				"longitude": 72.9731,
 				"two_wheeler_parking": 250,
-				"four_wheeler_parking": 200
+				"four_wheeler_parking": 200,
+				"prices": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Per Hour",
+						"duration": "first 2 hours",
+						"amount": 60.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Per Hour",
+						"duration": "subsequent hour",
+						"amount": 30.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "Full Day",
+						"rateType": "Flat Rate",
+						"duration": "Max 12 hours",
+						"amount": 300.00,
+						"currency": "INR"
+					}
+				],
+				"openingTimes": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 23:00"
+					}
+				],
+				"CoverageType": "Multi-level"
 			},
 			{
 				"name": "Gavdevi Underground Parking Naupada",
@@ -16,7 +49,40 @@
 				"latitude": 19.192213,
 				"longitude": 72.972217,
 				"two_wheeler_parking": 100,
-				"four_wheeler_parking": 150
+				"four_wheeler_parking": 150,
+				"prices": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Per Hour",
+						"duration": "first 2 hours",
+						"amount": 60.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Per Hour",
+						"duration": "subsequent hour",
+						"amount": 30.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "Full Day",
+						"rateType": "Flat Rate",
+						"duration": "Max 12 hours",
+						"amount": 300.00,
+						"currency": "INR"
+					}
+				],
+				"openingTimes": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 23:00"
+					}
+				],
+				"CoverageType": "Multi-level"
 			},
 			{
 				"name": "Kalwa Station Parking",
@@ -24,7 +90,40 @@
 				"latitude": 19.19606,
 				"longitude": 72.997574,
 				"two_wheeler_parking": 300,
-				"four_wheeler_parking": 75
+				"four_wheeler_parking": 75,
+				"prices": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Per Hour",
+						"duration": "first 2 hours",
+						"amount": 60.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Per Hour",
+						"duration": "subsequent hour",
+						"amount": 30.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "Full Day",
+						"rateType": "Flat Rate",
+						"duration": "Max 12 hours",
+						"amount": 300.00,
+						"currency": "INR"
+					}
+				],
+				"openingTimes": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 23:00"
+					}
+				],
+				"CoverageType": "Multi-level"
 			},
 			{
 				"name": "Ghodbunder Road",
@@ -32,7 +131,40 @@
 				"latitude": 19.2603,
 				"longitude": 72.9824,
 				"two_wheeler_parking": 500,
-				"four_wheeler_parking": 400
+				"four_wheeler_parking": 400,
+				"prices": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Per Hour",
+						"duration": "first 2 hours",
+						"amount": 60.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Per Hour",
+						"duration": "subsequent hour",
+						"amount": 30.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "Full Day",
+						"rateType": "Flat Rate",
+						"duration": "Max 12 hours",
+						"amount": 300.00,
+						"currency": "INR"
+					}
+				],
+				"openingTimes": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 23:00"
+					}
+				],
+				"CoverageType": "Multi-level"
 			},
 			{
 				"name": "Pokhran Road Parking (Pokhran Road No. 1)",
@@ -40,7 +172,40 @@
 				"latitude": 19.21,
 				"longitude": 72.96,
 				"two_wheeler_parking": 180,
-				"four_wheeler_parking": 160
+				"four_wheeler_parking": 160,
+				"prices": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Per Hour",
+						"duration": "first 2 hours",
+						"amount": 60.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Per Hour",
+						"duration": "subsequent hour",
+						"amount": 30.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "Full Day",
+						"rateType": "Flat Rate",
+						"duration": "Max 12 hours",
+						"amount": 300.00,
+						"currency": "INR"
+					}
+				],
+				"openingTimes": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 23:00"
+					}
+				],
+				"CoverageType": "Multi-level"
 			},
 			{
 				"name": "Parking Plaza",
@@ -48,7 +213,40 @@
 				"latitude": 19.197022,
 				"longitude": 73.003319,
 				"two_wheeler_parking": 120,
-				"four_wheeler_parking": 110
+				"four_wheeler_parking": 110,
+				"prices": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Per Hour",
+						"duration": "first 2 hours",
+						"amount": 60.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Per Hour",
+						"duration": "subsequent hour",
+						"amount": 30.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "Full Day",
+						"rateType": "Flat Rate",
+						"duration": "Max 12 hours",
+						"amount": 300.00,
+						"currency": "INR"
+					}
+				],
+				"openingTimes": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 23:00"
+					}
+				],
+				"CoverageType": "Multi-level"
 			},
 			{
 				"name": "Korum Mall Parking",
@@ -56,7 +254,40 @@
 				"latitude": 19.202332,
 				"longitude": 72.965677,
 				"two_wheeler_parking": 350,
-				"four_wheeler_parking": 600
+				"four_wheeler_parking": 600,
+				"prices": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Per Hour",
+						"duration": "first 2 hours",
+						"amount": 60.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Per Hour",
+						"duration": "subsequent hour",
+						"amount": 30.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "Full Day",
+						"rateType": "Flat Rate",
+						"duration": "Max 12 hours",
+						"amount": 300.00,
+						"currency": "INR"
+					}
+				],
+				"openingTimes": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 23:00"
+					}
+				],
+				"CoverageType": "Multi-level"
 			},
 			{
 				"name": "Viviana Mall Parking Facility",
@@ -64,7 +295,40 @@
 				"latitude": 19.20626,
 				"longitude": 72.977413,
 				"two_wheeler_parking": 400,
-				"four_wheeler_parking": 750
+				"four_wheeler_parking": 750,
+				"prices": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Per Hour",
+						"duration": "first 2 hours",
+						"amount": 60.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Per Hour",
+						"duration": "subsequent hour",
+						"amount": 30.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "Full Day",
+						"rateType": "Flat Rate",
+						"duration": "Max 12 hours",
+						"amount": 300.00,
+						"currency": "INR"
+					}
+				],
+				"openingTimes": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 23:00"
+					}
+				],
+				"CoverageType": "Multi-level"
 			},
 			{
 				"name": "Jupiter Hospital Parking Facility",
@@ -72,7 +336,40 @@
 				"latitude": 19.2063,
 				"longitude": 72.9772,
 				"two_wheeler_parking": 80,
-				"four_wheeler_parking": 250
+				"four_wheeler_parking": 250,
+				"prices": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Per Hour",
+						"duration": "first 2 hours",
+						"amount": 60.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Per Hour",
+						"duration": "subsequent hour",
+						"amount": 30.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "Full Day",
+						"rateType": "Flat Rate",
+						"duration": "Max 12 hours",
+						"amount": 300.00,
+						"currency": "INR"
+					}
+				],
+				"openingTimes": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 23:00"
+					}
+				],
+				"CoverageType": "Multi-level"
 			},
 			{
 				"name": "Upvan Lake Parking Lot",
@@ -80,7 +377,40 @@
 				"latitude": 19.2215,
 				"longitude": 72.9722,
 				"two_wheeler_parking": 200,
-				"four_wheeler_parking": 180
+				"four_wheeler_parking": 180,
+				"prices": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Per Hour",
+						"duration": "first 2 hours",
+						"amount": 60.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Per Hour",
+						"duration": "subsequent hour",
+						"amount": 30.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "Full Day",
+						"rateType": "Flat Rate",
+						"duration": "Max 12 hours",
+						"amount": 300.00,
+						"currency": "INR"
+					}
+				],
+				"openingTimes": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 23:00"
+					}
+				],
+				"CoverageType": "Multi-level"
 			},
 			{
 				"name": "Thane Court Parking Area",
@@ -88,7 +418,40 @@
 				"latitude": 19.1894,
 				"longitude": 72.9765,
 				"two_wheeler_parking": 100,
-				"four_wheeler_parking": 150
+				"four_wheeler_parking": 150,
+				"prices": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Per Hour",
+						"duration": "first 2 hours",
+						"amount": 60.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Per Hour",
+						"duration": "subsequent hour",
+						"amount": 30.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "Full Day",
+						"rateType": "Flat Rate",
+						"duration": "Max 12 hours",
+						"amount": 300.00,
+						"currency": "INR"
+					}
+				],
+				"openingTimes": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 23:00"
+					}
+				],
+				"CoverageType": "Multi-level"
 			}
 		]
 	}

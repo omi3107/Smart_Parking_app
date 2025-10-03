@@ -6,6 +6,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -51,6 +53,16 @@ class HomeActivity : ComponentActivity() {
     private lateinit var dbHelper: DatabaseHelper
     private val homeViewModel: HomeViewModel by viewModels()
 
+    private fun navigateToDetails(spotId: String) {
+        val intent = Intent(this, ParkingResultsActivity::class.java).apply {
+            putExtra(ParkingResultsActivity.EXTRA_PARKING_SPOT_ID, spotId)
+            // Optionally, pass the validated dates to ParkingResultsActivity
+            // intent.putExtra("arrival_time_millis", homeViewModel.arrivalDateTime.value.timeInMillis)
+            // intent.putExtra("leaving_time_millis", homeViewModel.leavingDateTime.value.timeInMillis)
+        }
+        startActivity(intent)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
@@ -72,10 +84,41 @@ class HomeActivity : ComponentActivity() {
                         startActivity(intent)
                         finish()
                     },
-                    onFindParkingClicked = {
-                        // TODO: Later, pass selected parking spot and dates from ViewModel
-                        val intent = Intent(this, ParkingResultsActivity::class.java)
-                        startActivity(intent)
+                    onNavigateToDetails = ::navigateToDetails,
+                    onFindParkingGeneral = {
+                        val arrivalCal = homeViewModel.arrivalDateTime.value
+                        val leavingCal = homeViewModel.leavingDateTime.value
+
+                        val todayCal = Calendar.getInstance().apply {
+                            set(Calendar.HOUR_OF_DAY, 0); set(Calendar.MINUTE, 0); set(Calendar.SECOND, 0); set(Calendar.MILLISECOND, 0)
+                        }
+                        val arrivalDateCal = (arrivalCal.clone() as Calendar).apply {
+                            set(Calendar.HOUR_OF_DAY, 0); set(Calendar.MINUTE, 0); set(Calendar.SECOND, 0); set(Calendar.MILLISECOND, 0)
+                        }
+                        val leavingDateCal = (leavingCal.clone() as Calendar).apply {
+                            set(Calendar.HOUR_OF_DAY, 0); set(Calendar.MINUTE, 0); set(Calendar.SECOND, 0); set(Calendar.MILLISECOND, 0)
+                        }
+
+                        if (arrivalDateCal.before(todayCal)) {
+                            showToast(this, "Arriving date cannot be in the past.")
+                            return@HomeScreenContent
+                        } 
+                        if (leavingDateCal.before(todayCal)) {
+                            showToast(this, "Leaving date cannot be in the past.")
+                            return@HomeScreenContent
+                        }
+                        if (leavingCal.before(arrivalCal)) {
+                            showToast(this, "Leaving date and time cannot be before arriving date and time.")
+                            return@HomeScreenContent
+                        }
+
+                        val searchState = homeViewModel.searchResults.value
+                        if (searchState is SearchResultUiState.Success && searchState.spots.isNotEmpty()) {
+                            val topSpotId = searchState.spots[0].id
+                            navigateToDetails(topSpotId)
+                        } else {
+                            Toast.makeText(this, "Please search and select a parking spot or ensure your search yields results.", Toast.LENGTH_LONG).show()
+                        }
                     }
                 )
             }
@@ -88,7 +131,8 @@ class HomeActivity : ComponentActivity() {
 fun HomeScreenContent(
     viewModel: HomeViewModel,
     onNavigateBack: () -> Unit,
-    onFindParkingClicked: () -> Unit
+    onNavigateToDetails: (spotId: String) -> Unit, // Changed
+    onFindParkingGeneral: () -> Unit // New for the main button
 ) {
     val context = LocalContext.current
     val searchQuery by viewModel.searchQuery.collectAsState()
@@ -99,7 +143,6 @@ fun HomeScreenContent(
     val dateFormatter = remember { SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()) }
     val timeFormatter = remember { SimpleDateFormat("hh:mm a", Locale.getDefault()) }
 
-    // --- Date and Time Picker Dialogs ---
     val showArrivalDatePicker = remember { mutableStateOf(false) }
     val showArrivalTimePicker = remember { mutableStateOf(false) }
     val showLeavingDatePicker = remember { mutableStateOf(false) }
@@ -129,7 +172,6 @@ fun HomeScreenContent(
             showLeavingTimePicker.value = false
         }
     }
-    // --- End Date and Time Picker Dialogs ---
 
     Scaffold(
         topBar = {
@@ -137,10 +179,7 @@ fun HomeScreenContent(
                 title = { Text("Home") },
                 navigationIcon = {
                     IconButton(onClick = onNavigateBack) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Logout"
-                        )
+                        Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Logout")
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -159,42 +198,17 @@ fun HomeScreenContent(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 24.dp),
+                modifier = Modifier.fillMaxWidth().padding(bottom = 24.dp),
                 horizontalArrangement = Arrangement.End,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    text = "PARK-KAR",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 20.sp,
-                    color = Color(0xFF4A4A4A)
-                )
+                Text(text = "PARK-KAR", fontWeight = FontWeight.Bold, fontSize = 20.sp, color = Color(0xFF4A4A4A))
                 Spacer(modifier = Modifier.width(8.dp))
-                Image(
-                    painter = painterResource(id = R.drawable.logo),
-                    contentDescription = "Park-Kar Logo",
-                    modifier = Modifier.height(20.dp)
-                )
+                Image(painter = painterResource(id = R.drawable.logo), contentDescription = "Park-Kar Logo", modifier = Modifier.height(20.dp))
             }
 
-            Text(
-                text = "Hi!",
-                style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 4.dp),
-                textAlign = TextAlign.Start
-            )
-            Text(
-                text = "Where are you going?",
-                style = MaterialTheme.typography.headlineSmall,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 16.dp), // Reduced bottom padding
-                textAlign = TextAlign.Start
-            )
+            Text("Hi!", style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold), modifier = Modifier.fillMaxWidth().padding(bottom = 4.dp), textAlign = TextAlign.Start)
+            Text("Where are you going?", style = MaterialTheme.typography.headlineSmall, modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp), textAlign = TextAlign.Start)
 
             OutlinedTextField(
                 value = searchQuery,
@@ -203,16 +217,11 @@ fun HomeScreenContent(
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true
             )
-            Spacer(modifier = Modifier.height(8.dp)) // Reduced spacer
+            Spacer(modifier = Modifier.height(8.dp))
 
-            // --- Search Results Section ---
-            Box(modifier = Modifier
-                .fillMaxWidth()
-                .weight(0.5f) // Adjust weight as needed for results list
-            ) {
+            Box(modifier = Modifier.fillMaxWidth().weight(0.5f)) {
                 when (val state = searchResultsUiState) {
                     is SearchResultUiState.Idle -> {
-                        // Nothing to show or a placeholder message
                         Text("Start typing to search for parking.", textAlign = TextAlign.Center, modifier = Modifier.align(Alignment.Center))
                     }
                     is SearchResultUiState.Loading -> {
@@ -221,9 +230,10 @@ fun HomeScreenContent(
                     is SearchResultUiState.Success -> {
                         LazyColumn(modifier = Modifier.fillMaxSize()) {
                             items(state.spots) { spot ->
-                                ParkingSpotItem(spot = spot) { selectedSpot ->
-                                    viewModel.onSearchQueryChanged(selectedSpot.parkingName ?: selectedSpot.address ?: selectedSpot.cityName)
-                                    // Optionally hide results list here by changing state
+                                ParkingSpotItem(spot = spot) {
+                                    // User clicked a spot in the list, directly navigate to details
+                                    viewModel.onSearchQueryChanged(spot.parkingName ?: spot.address ?: spot.cityName) // Update search bar for visual feedback
+                                    onNavigateToDetails(spot.id) // Pass ID for navigation
                                 }
                                 Divider()
                             }
@@ -240,10 +250,8 @@ fun HomeScreenContent(
                     }
                 }
             }
-            // --- End Search Results Section ---
 
             Spacer(modifier = Modifier.height(16.dp))
-
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -252,59 +260,30 @@ fun HomeScreenContent(
             ) {
                 Column(modifier = Modifier.weight(1f)) {
                     Text("Arriving", style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(bottom = 8.dp))
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clickable { showArrivalDatePicker.value = true }
-                            .padding(vertical = 8.dp)
-                    ) {
+                    Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth().clickable { showArrivalDatePicker.value = true }.padding(vertical = 8.dp)) {
                         Text(dateFormatter.format(arrivalDateTime.time), style = MaterialTheme.typography.bodyLarge)
                         Spacer(Modifier.weight(1f))
                         Icon(Icons.Filled.CalendarToday, contentDescription = "Select Arriving Date")
                     }
                     HorizontalDivider(modifier = Modifier.padding(vertical = 4.dp))
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clickable { showArrivalTimePicker.value = true }
-                            .padding(vertical = 8.dp)
-                    ) {
+                    Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth().clickable { showArrivalTimePicker.value = true }.padding(vertical = 8.dp)) {
                         Text(timeFormatter.format(arrivalDateTime.time), style = MaterialTheme.typography.bodyLarge)
                         Spacer(Modifier.weight(1f))
                         Icon(Icons.Filled.Schedule, contentDescription = "Select Arriving Time")
                     }
                 }
-
                 Spacer(modifier = Modifier.width(16.dp))
-                Box(modifier = Modifier
-                    .width(1.dp)
-                    .height(120.dp)
-                    .background(MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f)))
+                Box(modifier = Modifier.width(1.dp).height(120.dp).background(MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f)))
                 Spacer(modifier = Modifier.width(16.dp))
-
                 Column(modifier = Modifier.weight(1f)) {
                     Text("Leaving", style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(bottom = 8.dp))
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clickable { showLeavingDatePicker.value = true }
-                            .padding(vertical = 8.dp)
-                    ) {
+                    Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth().clickable { showLeavingDatePicker.value = true }.padding(vertical = 8.dp)) {
                         Text(dateFormatter.format(leavingDateTime.time), style = MaterialTheme.typography.bodyLarge)
                         Spacer(Modifier.weight(1f))
                         Icon(Icons.Filled.CalendarToday, contentDescription = "Select Leaving Date")
                     }
                     HorizontalDivider(modifier = Modifier.padding(vertical = 4.dp))
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clickable { showLeavingTimePicker.value = true }
-                            .padding(vertical = 8.dp)
-                    ) {
+                    Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth().clickable { showLeavingTimePicker.value = true }.padding(vertical = 8.dp)) {
                         Text(timeFormatter.format(leavingDateTime.time), style = MaterialTheme.typography.bodyLarge)
                         Spacer(Modifier.weight(1f))
                         Icon(Icons.Filled.Schedule, contentDescription = "Select Leaving Time")
@@ -312,13 +291,11 @@ fun HomeScreenContent(
                 }
             }
 
-            Spacer(modifier = Modifier.weight(0.5f)) // Adjust weight as needed
+            Spacer(modifier = Modifier.weight(0.5f))
 
             Button(
-                onClick = onFindParkingClicked,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(50.dp),
+                onClick = onFindParkingGeneral, // Changed to general find parking action
+                modifier = Modifier.fillMaxWidth().height(50.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF301934))
             ) {
                 Text("Find Parking", fontSize = 18.sp, color = Color.White)
@@ -328,102 +305,49 @@ fun HomeScreenContent(
 }
 
 @Composable
-fun ParkingSpotItem(spot: ParkingSpot, onClick: (ParkingSpot) -> Unit) {
+fun ParkingSpotItem(spot: ParkingSpot, onClick: () -> Unit) { // Changed onClick to () -> Unit as navigation is now within the lambda
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 4.dp)
-            .clickable { onClick(spot) },
+            .clickable { onClick() }, // Call the passed lambda
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
-            Text(
-                text = spot.parkingName ?: "Unknown Parking Name",
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.Bold
-            )
-            spot.address?.let {
-                Text(text = it, style = MaterialTheme.typography.bodyMedium)
-            }
-            Text(
-                text = "City: ${spot.cityName}",
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
+            Text(text = spot.parkingName ?: "Unknown Parking Name", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+            spot.address?.let { Text(text = it, style = MaterialTheme.typography.bodyMedium) }
+            Text(text = "City: ${spot.cityName}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             if (spot.latitude != null && spot.longitude != null) {
-                 Text(
-                    text = "Coords: ${String.format("%.4f", spot.latitude)}, ${String.format("%.4f", spot.longitude)}",
-                    style = MaterialTheme.typography.bodySmall
-                )
+                 Text(text = "Coords: ${String.format("%.4f", spot.latitude)}, ${String.format("%.4f", spot.longitude)}", style = MaterialTheme.typography.bodySmall)
             }
-             Text(
-                text = "4-Wheeler: ${spot.fourWheelerSpots}, 2-Wheeler: ${spot.twoWheelerSpots}",
-                style = MaterialTheme.typography.bodySmall
-            )
+             Text(text = "4-Wheeler: ${spot.fourWheelerSpots}, 2-Wheeler: ${spot.twoWheelerSpots}", style = MaterialTheme.typography.bodySmall)
         }
     }
 }
 
 @Composable
-fun ShowDatePicker(
-    context: Context,
-    initialCalendar: Calendar,
-    onDateSelected: (Calendar) -> Unit
-) {
-    val year = initialCalendar.get(Calendar.YEAR)
-    val month = initialCalendar.get(Calendar.MONTH)
-    val day = initialCalendar.get(Calendar.DAY_OF_MONTH)
-
-    DatePickerDialog(
-        context,
-        { _, selectedYear, selectedMonth, selectedDayOfMonth ->
-            val newCalendar = Calendar.getInstance().apply {
-                timeInMillis = initialCalendar.timeInMillis // Preserve time
-                set(selectedYear, selectedMonth, selectedDayOfMonth)
-            }
-            onDateSelected(newCalendar)
-        },
-        year,
-        month,
-        day
-    ).show()
+fun ShowDatePicker(context: Context, initialCalendar: Calendar, onDateSelected: (Calendar) -> Unit) {
+    val year = initialCalendar.get(Calendar.YEAR); val month = initialCalendar.get(Calendar.MONTH); val day = initialCalendar.get(Calendar.DAY_OF_MONTH)
+    DatePickerDialog(context, { _, selectedYear, selectedMonth, selectedDayOfMonth ->
+        val newCalendar = Calendar.getInstance().apply { timeInMillis = initialCalendar.timeInMillis; set(selectedYear, selectedMonth, selectedDayOfMonth) }
+        onDateSelected(newCalendar)
+    }, year, month, day).show()
 }
 
 @Composable
-fun ShowTimePicker(
-    context: Context,
-    initialCalendar: Calendar,
-    onTimeSelected: (Calendar) -> Unit
-) {
-    val hour = initialCalendar.get(Calendar.HOUR_OF_DAY)
-    val minute = initialCalendar.get(Calendar.MINUTE)
-
-    TimePickerDialog(
-        context,
-        { _, selectedHour, selectedMinute ->
-            val newCalendar = Calendar.getInstance().apply {
-                timeInMillis = initialCalendar.timeInMillis // Preserve date
-                set(Calendar.HOUR_OF_DAY, selectedHour)
-                set(Calendar.MINUTE, selectedMinute)
-            }
-            onTimeSelected(newCalendar)
-        },
-        hour,
-        minute,
-        false // 24 hour view: false for AM/PM
-    ).show()
+fun ShowTimePicker(context: Context, initialCalendar: Calendar, onTimeSelected: (Calendar) -> Unit) {
+    val hour = initialCalendar.get(Calendar.HOUR_OF_DAY); val minute = initialCalendar.get(Calendar.MINUTE)
+    TimePickerDialog(context, { _, selectedHour, selectedMinute ->
+        val newCalendar = Calendar.getInstance().apply { timeInMillis = initialCalendar.timeInMillis; set(Calendar.HOUR_OF_DAY, selectedHour); set(Calendar.MINUTE, selectedMinute) }
+        onTimeSelected(newCalendar)
+    }, hour, minute, false).show()
 }
-
 
 @Preview(showBackground = true, device = "spec:width=411dp,height=891dp")
 @Composable
 fun DefaultPreviewOfHomeScreenUpdated() {
     ParkkarTheme {
-        // Previewing with a dummy ViewModel is complex.
-        // For a basic preview, you might pass a dummy implementation or mock.
-        // Here, we just call it with dummy lambdas as before,
-        // but it won't reflect the ViewModel's behavior.
         val dummyViewModel = HomeViewModel(LocalContext.current.applicationContext as android.app.Application)
-        HomeScreenContent(viewModel = dummyViewModel, onNavigateBack = {}, onFindParkingClicked = {})
+        HomeScreenContent(viewModel = dummyViewModel, onNavigateBack = {}, onNavigateToDetails = {}, onFindParkingGeneral = {})
     }
 }
