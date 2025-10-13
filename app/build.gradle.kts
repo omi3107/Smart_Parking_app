@@ -2,7 +2,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.kotlin.serialization) // ADDED
+    alias(libs.plugins.kotlin.serialization) 
+    id("com.google.gms.google-services")
+
 }
 
 android {
@@ -51,8 +53,20 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
     implementation("androidx.compose.material:material-icons-core")
-    implementation("androidx.compose.material:material-icons-extended") // Added for extended Material Icons
-    implementation(libs.kotlinx.serialization.json) // ADDED
+    implementation("androidx.compose.material:material-icons-extended") 
+    implementation(libs.kotlinx.serialization.json)
+    
+    // Firebase - Use the version catalog (libs) and BOM
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.firestore.ktx)
+    implementation(libs.firebase.auth.ktx) // Added for auth
+    
+    // Google Sign-In
+    implementation(libs.play.services.auth)
+
+    // JSON Serialization
+    implementation("com.google.code.gson:gson:2.10.1")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

@@ -1,16 +1,13 @@
 package com.example.parkkar
 
-import android.content.Context // Keep for LocalContext if needed, or if other direct context uses remain
 import android.content.Intent
 import android.os.Bundle
-// import android.widget.Toast // Removed as showToast will be imported
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -24,70 +21,64 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.parkkar.data.DatabaseHelper
+import com.example.parkkar.utils.isValidPassword
 import com.example.parkkar.utils.sha256
-import com.example.parkkar.utils.isValidPassword // Import from utils
-import com.example.parkkar.utils.showToast // Import from utils
-import com.example.parkkar.ui.theme.ParkkarTheme // Import centralized theme
-import com.example.parkkar.R // Import R class for resources
+import com.example.parkkar.utils.showToast
+import com.example.parkkar.ui.theme.ParkkarTheme
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import androidx.compose.foundation.text.ClickableText
 
 class SignUpActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ParkkarTheme { // Uses imported ParkkarTheme
+            ParkkarTheme {
                 val context = LocalContext.current
-                val dbHelper = remember { DatabaseHelper(context) } 
+                val dbHelper = remember { DatabaseHelper(context) }
 
                 SignUpScreen(
-                    onSignUpClicked = { emailOrPhone, fullName, username, password, confirmPassword ->
-                        if (emailOrPhone.isBlank() || fullName.isBlank() || username.isBlank() || password.isBlank() || confirmPassword.isBlank()) {
+                    onSignUpClicked = {
+                        if (it.first.isBlank() || it.second.isBlank() || it.third.isBlank() || it.fourth.isBlank() || it.fifth.isBlank()) {
                             showToast(context, "All fields are required.")
                             return@SignUpScreen
                         }
-
-                        if (!isValidPassword(password)) {
+                        if (!isValidPassword(it.fourth)) {
                             showToast(context, "Password must be at least 6 characters and contain a number.")
                             return@SignUpScreen
                         }
-
-                        if (password != confirmPassword) {
+                        if (it.fourth != it.fifth) {
                             showToast(context, "Passwords do not match.")
                             return@SignUpScreen
                         }
-
-                        if (dbHelper.checkUserExists(username, emailOrPhone)) {
+                        if (dbHelper.checkUserExists(it.third, it.first)) {
                             showToast(context, "Username or Email/Phone already exists.")
                             return@SignUpScreen
                         }
-
-                        val hashedPassword = sha256(password)
+                        val hashedPassword = sha256(it.fourth)
                         if (hashedPassword.isEmpty()) {
-                             showToast(context, "Error hashing password. Please try again.")
-                             return@SignUpScreen
+                            showToast(context, "Error hashing password. Please try again.")
+                            return@SignUpScreen
                         }
-
                         val sdfDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
                         val sdfTimestamp = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
                         val currentDate = sdfDate.format(Date())
                         val currentTimestamp = sdfTimestamp.format(Date())
-
-                        val newUserId = dbHelper.addUser(emailOrPhone, fullName, username, hashedPassword, currentDate, currentTimestamp)
-
-                        if (newUserId > -1) { 
+                        val newUserId = dbHelper.addUser(it.first, it.second, it.third, hashedPassword, currentDate, currentTimestamp)
+                        if (newUserId > -1) {
                             showToast(context, "Account Created Successfully")
                             val intent = Intent(context, LoginActivity::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -97,21 +88,16 @@ class SignUpActivity : ComponentActivity() {
                             showToast(context, "Sign up failed. Please try again.")
                         }
                     },
-                    onLoginClicked = {
-                        finish()
-                    }
+                    onLoginClicked = { finish() }
                 )
             }
         }
     }
 }
 
-// isValidPassword function was REMOVED from here (moved to utils.Crypto.kt)
-// showToast function was REMOVED from here (moved to utils.Crypto.kt)
-
 @Composable
 fun SignUpScreen(
-    onSignUpClicked: (String, String, String, String, String) -> Unit,
+    onSignUpClicked: (Quintuple<String, String, String, String, String>) -> Unit,
     onLoginClicked: () -> Unit
 ) {
     var emailOrPhone by rememberSaveable { mutableStateOf("") }
@@ -169,7 +155,7 @@ fun SignUpScreen(
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
-                    text = "Let's create an account",
+                    text = "Let\'s create an account",
                     fontSize = 16.sp,
                     color = Color.Gray,
                     textAlign = TextAlign.Center,
@@ -262,7 +248,7 @@ fun SignUpScreen(
                 Spacer(modifier = Modifier.height(24.dp))
 
                 Button(
-                    onClick = { onSignUpClicked(emailOrPhone, fullName, username, password, confirmPassword) },
+                    onClick = { onSignUpClicked(Quintuple(emailOrPhone, fullName, username, password, confirmPassword)) },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(50.dp),
@@ -282,27 +268,26 @@ fun SignUpScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text("Have an account? ", fontSize = 14.sp, color = Color.Gray)
-                ClickableText(
-                    text = AnnotatedString("Log In"),
-                    onClick = { onLoginClicked() },
-                    style = TextStyle(
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color(0xFF4A4A4A) 
-                    )
-                )
+                val annotatedString = buildAnnotatedString {
+                    withStyle(style = SpanStyle(color = Color(0xFF4A4A4A), fontWeight = FontWeight.Bold, fontSize = 14.sp)) {
+                        append("Log In")
+                    }
+                }
+                ClickableText(text = annotatedString) { onLoginClicked() }
             }
         }
     }
 }
 
+data class Quintuple<A, B, C, D, E>(val first: A, val second: B, val third: C, val fourth: D, val fifth: E)
+
 @Preview(showBackground = true, device = "spec:width=411dp,height=891dp")
 @Composable
 fun SignUpScreenPreview() {
-    ParkkarTheme { // Uses imported ParkkarTheme
+    ParkkarTheme {
         val context = LocalContext.current
         SignUpScreen(
-            onSignUpClicked = { _, _, _, _, _ -> showToast(context, "Preview: Sign Up Clicked") },
+            onSignUpClicked = { showToast(context, "Preview: Sign Up Clicked") },
             onLoginClicked = { showToast(context, "Preview: Login Clicked") }
         )
     }

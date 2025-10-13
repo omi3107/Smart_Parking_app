@@ -7,6 +7,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable // For clickable stars
 import androidx.compose.foundation.layout.*
@@ -16,6 +17,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.DirectionsWalk
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.outlined.StarBorder // For empty stars
 import androidx.compose.material3.*
@@ -27,8 +29,8 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
@@ -44,7 +46,6 @@ import com.example.parkkar.ui.theme.ParkkarTheme
 import java.util.Locale
 import java.util.UUID
 
-// Moved ReviewItemData to the top of the file before its first use.
 data class ReviewItemData(
     val id: String = UUID.randomUUID().toString(),
     val reviewerName: String,
@@ -71,9 +72,8 @@ class ParkingResultsActivity : ComponentActivity() {
             viewModel.fetchParkingSpotDetails(parkingSpotId)
         } else {
             Log.e("ParkingResultsActivity", "No parking spot ID received. Cannot display details.")
-            // Optionally, finish the activity or show a prominent error message
             Toast.makeText(this, "Error: Parking spot details not found.", Toast.LENGTH_LONG).show()
-            finish() // Finish if no ID is provided, as the screen would be useless
+            finish()
             return
         }
 
@@ -90,7 +90,7 @@ class ParkingResultsActivity : ComponentActivity() {
                     is ParkingSpotUiState.Success -> {
                         ExactParkingResultsScreen(
                             parkingSpot = state.parkingSpot,
-                            currentReviews = emptyList(), // Replace with actual reviews later
+                            currentReviews = emptyList(),
                             onCloseScreen = { finish() }
                         )
                     }
@@ -142,7 +142,7 @@ fun ExactParkingResultsScreen(
                 price = parkingSpot.prices?.firstOrNull()?.amount ?: 0.0,
                 currency = parkingSpot.prices?.firstOrNull()?.currency ?: "₹",
                 duration = parkingSpot.prices?.firstOrNull()?.duration ?: "N/A",
-                timeToDestination = "Calculating...", // Will be dynamic later
+                timeToDestination = "Calculating...", 
                 locationName = parkingSpot.parkingName ?: "N/A",
                 locationArea = parkingSpot.cityName, 
                 onGetDirections = {
@@ -159,7 +159,7 @@ fun ExactParkingResultsScreen(
 
             if (!showWriteReviewForm) {
                 ExactReviewsSection(
-                    currentReviews = currentReviews, // Pass the reviews
+                    currentReviews = currentReviews, 
                     onRateWriteReviewClick = { showWriteReviewForm = true }
                 )
             } else {
@@ -173,7 +173,6 @@ fun ExactParkingResultsScreen(
                         showWriteReviewForm = false
                         userRating = 0f
                         userReviewText = ""
-                        // TODO: Add logic to save the review
                     },
                     onCancel = {
                         showWriteReviewForm = false
@@ -228,6 +227,26 @@ fun ExactCoreInfoSection(
             .padding(16.dp)
     ) {
         Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 16.dp),
+            horizontalArrangement = Arrangement.End,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "PARK-KAR",
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp,
+                color = Color(0xFF4A4A4A)
+            )
+            Spacer(modifier = Modifier.width(8.dp))
+            Image(
+                painter = painterResource(id = R.drawable.logo),
+                contentDescription = "Park-Kar Logo",
+                modifier = Modifier.height(20.dp)
+            )
+        }
+        Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -249,7 +268,7 @@ fun ExactCoreInfoSection(
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(
-                        Icons.Filled.DirectionsWalk,
+                        imageVector = Icons.AutoMirrored.Filled.DirectionsWalk,
                         contentDescription = "Time to destination",
                         tint = Color.Black,
                         modifier = Modifier.size(18.dp)
@@ -265,7 +284,7 @@ fun ExactCoreInfoSection(
             onClick = onGetDirections,
             modifier = Modifier.fillMaxWidth().height(48.dp),
             shape = RoundedCornerShape(8.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1976D2))
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF301934))
         ) {
             Text("Get Directions", fontSize = 16.sp, color = Color.White, fontWeight = FontWeight.Medium)
         }
@@ -297,12 +316,10 @@ fun DottedDividerExact(modifier: Modifier = Modifier) {
             color = Color.LightGray,
             start = Offset(0f, 0f),
             end = Offset(size.width, 0f),
-            pathEffect = pathEffect,
-            strokeWidth = 1.dp.toPx()
+            pathEffect = pathEffect
         )
     }
 }
-
 
 @Composable
 fun ExactPricesSection(prices: List<PriceInfo>) {
@@ -316,7 +333,7 @@ fun ExactPricesSection(prices: List<PriceInfo>) {
             "Prices",
             fontSize = 17.sp,
             fontWeight = FontWeight.Medium,
-            color = Color(0xFF1976D2)
+            color = MaterialTheme.colorScheme.primary
         )
         Spacer(modifier = Modifier.height(10.dp))
         if (prices.isEmpty()) {
@@ -370,7 +387,7 @@ fun ExactOpeningTimesSection(openingTimes: List<OpeningTimeInfo>) {
             "Opening Times",
             fontSize = 17.sp,
             fontWeight = FontWeight.Medium,
-            color = Color(0xFF1976D2)
+            color = MaterialTheme.colorScheme.primary
         )
         Spacer(modifier = Modifier.height(10.dp))
         if (openingTimes.isEmpty()) {
@@ -415,26 +432,26 @@ fun ExactPaymentOptionsSection() {
             "Payment Options",
             fontSize = 17.sp,
             fontWeight = FontWeight.Medium,
-            color = Color(0xFF1976D2)
+            color = MaterialTheme.colorScheme.primary
         )
         Spacer(modifier = Modifier.height(10.dp))
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(Icons.Filled.CreditCard, contentDescription = "Card Payment", tint = Color.DarkGray, modifier = Modifier.size(20.dp))
             Spacer(modifier = Modifier.width(8.dp))
-            Text("Card Accepted", fontSize = 15.sp, color = Color.DarkGray)
+            Text("Card/Mobile Payments Accepted", fontSize = 15.sp, color = Color.DarkGray)
         }
         Spacer(modifier = Modifier.height(8.dp))
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(Icons.Filled.AccountBalanceWallet, contentDescription = "Mobile Payment", tint = Color.DarkGray, modifier = Modifier.size(20.dp))
             Spacer(modifier = Modifier.width(8.dp))
-            Text("Mobile Payments Accepted", fontSize = 15.sp, color = Color.DarkGray)
+            Text("Cash Accepted", fontSize = 15.sp, color = Color.DarkGray)
         }
     }
 }
 
 @Composable
 fun ExactReviewsSection(
-    currentReviews: List<ReviewItemData>, // Added currentReviews parameter
+    currentReviews: List<ReviewItemData>, 
     onRateWriteReviewClick: () -> Unit
 ) {
     Column(
@@ -452,20 +469,18 @@ fun ExactReviewsSection(
                 "Ratings and Reviews",
                 fontSize = 17.sp,
                 fontWeight = FontWeight.Medium,
-                color = Color(0xFF1976D2)
+                color = MaterialTheme.colorScheme.primary
             )
             TextButton(onClick = onRateWriteReviewClick) {
-                Text("Rate & Write Review", color = Color(0xFF1976D2))
+                Text("Rate & Write Review", color = MaterialTheme.colorScheme.primary)
             }
         }
         Spacer(modifier = Modifier.height(10.dp))
         if (currentReviews.isEmpty()) {
             Text("No reviews yet. Be the first to write one!", fontSize = 14.sp, color = Color.Gray)
         } else {
-            // TODO: Display list of reviews (e.g., in a LazyColumn)
-            currentReviews.forEach {
-                // Simple text for now, can be a more complex Composable later
-                Text("${it.reviewerName} (${it.rating} stars): ${it.reviewText} - ${it.date}", modifier = Modifier.padding(bottom=4.dp))
+            currentReviews.forEach { review ->
+                Text("${review.reviewerName} (${review.rating} stars): ${review.reviewText} - ${review.date}", modifier = Modifier.padding(bottom=4.dp))
             }
         }
     }
@@ -482,6 +497,7 @@ fun ExactWriteReviewForm(
     onCancel: () -> Unit
 ) {
     val focusManager = LocalFocusManager.current
+    val context = LocalContext.current // FIX: Get context in the composable scope
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -528,7 +544,8 @@ fun ExactWriteReviewForm(
                 if (currentRating > 0) {
                     onAddReview(currentRating, reviewText)
                 } else {
-                    // TODO: Show a toast or message that rating is required
+                    // FIX: Use the context variable from the outer scope
+                    Toast.makeText(context, "Please select a rating before submitting.", Toast.LENGTH_SHORT).show()
                 }
             }) {
                 Text("Add Review")
@@ -542,6 +559,7 @@ fun ExactWriteReviewForm(
 fun ExactParkingResultsScreenPreview() {
     ParkkarTheme {
         val previewSpot = ParkingSpot(
+            id = "preview-id",
             cityName = "Preview City",
             parkingName = "Preview Parking Name",
             address = "123 Preview St, Preview City",

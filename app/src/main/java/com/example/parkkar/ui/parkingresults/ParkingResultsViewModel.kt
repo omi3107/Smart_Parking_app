@@ -19,7 +19,8 @@ sealed class ParkingSpotUiState {
 
 class ParkingResultsViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val parkingRepository = ParkingDataRepository(application)
+    // Use the singleton instance of the repository
+    private val parkingRepository = ParkingDataRepository.getInstance(application)
 
     private val _parkingSpotUiState = MutableStateFlow<ParkingSpotUiState>(ParkingSpotUiState.Loading)
     val parkingSpotUiState: StateFlow<ParkingSpotUiState> = _parkingSpotUiState.asStateFlow()

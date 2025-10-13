@@ -56,9 +56,6 @@ class HomeActivity : ComponentActivity() {
     private fun navigateToDetails(spotId: String) {
         val intent = Intent(this, ParkingResultsActivity::class.java).apply {
             putExtra(ParkingResultsActivity.EXTRA_PARKING_SPOT_ID, spotId)
-            // Optionally, pass the validated dates to ParkingResultsActivity
-            // intent.putExtra("arrival_time_millis", homeViewModel.arrivalDateTime.value.timeInMillis)
-            // intent.putExtra("leaving_time_millis", homeViewModel.leavingDateTime.value.timeInMillis)
         }
         startActivity(intent)
     }
@@ -131,8 +128,8 @@ class HomeActivity : ComponentActivity() {
 fun HomeScreenContent(
     viewModel: HomeViewModel,
     onNavigateBack: () -> Unit,
-    onNavigateToDetails: (spotId: String) -> Unit, // Changed
-    onFindParkingGeneral: () -> Unit // New for the main button
+    onNavigateToDetails: (spotId: String) -> Unit, 
+    onFindParkingGeneral: () -> Unit 
 ) {
     val context = LocalContext.current
     val searchQuery by viewModel.searchQuery.collectAsState()
@@ -231,11 +228,10 @@ fun HomeScreenContent(
                         LazyColumn(modifier = Modifier.fillMaxSize()) {
                             items(state.spots) { spot ->
                                 ParkingSpotItem(spot = spot) {
-                                    // User clicked a spot in the list, directly navigate to details
-                                    viewModel.onSearchQueryChanged(spot.parkingName ?: spot.address ?: spot.cityName) // Update search bar for visual feedback
-                                    onNavigateToDetails(spot.id) // Pass ID for navigation
+                                    viewModel.onSearchQueryChanged(spot.parkingName ?: spot.address ?: spot.cityName)
+                                    onNavigateToDetails(spot.id)
                                 }
-                                Divider()
+                                HorizontalDivider() // FIX: Replaced Divider with HorizontalDivider
                             }
                         }
                     }
@@ -294,7 +290,7 @@ fun HomeScreenContent(
             Spacer(modifier = Modifier.weight(0.5f))
 
             Button(
-                onClick = onFindParkingGeneral, // Changed to general find parking action
+                onClick = onFindParkingGeneral, 
                 modifier = Modifier.fillMaxWidth().height(50.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF301934))
             ) {
@@ -305,12 +301,12 @@ fun HomeScreenContent(
 }
 
 @Composable
-fun ParkingSpotItem(spot: ParkingSpot, onClick: () -> Unit) { // Changed onClick to () -> Unit as navigation is now within the lambda
+fun ParkingSpotItem(spot: ParkingSpot, onClick: () -> Unit) { 
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 4.dp)
-            .clickable { onClick() }, // Call the passed lambda
+            .clickable { onClick() },
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Column(modifier = Modifier.padding(16.dp)) {

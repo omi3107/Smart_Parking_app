@@ -9,10 +9,18 @@ import androidx.lifecycle.viewModelScope
 import com.example.parkkar.data.model.ParkingSpot
 import com.example.parkkar.data.repository.ParkingDataRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.withContext
 import java.io.IOException
 import java.util.Calendar
@@ -31,16 +39,41 @@ sealed class SearchResultUiState {
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val parkingRepository = ParkingDataRepository(application)
+    private val parkingRepository = ParkingDataRepository.getInstance(application)
     private val geocoder = Geocoder(application, Locale.getDefault())
 
     private val _searchQuery = MutableStateFlow("")
     val searchQuery: StateFlow<String> = _searchQuery.asStateFlow()
 
-    private val _searchResults = MutableStateFlow<SearchResultUiState>(SearchResultUiState.Idle)
-    val searchResults: StateFlow<SearchResultUiState> = _searchResults.asStateFlow()
+    // Start with a null list to explicitly track whether the initial data has been loaded.
+    private val allParkingSpots: StateFlow<List<ParkingSpot>?> = parkingRepository.getAllParkingSpotsFlow()
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), null)
 
-    private var allParkingSpots: List<ParkingSpot> = emptyList()
+    @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
+    val searchResults: StateFlow<SearchResultUiState> =
+        combine(_searchQuery.debounce(300L), allParkingSpots) { query, spots ->
+            query to spots // Pair the latest query and spots list
+        }.flatMapLatest { (query, spots) ->
+            if (query.isBlank()) {
+                flowOf(SearchResultUiState.Idle)
+            } else {
+                if (spots == null) {
+                    // If we have a query but spots are null, the initial data is still loading.
+                    flowOf(SearchResultUiState.Loading)
+                } else {
+                    // Once we have a non-null list (even if empty), we can perform the search.
+                    flow {
+                        emit(SearchResultUiState.Loading) // Show loading for the search operation itself
+                        val result = performSearch(query, spots)
+                        emit(result)
+                    }
+                }
+            }
+        }.stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = SearchResultUiState.Idle
+        )
 
     private val _arrivalDateTime = MutableStateFlow<Calendar>(Calendar.getInstance())
     val arrivalDateTime: StateFlow<Calendar> = _arrivalDateTime.asStateFlow()
@@ -50,104 +83,43 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     })
     val leavingDateTime: StateFlow<Calendar> = _leavingDateTime.asStateFlow()
 
-    private val VERY_CLOSE_THRESHOLD = 0.001 // Approx 111 meters
-    private val NEARBY_THRESHOLD = 0.01   // Approx 1.1 km
-    private val CITY_MATCH_THRESHOLD = 0.05 // Approx 5.5 km for wider city matching
-
-    private val _isCoordinateSearch = MutableStateFlow(false)
-    val isCoordinateSearch: StateFlow<Boolean> = _isCoordinateSearch.asStateFlow()
-
-    init {
-        loadAllParkingSpots()
-    }
-
-    private fun loadAllParkingSpots() {
-        viewModelScope.launch {
-            _searchResults.value = SearchResultUiState.Loading
-            try {
-                allParkingSpots = parkingRepository.getAllParkingSpots()
-                Log.d("HomeViewModel", "Loaded ${allParkingSpots.size} parking spots from repository.")
-                if (allParkingSpots.isEmpty()) {
-                    _searchResults.value = SearchResultUiState.Error("No parking data found in assets.")
-                } else {
-                    _searchResults.value = SearchResultUiState.Idle // Go to Idle after successful load
-                }
-            } catch (e: Exception) {
-                Log.e("HomeViewModel", "Failed to load parking data: ${e.message}", e)
-                _searchResults.value = SearchResultUiState.Error("Failed to load parking data: ${e.message}")
-            }
-        }
-    }
+    private val veryCloseThreshold = 0.001
+    private val nearbyThreshold = 0.01
+    private val cityMatchThreshold = 0.05
 
     fun onSearchQueryChanged(query: String) {
         _searchQuery.value = query
-        if (query.isBlank()) {
-            _searchResults.value = SearchResultUiState.Idle
-            _isCoordinateSearch.value = false
-            return
-        }
-        if (allParkingSpots.isEmpty()){
-            _searchResults.value = SearchResultUiState.Error("Parking data not loaded yet. Please try again shortly.")
-            _isCoordinateSearch.value = false
-            return
-        }
-        performSearch(query)
     }
 
     private fun parseLatLng(query: String): Pair<Double, Double>? {
         try {
             val parts = query.split(",").map { it.trim().toDoubleOrNull() }
             if (parts.size == 2 && parts[0] != null && parts[1] != null) {
-                Log.d("HomeViewModel", "Parsed as comma-separated: ${parts[0]}, ${parts[1]}")
                 return Pair(parts[0]!!, parts[1]!!)
             }
-        } catch (e: Exception) {
-            // Not simple comma-separated
-        }
+        } catch (_: Exception) { /* Ignore */ }
 
         try {
-            val cleanedQuery = query.uppercase(Locale.getDefault())
-                .replace("°", " ") // Replace degree symbol with space for easier parsing
-                .replace(",", " ")
-                .replace(Regex("\\s+"), " ") // Corrected: \s+ for one or more spaces
-                .trim()
-
-            // Regex for patterns like "19.123 N 72.456 E" or "19.123 72.456" (assuming N/E or simple order)
-            // It allows for optional N/S/E/W characters.
-            // Using standard strings with escaped backslashes for regex special characters
-            val dmsPattern = Regex(
-                "(-?\\d+\\.?\\d*)\\s*([NS])?\\s*(-?\\d+\\.?\\d*)\\s*([EW])?" +
-                "|(-?\\d+\\.?\\d*)\\s+(-?\\d+\\.?\\d*)"
-            )
+            val cleanedQuery = query.uppercase(Locale.getDefault()).replace("°", " ").replace(",", " ").replace(Regex("\\s+"), " ").trim()
+            val dmsPattern = Regex("(-?\\d+\\.?\\d*)\\s*([NS])?\\s*(-?\\d+\\.?\\d*)\\s*([EW])?|(-?\\d+\\.?\\d*)\\s+(-?\\d+\\.?\\d*)")
             val match = dmsPattern.find(cleanedQuery)
 
             if (match != null) {
-                if (match.groups[1] != null && match.groups[3] != null) { // Format with N/S and E/W
-                    val latValStr = match.groupValues[1]
-                    val latDirStr = match.groupValues[2].ifEmpty { "N" } // Default to N if no direction
-                    val lonValStr = match.groupValues[3]
-                    val lonDirStr = match.groupValues[4].ifEmpty { "E" } // Default to E if no direction
-
-                    var lat = latValStr.toDoubleOrNull()
-                    var lon = lonValStr.toDoubleOrNull()
-
+                if (match.groups[1] != null && match.groups[3] != null) {
+                    var lat = match.groupValues[1].toDoubleOrNull()
+                    val latDir = match.groupValues[2].ifEmpty { "N" }
+                    var lon = match.groupValues[3].toDoubleOrNull()
+                    val lonDir = match.groupValues[4].ifEmpty { "E" }
                     if (lat != null && lon != null) {
-                        if (latDirStr == "S") lat *= -1
-                        if (lonDirStr == "W") lon *= -1
-                        Log.d("HomeViewModel", "Parsed as DMS/Directional: Lat $lat, Lon $lon")
+                        if (latDir == "S") lat *= -1
+                        if (lonDir == "W") lon *= -1
                         return Pair(lat, lon)
                     }
-                } else if (match.groups[5] != null && match.groups[6] != null) { // Format with two numbers
-                    val latValStr = match.groupValues[5]
-                    val lonValStr = match.groupValues[6]
-                     var lat = latValStr.toDoubleOrNull()
-                    var lon = lonValStr.toDoubleOrNull()
-                     if (lat != null && lon != null) {
-                        // Basic validation: lat between -90 and 90, lon between -180 and 180
-                        if (lat in -90.0..90.0 && lon in -180.0..180.0) {
-                            Log.d("HomeViewModel", "Parsed as two numbers: Lat $lat, Lon $lon")
-                            return Pair(lat, lon)
-                        }
+                } else if (match.groups[5] != null && match.groups[6] != null) {
+                    val lat = match.groupValues[5].toDoubleOrNull()
+                    val lon = match.groupValues[6].toDoubleOrNull()
+                    if (lat != null && lon != null && lat in -90.0..90.0 && lon in -180.0..180.0) {
+                        return Pair(lat, lon)
                     }
                 }
             }
@@ -157,161 +129,104 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         return null
     }
 
-
-    private fun performSearch(query: String) {
-        _searchResults.value = SearchResultUiState.Loading
-        Log.d("HomeViewModel", "Performing search for: $query")
-
+    private suspend fun performSearch(query: String, spots: List<ParkingSpot>): SearchResultUiState {
         val latLng = parseLatLng(query)
-        if (latLng != null) {
-            _isCoordinateSearch.value = true
-            searchByCoordinates(latLng.first, latLng.second, query)
+        return if (latLng != null) {
+            searchByCoordinates(latLng.first, latLng.second, spots)
         } else {
-            _isCoordinateSearch.value = false
-            searchByText(query)
+            searchByText(query, spots)
         }
     }
 
-    private fun searchByText(query: String) {
-        viewModelScope.launch(Dispatchers.Default) {
-            val lowerCaseQuery = query.lowercase(Locale.getDefault())
-            val filteredSpots = allParkingSpots.filter { spot ->
-                val nameMatch = spot.parkingName?.lowercase(Locale.getDefault())?.contains(lowerCaseQuery) == true
-                val addressMatch = spot.address?.lowercase(Locale.getDefault())?.contains(lowerCaseQuery) == true
-                val cityMatch = spot.cityName.lowercase(Locale.getDefault()).contains(lowerCaseQuery)
-                val zoneMatch = spot.zoneName?.lowercase(Locale.getDefault())?.contains(lowerCaseQuery) == true
-                val wardMatch = spot.wardName?.lowercase(Locale.getDefault())?.contains(lowerCaseQuery) == true
-                nameMatch || addressMatch || cityMatch || zoneMatch || wardMatch
-            }
-            Log.d("HomeViewModel", "Text search found ${filteredSpots.size} spots.")
+    private fun searchByText(query: String, spots: List<ParkingSpot>): SearchResultUiState {
+        val lowerCaseQuery = query.lowercase(Locale.getDefault())
+        val filteredSpots = spots.filter { spot ->
+            val nameMatch = spot.parkingName?.lowercase(Locale.getDefault())?.contains(lowerCaseQuery) == true
+            val addressMatch = spot.address?.lowercase(Locale.getDefault())?.contains(lowerCaseQuery) == true
+            val cityMatch = spot.cityName.lowercase(Locale.getDefault()).contains(lowerCaseQuery)
+            val zoneMatch = spot.zoneName?.lowercase(Locale.getDefault())?.contains(lowerCaseQuery) == true
+            val wardMatch = spot.wardName?.lowercase(Locale.getDefault())?.contains(lowerCaseQuery) == true
+            nameMatch || addressMatch || cityMatch || zoneMatch || wardMatch
+        }
 
-            if (filteredSpots.isNotEmpty()) {
-                _searchResults.value = SearchResultUiState.Success(
-                    filteredSpots.sortedByRelevanceToTextQuery(query),
-                    message = "Found ${filteredSpots.size} locations matching '$query'."
-                )
-            } else {
-                _searchResults.value = SearchResultUiState.NoResults
-            }
+        return if (filteredSpots.isNotEmpty()) {
+            SearchResultUiState.Success(filteredSpots.sortedByRelevanceToTextQuery(query), message = "Found ${filteredSpots.size} locations matching '$query'.")
+        } else {
+            SearchResultUiState.NoResults
         }
     }
 
     private fun List<ParkingSpot>.sortedByRelevanceToTextQuery(query: String): List<ParkingSpot> {
         val lowerCaseQuery = query.lowercase(Locale.getDefault())
-        return this.sortedWith(compareByDescending<ParkingSpot> {
-            (it.parkingName?.lowercase(Locale.getDefault())?.contains(lowerCaseQuery) == true)
-        }.thenByDescending {
-            (it.address?.lowercase(Locale.getDefault())?.contains(lowerCaseQuery) == true)
-        }.thenByDescending {
-            (it.cityName.lowercase(Locale.getDefault())?.contains(lowerCaseQuery) == true)
-        })
+        return this.sortedWith(compareByDescending<ParkingSpot> { it.parkingName?.lowercase(Locale.getDefault())?.contains(lowerCaseQuery) == true }
+            .thenByDescending { it.address?.lowercase(Locale.getDefault())?.contains(lowerCaseQuery) == true }
+            .thenByDescending { it.cityName.lowercase(Locale.getDefault()).contains(lowerCaseQuery) })
     }
 
-    private fun searchByCoordinates(latitude: Double, longitude: Double, originalQuery: String) {
-        viewModelScope.launch {
+    private suspend fun searchByCoordinates(latitude: Double, longitude: Double, spots: List<ParkingSpot>): SearchResultUiState {
+        return withContext(Dispatchers.IO) {
             var derivedCityNameFromGeocoder: String? = null
             var geocodedAddress: String? = null
             var geocoderFailed = false
 
             try {
-                val addresses = withContext(Dispatchers.IO) {
-                    @Suppress("DEPRECATION")
-                    if (Geocoder.isPresent()) geocoder.getFromLocation(latitude, longitude, 1) else null
-                }
-                if (addresses?.isNotEmpty() == true) {
+                @Suppress("DEPRECATION")
+                val addresses = if (Geocoder.isPresent()) geocoder.getFromLocation(latitude, longitude, 1) else null
+                if (!addresses.isNullOrEmpty()) {
                     val firstAddress = addresses[0]
                     derivedCityNameFromGeocoder = firstAddress.locality ?: firstAddress.subAdminArea ?: firstAddress.adminArea
                     geocodedAddress = listOfNotNull(firstAddress.subLocality, firstAddress.locality, firstAddress.subAdminArea, firstAddress.adminArea, firstAddress.countryName)
-                        .filter { it.isNotBlank() }
-                        .distinct()
-                        .joinToString(", ")
+                        .filter { it.isNotBlank() }.distinct().joinToString(", ")
                     if (geocodedAddress.isNullOrBlank()) geocodedAddress = firstAddress.getAddressLine(0)
-
-                    Log.d("HomeViewModel", "Geocoder derived city: $derivedCityNameFromGeocoder, Full Address: $geocodedAddress for $latitude, $longitude")
                 } else {
                     Log.w("HomeViewModel", "Geocoder returned no addresses for $latitude, $longitude")
                 }
-            } catch (e: IOException) {
-                Log.e("HomeViewModel", "Geocoder IOException for $latitude, $longitude: ${e.message}", e)
+            } catch (_: IOException) {
                 geocoderFailed = true
-            } catch (e: IllegalArgumentException) {
-                Log.e("HomeViewModel", "Geocoder IllegalArgumentException for $latitude, $longitude: ${e.message}", e)
-                _searchResults.value = SearchResultUiState.Error("Invalid coordinates provided.")
-                return@launch
+            } catch (_: IllegalArgumentException) {
+                return@withContext SearchResultUiState.Error("Invalid coordinates provided.")
             }
 
             val resultSpots = mutableListOf<ParkingSpot>()
             var searchMessage: String? = null
 
-            val veryCloseMatches = allParkingSpots.filter { spot ->
-                spot.latitude != null && spot.longitude != null &&
-                        abs(spot.latitude - latitude) < VERY_CLOSE_THRESHOLD &&
-                        abs(spot.longitude - longitude) < VERY_CLOSE_THRESHOLD
+            val veryCloseMatches = spots.filter {
+                it.latitude != null && it.longitude != null && abs(it.latitude - latitude) < veryCloseThreshold && abs(it.longitude - longitude) < veryCloseThreshold
             }
             resultSpots.addAll(veryCloseMatches)
-            Log.d("HomeViewModel", "Found ${veryCloseMatches.size} very close direct matches from dataset.")
 
             if (derivedCityNameFromGeocoder != null) {
                 searchMessage = "Spots near ${geocodedAddress ?: derivedCityNameFromGeocoder}"
-                val spotsInOrNearDerivedCity = allParkingSpots.filter { spot ->
-                    !resultSpots.any { rs -> rs.id == spot.id } &&
-                            (spot.cityName.equals(derivedCityNameFromGeocoder, ignoreCase = true) ||
-                                    (spot.latitude != null && spot.longitude != null &&
-                                            abs(spot.latitude - latitude) < CITY_MATCH_THRESHOLD &&
-                                            abs(spot.longitude - longitude) < CITY_MATCH_THRESHOLD))
+                val spotsInOrNearDerivedCity = spots.filter { spot ->
+                    !resultSpots.any { rs -> rs.id == spot.id } && (spot.cityName.equals(derivedCityNameFromGeocoder, ignoreCase = true) ||
+                            (spot.latitude != null && spot.longitude != null && abs(spot.latitude - latitude) < cityMatchThreshold && abs(spot.longitude - longitude) < cityMatchThreshold))
                 }
                 resultSpots.addAll(spotsInOrNearDerivedCity)
-                Log.d("HomeViewModel", "Found ${spotsInOrNearDerivedCity.size} spots in/near Geocoded city: $derivedCityNameFromGeocoder.")
-            } else if (geocoderFailed) {
-                searchMessage = "Geocoder unavailable. Showing best matches from data."
-            } else {
-                searchMessage = "Showing best matches from data for the coordinates."
             }
 
-            if (resultSpots.size < 3) { // If not enough very close or city-specific matches
-                val nearbySpotsFromAll = allParkingSpots.filter { spot ->
-                    !resultSpots.any { rs -> rs.id == spot.id } &&
-                            spot.latitude != null && spot.longitude != null &&
-                            abs(spot.latitude - latitude) < NEARBY_THRESHOLD &&
-                            abs(spot.longitude - longitude) < NEARBY_THRESHOLD
+            if (resultSpots.size < 3) {
+                val nearbySpotsFromAll = spots.filter { spot ->
+                    !resultSpots.any { rs -> rs.id == spot.id } && spot.latitude != null && spot.longitude != null &&
+                            abs(spot.latitude - latitude) < nearbyThreshold && abs(spot.longitude - longitude) < nearbyThreshold
                 }
                 resultSpots.addAll(nearbySpotsFromAll)
-                Log.d("HomeViewModel", "Added ${nearbySpotsFromAll.size} general nearby spots from dataset.")
             }
 
             val finalSpots = resultSpots.distinctBy { it.id }.sortedBy { spot ->
-                val spotLocation = Location("spot").apply {
-                    this.latitude = spot.latitude ?: 0.0
-                    this.longitude = spot.longitude ?: 0.0
-                }
-                val searchLocation = Location("search").apply {
-                    this.latitude = latitude
-                    this.longitude = longitude
-                }
-                spotLocation.distanceTo(searchLocation)
+                Location("spot").apply { this.latitude = spot.latitude ?: 0.0; this.longitude = spot.longitude ?: 0.0 }
+                    .distanceTo(Location("search").apply { this.latitude = latitude; this.longitude = longitude })
             }
 
-            Log.d("HomeViewModel", "Final ${finalSpots.size} spots for coordinate search. Message: $searchMessage")
-
             if (finalSpots.isNotEmpty()) {
-                _searchResults.value = SearchResultUiState.Success(finalSpots, searchMessage, isFromGeocoderOnly = false)
+                SearchResultUiState.Success(finalSpots, searchMessage, isFromGeocoderOnly = false)
             } else {
                 if (geocodedAddress != null) {
-                    val geocodedSpot = ParkingSpot(
-                        id = UUID.randomUUID().toString(),
-                        cityName = derivedCityNameFromGeocoder ?: "Unknown Area",
-                        parkingName = "Location: ${geocodedAddress.take(40)}${if(geocodedAddress.length > 40) "..." else ""}",
-                        address = geocodedAddress,
-                        latitude = latitude,
-                        longitude = longitude,
-                        fourWheelerSpots = -1, // Indicates no specific parking data from our system
-                        twoWheelerSpots = -1
-                    )
-                    _searchResults.value = SearchResultUiState.Success(listOf(geocodedSpot), "Location: $geocodedAddress (No specific parking data in our system)", isFromGeocoderOnly = true)
+                    val geocodedSpot = ParkingSpot(UUID.randomUUID().toString(), derivedCityNameFromGeocoder ?: "Unknown Area", "Location: ${geocodedAddress.take(40)}${if (geocodedAddress.length > 40) "..." else ""}", geocodedAddress, latitude, longitude, -1, -1)
+                    SearchResultUiState.Success(listOf(geocodedSpot), "Location: $geocodedAddress (No specific parking data in our system)", isFromGeocoderOnly = true)
                 } else if (geocoderFailed) {
-                    _searchResults.value = SearchResultUiState.GeocoderError // Geocoder failed, and no local results
+                    SearchResultUiState.GeocoderError
                 } else {
-                    _searchResults.value = SearchResultUiState.NoResults // No local results, Geocoder didn't find anything usable
+                    SearchResultUiState.NoResults
                 }
             }
         }
@@ -320,9 +235,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     fun updateArrivalDateTime(calendar: Calendar) {
         _arrivalDateTime.value = calendar
         if (_leavingDateTime.value.before(_arrivalDateTime.value)) {
-            _leavingDateTime.value = (calendar.clone() as Calendar).apply {
-                add(Calendar.HOUR_OF_DAY, 1)
-            }
+            _leavingDateTime.value = (calendar.clone() as Calendar).apply { add(Calendar.HOUR_OF_DAY, 1) }
         }
     }
 
@@ -330,9 +243,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         if (calendar.after(_arrivalDateTime.value)) {
             _leavingDateTime.value = calendar
         } else {
-            _leavingDateTime.value = (_arrivalDateTime.value.clone() as Calendar).apply {
-                add(Calendar.HOUR_OF_DAY, 1)
-            }
+            _leavingDateTime.value = (_arrivalDateTime.value.clone() as Calendar).apply { add(Calendar.HOUR_OF_DAY, 1) }
         }
     }
 }

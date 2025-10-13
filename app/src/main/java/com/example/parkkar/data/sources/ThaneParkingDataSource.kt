@@ -2,7 +2,7 @@ package com.example.parkkar.data.sources
 
 import android.content.Context
 import com.example.parkkar.data.mappers.toParkingLocationList // Assuming this will be created
-import com.example.parkkar.data.model.ThaneRoot
+import com.example.parkkar.data.model.ThaneParkingRoot
 import com.example.parkkar.model.ParkingLocation
 import kotlinx.serialization.json.Json
 import java.io.IOException
@@ -18,7 +18,7 @@ class ThaneParkingDataSource(private val context: Context) : ParkingDataSource {
     override suspend fun getParkingLocations(): List<ParkingLocation> {
         return try {
             val jsonString = context.assets.open("thane_sample.json").bufferedReader().use { it.readText() }
-            val thaneRoot = json.decodeFromString<ThaneRoot>(jsonString)
+            val thaneRoot = json.decodeFromString<ThaneParkingRoot>(jsonString)
             thaneRoot.toParkingLocationList() // This extension function will be in ThaneParkingMapper.kt
         } catch (e: IOException) {
             // Handle exception (e.g., log error, return empty list)

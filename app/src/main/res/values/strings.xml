@@ -10,4 +10,5 @@
     <string name="log_in">Log In</string>
     <string name="no_account_text">Don\'t have an account?</string>
     <string name="signup_text">Sign Up</string>
+    <string name="default_web_client_id">978556169701-vo2hkp7eh9555mq92c1he6iv41hr9er4.apps.googleusercontent.com</string>
 </resources>

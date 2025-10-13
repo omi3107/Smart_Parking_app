@@ -21,8 +21,8 @@
 					{
 						"days": "Mon-Sun",
 						"timeRange": "08:00 - 22:00",
-						"rateType": "Per Hour",
-						"duration": "subsequent hour",
+						"rateType": "Subsequent Hour",
+						"duration": "continuous hour",
 						"amount": 30.00,
 						"currency": "INR"
 					},
@@ -62,8 +62,8 @@
 					{
 						"days": "Mon-Sun",
 						"timeRange": "08:00 - 22:00",
-						"rateType": "Per Hour",
-						"duration": "subsequent hour",
+						"rateType": "Subsequent Hour",
+						"duration": "continuous hour",
 						"amount": 30.00,
 						"currency": "INR"
 					},
@@ -103,8 +103,8 @@
 					{
 						"days": "Mon-Sun",
 						"timeRange": "08:00 - 22:00",
-						"rateType": "Per Hour",
-						"duration": "subsequent hour",
+						"rateType": "Subsequent Hour",
+						"duration": "continuous hour",
 						"amount": 30.00,
 						"currency": "INR"
 					},
@@ -144,8 +144,8 @@
 					{
 						"days": "Mon-Sun",
 						"timeRange": "08:00 - 22:00",
-						"rateType": "Per Hour",
-						"duration": "subsequent hour",
+						"rateType": "Subsequent Hour",
+						"duration": "continuous hour",
 						"amount": 30.00,
 						"currency": "INR"
 					},
@@ -185,8 +185,8 @@
 					{
 						"days": "Mon-Sun",
 						"timeRange": "08:00 - 22:00",
-						"rateType": "Per Hour",
-						"duration": "subsequent hour",
+						"rateType": "Subsequent Hour",
+						"duration": "continuous hour",
 						"amount": 30.00,
 						"currency": "INR"
 					},
@@ -226,8 +226,8 @@
 					{
 						"days": "Mon-Sun",
 						"timeRange": "08:00 - 22:00",
-						"rateType": "Per Hour",
-						"duration": "subsequent hour",
+						"rateType": "Subsequent Hour",
+						"duration": "continuous hour",
 						"amount": 30.00,
 						"currency": "INR"
 					},
@@ -267,8 +267,8 @@
 					{
 						"days": "Mon-Sun",
 						"timeRange": "08:00 - 22:00",
-						"rateType": "Per Hour",
-						"duration": "subsequent hour",
+						"rateType": "Subsequent Hour",
+						"duration": "continuous hour",
 						"amount": 30.00,
 						"currency": "INR"
 					},
@@ -308,8 +308,8 @@
 					{
 						"days": "Mon-Sun",
 						"timeRange": "08:00 - 22:00",
-						"rateType": "Per Hour",
-						"duration": "subsequent hour",
+						"rateType": "Subsequent Hour",
+						"duration": "continuous hour",
 						"amount": 30.00,
 						"currency": "INR"
 					},
@@ -349,8 +349,8 @@
 					{
 						"days": "Mon-Sun",
 						"timeRange": "08:00 - 22:00",
-						"rateType": "Per Hour",
-						"duration": "subsequent hour",
+						"rateType": "Subsequent Hour",
+						"duration": "continuous hour",
 						"amount": 30.00,
 						"currency": "INR"
 					},
@@ -390,8 +390,8 @@
 					{
 						"days": "Mon-Sun",
 						"timeRange": "08:00 - 22:00",
-						"rateType": "Per Hour",
-						"duration": "subsequent hour",
+						"rateType": "Subsequent Hour",
+						"duration": "continuous hour",
 						"amount": 30.00,
 						"currency": "INR"
 					},
@@ -431,8 +431,8 @@
 					{
 						"days": "Mon-Sun",
 						"timeRange": "08:00 - 22:00",
-						"rateType": "Per Hour",
-						"duration": "subsequent hour",
+						"rateType": "Subsequent Hour",
+						"duration": "continuous hour",
 						"amount": 30.00,
 						"currency": "INR"
 					},

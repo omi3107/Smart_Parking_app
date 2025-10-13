@@ -2,28 +2,30 @@ package com.example.parkkar.data.mappers
 
 import com.example.parkkar.data.model.MumbaiRoot
 import com.example.parkkar.model.ParkingLocation
-import java.util.UUID
 
 fun MumbaiRoot.toParkingLocationList(): List<ParkingLocation> {
     return this.features.mapNotNull { feature ->
         val properties = feature.properties
         val geometry = feature.geometry
+        val name = properties?.name ?: return@mapNotNull null
+        val city = "Mumbai"
 
         val longitude = geometry?.coordinates?.getOrNull(0)
         val latitude = geometry?.coordinates?.getOrNull(1)
 
         ParkingLocation(
-            id = UUID.randomUUID().toString(),
-            name = properties?.name,
-            address = null, // Not available in Mumbai JSON
+            id = "${city.toSafeId()}_${name.toSafeId()}", // Create a stable ID
+            name = name,
+            address = properties.description, // Use description as address
             latitude = latitude,
             longitude = longitude,
-            cityName = null, // Not available in Mumbai JSON, could be set to "Mumbai" if appropriate
-            twoWheelerCapacity = null, // Not available in Mumbai JSON
-            fourWheelerCapacity = null, // Not available in Mumbai JSON
-            coverageType = properties?.coverageType,
-            prices = properties?.prices,
-            openingTimes = properties?.openingTimes
+            cityName = city,
+            // Capacities are missing in the Mumbai JSON, so they will be null
+            twoWheelerCapacity = null, 
+            fourWheelerCapacity = null, 
+            coverageType = properties.coverageType,
+            prices = properties.prices, // Assuming direct mapping is fine
+            openingTimes = properties.openingTimes // Assuming direct mapping is fine
         )
     }
 }
