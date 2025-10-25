@@ -34,7 +34,6 @@ import com.example.parkkar.ui.theme.ParkkarTheme
 import com.example.parkkar.utils.sha256
 import com.example.parkkar.utils.isValidPassword
 import com.example.parkkar.utils.showToast
-import com.example.parkkar.R
 import android.content.Intent // Already present, good.
 
 class ForgotPasswordActivity : ComponentActivity() {

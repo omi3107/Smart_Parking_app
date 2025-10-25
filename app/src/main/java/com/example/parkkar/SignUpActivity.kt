@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -21,26 +22,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.parkkar.data.DatabaseHelper
+import com.example.parkkar.ui.theme.ParkkarTheme
 import com.example.parkkar.utils.isValidPassword
 import com.example.parkkar.utils.sha256
 import com.example.parkkar.utils.showToast
-import com.example.parkkar.ui.theme.ParkkarTheme
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-import androidx.compose.foundation.text.ClickableText
 
 class SignUpActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -128,7 +125,7 @@ fun SignUpScreen(
                     text = "PARK-KAR",
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp,
-                    color = Color(0xFF4A4A4A) 
+                    color = Color(0xFF4A4A4A)
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Image(
@@ -155,7 +152,7 @@ fun SignUpScreen(
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
-                    text = "Let\'s create an account",
+                    text = "Let's create an account",
                     fontSize = 16.sp,
                     color = Color.Gray,
                     textAlign = TextAlign.Center,
@@ -268,12 +265,13 @@ fun SignUpScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text("Have an account? ", fontSize = 14.sp, color = Color.Gray)
-                val annotatedString = buildAnnotatedString {
-                    withStyle(style = SpanStyle(color = Color(0xFF4A4A4A), fontWeight = FontWeight.Bold, fontSize = 14.sp)) {
-                        append("Log In")
-                    }
-                }
-                ClickableText(text = annotatedString) { onLoginClicked() }
+                Text(
+                    text = "Log In",
+                    modifier = Modifier.clickable { onLoginClicked() },
+                    color = Color(0xFF4A4A4A),
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 14.sp
+                )
             }
         }
     }

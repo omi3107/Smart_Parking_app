@@ -10,10 +10,10 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
@@ -28,7 +28,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
@@ -37,18 +36,16 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.edit
 import com.example.parkkar.data.DatabaseHelper
 import com.example.parkkar.ui.theme.ParkkarTheme
 import com.example.parkkar.utils.showToast
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import androidx.core.content.edit
 
 private const val PREFS_NAME = "ParkkarPrefs"
 private const val KEY_SAVED_USERNAME = "saved_username"
@@ -58,7 +55,6 @@ class LoginActivity : ComponentActivity() {
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var dbHelper: DatabaseHelper
     private lateinit var auth: FirebaseAuth
-    private lateinit var googleSignInClient: GoogleSignInClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,12 +62,16 @@ class LoginActivity : ComponentActivity() {
         dbHelper = DatabaseHelper(this)
         auth = Firebase.auth
 
-        // Configure Google Sign In
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
+        val oneTapClient = Identity.getSignInClient(this)
+        val signInRequest = com.google.android.gms.auth.api.identity.BeginSignInRequest.builder()
+            .setGoogleIdTokenRequestOptions(
+                com.google.android.gms.auth.api.identity.BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
+                    .setSupported(true)
+                    .setServerClientId(getString(R.string.default_web_client_id))
+                    .setFilterByAuthorizedAccounts(false)
+                    .build()
+            )
             .build()
-        googleSignInClient = GoogleSignIn.getClient(this, gso)
 
         setContent {
             ParkkarTheme {
@@ -80,13 +80,14 @@ class LoginActivity : ComponentActivity() {
                 val initialRememberMe = savedUsername.isNotEmpty()
 
                 val googleSignInLauncher = rememberLauncherForActivityResult(
-                    contract = ActivityResultContracts.StartActivityForResult(),
+                    contract = ActivityResultContracts.StartIntentSenderForResult(),
                     onResult = { result ->
-                        val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
                         try {
-                            val account = task.getResult(ApiException::class.java)!!
-                            Log.d(TAG, "Firebase Auth with Google: ${account.id}")
-                            firebaseAuthWithGoogle(account.idToken!!)
+                            val credential = oneTapClient.getSignInCredentialFromIntent(result.data)
+                            val idToken = credential.googleIdToken
+                            if (idToken != null) {
+                                firebaseAuthWithGoogle(idToken)
+                            }
                         } catch (e: ApiException) {
                             Log.w(TAG, "Google sign in failed", e)
                             showToast(context, "Google Sign-In failed.")
@@ -112,7 +113,17 @@ class LoginActivity : ComponentActivity() {
                     },
                     onSignUpClicked = { navigateTo(SignUpActivity::class.java) },
                     onForgotPasswordClicked = { navigateTo(ForgotPasswordActivity::class.java) },
-                    onGoogleSignInClicked = { googleSignInLauncher.launch(googleSignInClient.signInIntent) }
+                    onGoogleSignInClicked = {
+                        oneTapClient.beginSignIn(signInRequest)
+                            .addOnSuccessListener(this) { result ->
+                                val intentSenderRequest = androidx.activity.result.IntentSenderRequest.Builder(result.pendingIntent.intentSender).build()
+                                googleSignInLauncher.launch(intentSenderRequest)
+                            }
+                            .addOnFailureListener(this) { e ->
+                                Log.e(TAG, "Google Sign-In failed: ${e.localizedMessage}")
+                                showToast(this, "Google Sign-In is not available at the moment.")
+                            }
+                    }
                 )
             }
         }
@@ -140,12 +151,11 @@ class LoginActivity : ComponentActivity() {
         showToast(this, "Login Successful")
 
         if (shouldRemember) {
-            sharedPreferences.edit().putString(KEY_SAVED_USERNAME, username).apply()
+            sharedPreferences.edit { putString(KEY_SAVED_USERNAME, username) }
         } else {
-            // Don't save username for Google Sign-In unless you add a specific 'Remember Me' choice for it
             sharedPreferences.edit { remove(KEY_SAVED_USERNAME) }
         }
-        
+
         navigateTo(HomeActivity::class.java, clearTask = true)
     }
 
@@ -179,7 +189,6 @@ fun LoginScreen(
                 .fillMaxSize()
                 .padding(16.dp),
         ) {
-            // Header remains the same...
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -233,9 +242,13 @@ fun LoginScreen(
                         Checkbox(checked = rememberMe, onCheckedChange = { rememberMe = it })
                         Text("Remember Me", fontSize = 14.sp, color = Color.DarkGray)
                     }
-                    ClickableText(buildAnnotatedString {
-                        withStyle(style = SpanStyle(color = MaterialTheme.colorScheme.primary, textDecoration = TextDecoration.Underline, fontSize = 14.sp)) { append("Forgot Password?") }
-                    }) { onForgotPasswordClicked() }
+                    Text(
+                        text = "Forgot Password?",
+                        modifier = Modifier.clickable { onForgotPasswordClicked() },
+                        color = MaterialTheme.colorScheme.primary,
+                        textDecoration = TextDecoration.Underline,
+                        fontSize = 14.sp
+                    )
                 }
                 Spacer(modifier = Modifier.height(24.dp))
                 Button(
@@ -272,10 +285,13 @@ fun LoginScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text("Don't have an account? ", fontSize = 14.sp, color = Color.Gray)
-                val annotatedString = buildAnnotatedString {
-                    withStyle(style = SpanStyle(color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold, fontSize = 14.sp)) { append("Sign Up") }
-                }
-                ClickableText(text = annotatedString) { onSignUpClicked() }
+                Text(
+                    text = "Sign Up",
+                    modifier = Modifier.clickable { onSignUpClicked() },
+                    color = MaterialTheme.colorScheme.primary,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 14.sp
+                )
             }
         }
     }

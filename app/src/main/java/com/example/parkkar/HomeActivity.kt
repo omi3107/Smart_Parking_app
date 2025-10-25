@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -34,8 +33,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.edit
-import com.example.parkkar.data.DatabaseHelper
-import com.example.parkkar.data.model.ParkingSpot
+import com.example.parkkar.model.ParkingLocation
 import com.example.parkkar.ui.home.HomeViewModel
 import com.example.parkkar.ui.home.SearchResultUiState
 import com.example.parkkar.ui.theme.ParkkarTheme
@@ -50,7 +48,6 @@ private const val KEY_SAVED_USERNAME = "saved_username"
 
 class HomeActivity : ComponentActivity() {
     private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var dbHelper: DatabaseHelper
     private val homeViewModel: HomeViewModel by viewModels()
 
     private fun navigateToDetails(spotId: String) {
@@ -63,18 +60,12 @@ class HomeActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
-        dbHelper = DatabaseHelper(this)
 
         setContent {
             ParkkarTheme {
                 HomeScreenContent(
                     viewModel = homeViewModel,
                     onNavigateBack = {
-                        val savedUsername = sharedPreferences.getString(KEY_SAVED_USERNAME, null)
-                        if (!savedUsername.isNullOrEmpty()) {
-                            val userId = dbHelper.getUserIdByUsername(savedUsername)
-                            dbHelper.addLogEntry(userId, "Successful Logout")
-                        }
                         sharedPreferences.edit { remove(KEY_SAVED_USERNAME) }
                         val intent = Intent(this, LoginActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -99,7 +90,7 @@ class HomeActivity : ComponentActivity() {
                         if (arrivalDateCal.before(todayCal)) {
                             showToast(this, "Arriving date cannot be in the past.")
                             return@HomeScreenContent
-                        } 
+                        }
                         if (leavingDateCal.before(todayCal)) {
                             showToast(this, "Leaving date cannot be in the past.")
                             return@HomeScreenContent
@@ -128,8 +119,8 @@ class HomeActivity : ComponentActivity() {
 fun HomeScreenContent(
     viewModel: HomeViewModel,
     onNavigateBack: () -> Unit,
-    onNavigateToDetails: (spotId: String) -> Unit, 
-    onFindParkingGeneral: () -> Unit 
+    onNavigateToDetails: (spotId: String) -> Unit,
+    onFindParkingGeneral: () -> Unit
 ) {
     val context = LocalContext.current
     val searchQuery by viewModel.searchQuery.collectAsState()
@@ -185,15 +176,6 @@ fun HomeScreenContent(
                     navigationIconContentColor = MaterialTheme.colorScheme.onPrimaryContainer
                 )
             )
-        }
-    ) { innerPadding ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
             Row(
                 modifier = Modifier.fillMaxWidth().padding(bottom = 24.dp),
                 horizontalArrangement = Arrangement.End,
@@ -203,7 +185,15 @@ fun HomeScreenContent(
                 Spacer(modifier = Modifier.width(8.dp))
                 Image(painter = painterResource(id = R.drawable.logo), contentDescription = "Park-Kar Logo", modifier = Modifier.height(20.dp))
             }
-
+        }
+    ) { innerPadding ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding)
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
             Text("Hi!", style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold), modifier = Modifier.fillMaxWidth().padding(bottom = 4.dp), textAlign = TextAlign.Start)
             Text("Where are you going?", style = MaterialTheme.typography.headlineSmall, modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp), textAlign = TextAlign.Start)
 
@@ -228,10 +218,10 @@ fun HomeScreenContent(
                         LazyColumn(modifier = Modifier.fillMaxSize()) {
                             items(state.spots) { spot ->
                                 ParkingSpotItem(spot = spot) {
-                                    viewModel.onSearchQueryChanged(spot.parkingName ?: spot.address ?: spot.cityName)
+                                    viewModel.onSearchQueryChanged(spot.name ?: spot.address ?: spot.cityName ?: "")
                                     onNavigateToDetails(spot.id)
                                 }
-                                HorizontalDivider() // FIX: Replaced Divider with HorizontalDivider
+                                HorizontalDivider()
                             }
                         }
                     }
@@ -240,9 +230,6 @@ fun HomeScreenContent(
                     }
                     is SearchResultUiState.Error -> {
                         Text("Error: ${state.message}", color = MaterialTheme.colorScheme.error, textAlign = TextAlign.Center, modifier = Modifier.align(Alignment.Center))
-                    }
-                    is SearchResultUiState.GeocoderError -> {
-                         Text("Could not determine city from coordinates. Please try a different location or check network.", color = MaterialTheme.colorScheme.error, textAlign = TextAlign.Center, modifier = Modifier.align(Alignment.Center))
                     }
                 }
             }
@@ -290,7 +277,7 @@ fun HomeScreenContent(
             Spacer(modifier = Modifier.weight(0.5f))
 
             Button(
-                onClick = onFindParkingGeneral, 
+                onClick = onFindParkingGeneral,
                 modifier = Modifier.fillMaxWidth().height(50.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF301934))
             ) {
@@ -301,7 +288,7 @@ fun HomeScreenContent(
 }
 
 @Composable
-fun ParkingSpotItem(spot: ParkingSpot, onClick: () -> Unit) { 
+fun ParkingSpotItem(spot: ParkingLocation, onClick: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -310,13 +297,13 @@ fun ParkingSpotItem(spot: ParkingSpot, onClick: () -> Unit) {
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
-            Text(text = spot.parkingName ?: "Unknown Parking Name", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+            Text(text = spot.name ?: "Unknown Parking Name", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
             spot.address?.let { Text(text = it, style = MaterialTheme.typography.bodyMedium) }
             Text(text = "City: ${spot.cityName}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             if (spot.latitude != null && spot.longitude != null) {
                  Text(text = "Coords: ${String.format("%.4f", spot.latitude)}, ${String.format("%.4f", spot.longitude)}", style = MaterialTheme.typography.bodySmall)
             }
-             Text(text = "4-Wheeler: ${spot.fourWheelerSpots}, 2-Wheeler: ${spot.twoWheelerSpots}", style = MaterialTheme.typography.bodySmall)
+             Text(text = "4-Wheeler: ${spot.fourWheelerCapacity}, 2-Wheeler: ${spot.twoWheelerCapacity}", style = MaterialTheme.typography.bodySmall)
         }
     }
 }

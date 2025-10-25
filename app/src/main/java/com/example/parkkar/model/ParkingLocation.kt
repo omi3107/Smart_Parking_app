@@ -21,16 +21,6 @@ data class ParkingLocation(
 )
 
 @Serializable
-data class PriceInfo(
-    val days: String?,
-    val timeRange: String?,
-    val rateType: String?,
-    val duration: String?,
-    val amount: Double?,
-    val currency: String?
-)
-
-@Serializable
 data class OpeningTime(
     val days: String?,
     val timeRange: String?

@@ -1,5 +1,6 @@
 package com.example.parkkar
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -9,7 +10,7 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable // For clickable stars
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -17,11 +18,12 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.DirectionsWalk
 import androidx.compose.material.icons.filled.*
-import androidx.compose.material.icons.outlined.StarBorder // For empty stars
+import androidx.compose.material.icons.outlined.StarBorder
 import androidx.compose.material3.*
-import androidx.compose.material3.TextFieldDefaults // Explicit import
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -37,9 +39,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.parkkar.data.model.OpeningTimeInfo
-import com.example.parkkar.data.model.ParkingSpot
-import com.example.parkkar.data.model.PriceInfo
+import com.example.parkkar.model.OpeningTime
+import com.example.parkkar.model.ParkingLocation
+import com.example.parkkar.model.PriceInfo
 import com.example.parkkar.ui.parkingresults.ParkingResultsViewModel
 import com.example.parkkar.ui.parkingresults.ParkingSpotUiState
 import com.example.parkkar.ui.theme.ParkkarTheme
@@ -113,7 +115,7 @@ class ParkingResultsActivity : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ExactParkingResultsScreen(
-    parkingSpot: ParkingSpot, 
+    parkingSpot: ParkingLocation,
     currentReviews: List<ReviewItemData>,
     onCloseScreen: () -> Unit
 ) {
@@ -124,42 +126,44 @@ fun ExactParkingResultsScreen(
 
     Scaffold(
         topBar = {
-            ExactTopBar(
-                title = parkingSpot.parkingName ?: "Parking Details",
-                subtitle = "${parkingSpot.coverageType ?: ""} - ${parkingSpot.fourWheelerSpots + parkingSpot.twoWheelerSpots} spaces",
-                onClose = onCloseScreen
-            )
+            ExactTopBar(onClose = onCloseScreen)
         },
         containerColor = Color(0xFFF0F2F5)
     ) { innerPadding ->
         Column(
             modifier = Modifier
-                .padding(innerPadding) 
+                .padding(innerPadding)
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
         ) {
             ExactCoreInfoSection(
-                price = parkingSpot.prices?.firstOrNull()?.amount ?: 0.0,
-                currency = parkingSpot.prices?.firstOrNull()?.currency ?: "₹",
-                duration = parkingSpot.prices?.firstOrNull()?.duration ?: "N/A",
-                timeToDestination = "Calculating...", 
-                locationName = parkingSpot.parkingName ?: "N/A",
-                locationArea = parkingSpot.cityName, 
+                price = parkingSpot.prices?.firstOrNull()?.amount,
+                currency = parkingSpot.prices?.firstOrNull()?.currency,
+                duration = parkingSpot.prices?.firstOrNull()?.duration,
+                timeToDestination = "Calculating...",
+                locationName = parkingSpot.name ?: "-",
+                locationArea = parkingSpot.cityName ?: "-",
                 onGetDirections = {
-                    Toast.makeText(context, "Get Directions Clicked for ${parkingSpot.parkingName}", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(context, MapActivity::class.java).apply {
+                        putExtra("latitude", parkingSpot.latitude)
+                        putExtra("longitude", parkingSpot.longitude)
+                        putExtra("locationName", parkingSpot.name)
+                        putExtra("cityName", parkingSpot.cityName)
+                    }
+                    context.startActivity(intent)
                 }
             )
             Spacer(modifier = Modifier.height(8.dp))
-            ExactPricesSection(prices = parkingSpot.prices ?: emptyList())
+            ExactPricesSection(prices = parkingSpot.prices)
             Spacer(modifier = Modifier.height(8.dp))
-            ExactOpeningTimesSection(openingTimes = parkingSpot.openingTimes ?: emptyList())
+            ExactOpeningTimesSection(openingTimes = parkingSpot.openingTimes)
             Spacer(modifier = Modifier.height(8.dp))
             ExactPaymentOptionsSection()
             Spacer(modifier = Modifier.height(8.dp))
 
             if (!showWriteReviewForm) {
                 ExactReviewsSection(
-                    currentReviews = currentReviews, 
+                    currentReviews = currentReviews,
                     onRateWriteReviewClick = { showWriteReviewForm = true }
                 )
             } else {
@@ -188,17 +192,22 @@ fun ExactParkingResultsScreen(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ExactTopBar(title: String, subtitle: String, onClose: () -> Unit) {
+fun ExactTopBar(onClose: () -> Unit) {
     TopAppBar(
-        title = {
-            Column {
-                Text(text = title, fontSize = 20.sp, fontWeight = FontWeight.SemiBold)
-                Text(text = subtitle, fontSize = 14.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        title = { },
+        navigationIcon = {
+            IconButton(onClick = onClose) {
+                Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
             }
         },
         actions = {
-            IconButton(onClick = onClose) {
-                Icon(Icons.Filled.Close, contentDescription = "Close")
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.padding(end = 16.dp)
+            ) {
+                Text("PARK-KAR", fontWeight = FontWeight.Bold, fontSize = 20.sp, color = Color(0xFF4A4A4A))
+                Spacer(modifier = Modifier.width(8.dp))
+                Image(painter = painterResource(id = R.drawable.logo), contentDescription = "Park-Kar Logo", modifier = Modifier.height(20.dp))
             }
         },
         colors = TopAppBarDefaults.topAppBarColors(
@@ -212,9 +221,9 @@ fun ExactTopBar(title: String, subtitle: String, onClose: () -> Unit) {
 
 @Composable
 fun ExactCoreInfoSection(
-    price: Double,
-    currency: String,
-    duration: String,
+    price: Double?,
+    currency: String?,
+    duration: String?,
     timeToDestination: String,
     locationName: String,
     locationArea: String,
@@ -227,26 +236,6 @@ fun ExactCoreInfoSection(
             .padding(16.dp)
     ) {
         Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 16.dp),
-            horizontalArrangement = Arrangement.End,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(
-                text = "PARK-KAR",
-                fontWeight = FontWeight.Bold,
-                fontSize = 20.sp,
-                color = Color(0xFF4A4A4A)
-            )
-            Spacer(modifier = Modifier.width(8.dp))
-            Image(
-                painter = painterResource(id = R.drawable.logo),
-                contentDescription = "Park-Kar Logo",
-                modifier = Modifier.height(20.dp)
-            )
-        }
-        Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -254,13 +243,17 @@ fun ExactCoreInfoSection(
                 modifier = Modifier.weight(1f),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(
-                    text = "$currency${String.format(Locale.getDefault(), "%.0f", price)}",
-                    fontSize = 28.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.Black
-                )
-                Text(duration, fontSize = 13.sp, color = Color.Gray)
+                if (price != null && currency != null) {
+                    Text(
+                        text = "$currency${String.format(Locale.getDefault(), "%.0f", price)}",
+                        fontSize = 28.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Black
+                    )
+                    Text(duration ?: "-", fontSize = 13.sp, color = Color.Gray)
+                } else {
+                    Text("-", fontSize = 28.sp, fontWeight = FontWeight.Bold, color = Color.Black)
+                }
             }
             Column(
                 modifier = Modifier.weight(1f),
@@ -322,7 +315,7 @@ fun DottedDividerExact(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun ExactPricesSection(prices: List<PriceInfo>) {
+fun ExactPricesSection(prices: List<PriceInfo>?) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -336,7 +329,7 @@ fun ExactPricesSection(prices: List<PriceInfo>) {
             color = MaterialTheme.colorScheme.primary
         )
         Spacer(modifier = Modifier.height(10.dp))
-        if (prices.isEmpty()) {
+        if (prices.isNullOrEmpty()) {
             Text("No price information available.", fontSize = 14.sp, color = Color.Gray)
         } else {
             prices.forEachIndexed { index, priceInfo ->
@@ -358,7 +351,7 @@ fun ExactPricesSection(prices: List<PriceInfo>) {
                             )
                         }
                         Text(
-                            "${priceInfo.currency ?: "₹"}${String.format(Locale.getDefault(), "%.2f", priceInfo.amount ?: 0.0)}", 
+                            "${priceInfo.currency ?: "₹"}${String.format(Locale.getDefault(), "%.2f", priceInfo.amount ?: 0.0)}",
                             fontSize = 15.sp,
                             fontWeight = FontWeight.Medium,
                             color = Color.DarkGray,
@@ -376,7 +369,7 @@ fun ExactPricesSection(prices: List<PriceInfo>) {
 }
 
 @Composable
-fun ExactOpeningTimesSection(openingTimes: List<OpeningTimeInfo>) {
+fun ExactOpeningTimesSection(openingTimes: List<OpeningTime>?) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -390,7 +383,7 @@ fun ExactOpeningTimesSection(openingTimes: List<OpeningTimeInfo>) {
             color = MaterialTheme.colorScheme.primary
         )
         Spacer(modifier = Modifier.height(10.dp))
-        if (openingTimes.isEmpty()) {
+        if (openingTimes.isNullOrEmpty()) {
             Text("No opening time information available.", fontSize = 14.sp, color = Color.Gray)
         } else {
             openingTimes.forEachIndexed { index, timeInfo ->
@@ -558,16 +551,16 @@ fun ExactWriteReviewForm(
 @Composable
 fun ExactParkingResultsScreenPreview() {
     ParkkarTheme {
-        val previewSpot = ParkingSpot(
+        val previewSpot = ParkingLocation(
             id = "preview-id",
             cityName = "Preview City",
-            parkingName = "Preview Parking Name",
+            name = "Preview Parking Name",
             address = "123 Preview St, Preview City",
             latitude = 0.0, longitude = 0.0,
-            fourWheelerSpots = 100, twoWheelerSpots = 50,
+            fourWheelerCapacity = 100, twoWheelerCapacity = 50,
             coverageType = "Covered",
             prices = listOf(PriceInfo(days = "Mon-Fri", timeRange = "All Day", rateType = "Flat", duration = "1 hour", amount = 5.0, currency = "$")),
-            openingTimes = listOf(OpeningTimeInfo(days = "Mon-Fri", timeRange = "09:00 - 18:00"))
+            openingTimes = listOf(OpeningTime(days = "Mon-Fri", timeRange = "09:00 - 18:00"))
         )
         ExactParkingResultsScreen(previewSpot, emptyList(), onCloseScreen = {})
     }
