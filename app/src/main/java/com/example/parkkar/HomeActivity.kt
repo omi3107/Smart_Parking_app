@@ -57,6 +57,13 @@ class HomeActivity : ComponentActivity() {
         startActivity(intent)
     }
 
+    private fun navigateToMap(query: String) {
+        val intent = Intent(this, MapActivity::class.java).apply {
+            putExtra("query", query)
+        }
+        startActivity(intent)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
@@ -101,11 +108,15 @@ class HomeActivity : ComponentActivity() {
                         }
 
                         val searchState = homeViewModel.searchResults.value
+                        val searchQuery = homeViewModel.searchQuery.value
+
                         if (searchState is SearchResultUiState.Success && searchState.spots.isNotEmpty()) {
                             val topSpotId = searchState.spots[0].id
                             navigateToDetails(topSpotId)
+                        } else if (searchQuery.isNotBlank()) {
+                            navigateToMap(searchQuery)
                         } else {
-                            Toast.makeText(this, "Please search and select a parking spot or ensure your search yields results.", Toast.LENGTH_LONG).show()
+                            Toast.makeText(this, "Please enter a search query.", Toast.LENGTH_LONG).show()
                         }
                     }
                 )

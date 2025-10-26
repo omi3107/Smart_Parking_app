@@ -71,6 +71,7 @@ dependencies {
     implementation("androidx.compose.material:material-icons-extended")
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.maplibre.sdk)
+    implementation("org.maplibre.gl:android-plugin-annotation-v9:3.0.0")
 
     // Firebase - Use the version catalog (libs) and BOM
     implementation(platform(libs.firebase.bom))
