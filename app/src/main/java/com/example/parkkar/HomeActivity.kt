@@ -1,27 +1,67 @@
+
 package com.example.parkkar
 
+import android.Manifest
+import android.app.Application
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.CalendarToday
+import androidx.compose.material.icons.filled.Chat
 import androidx.compose.material.icons.filled.Schedule
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -32,46 +72,71 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat
 import androidx.core.content.edit
+import androidx.lifecycle.lifecycleScope
 import com.example.parkkar.model.ParkingLocation
 import com.example.parkkar.ui.home.HomeViewModel
 import com.example.parkkar.ui.home.SearchResultUiState
 import com.example.parkkar.ui.theme.ParkkarTheme
 import com.example.parkkar.utils.showToast
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.analytics.ktx.logEvent
+import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-// SharedPreferences Constants
 private const val PREFS_NAME = "ParkkarPrefs"
 private const val KEY_SAVED_USERNAME = "saved_username"
 
 class HomeActivity : ComponentActivity() {
     private lateinit var sharedPreferences: SharedPreferences
     private val homeViewModel: HomeViewModel by viewModels()
-
-    private fun navigateToDetails(spotId: String) {
-        val intent = Intent(this, ParkingResultsActivity::class.java).apply {
-            putExtra(ParkingResultsActivity.EXTRA_PARKING_SPOT_ID, spotId)
-        }
-        startActivity(intent)
-    }
-
-    private fun navigateToMap(query: String) {
-        val intent = Intent(this, MapActivity::class.java).apply {
-            putExtra("query", query)
-        }
-        startActivity(intent)
-    }
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+        firebaseAnalytics = Firebase.analytics
 
         setContent {
             ParkkarTheme {
+                val context = LocalContext.current
+                var hasLocationPermission by remember {
+                    mutableStateOf(
+                        ContextCompat.checkSelfPermission(
+                            context,
+                            Manifest.permission.ACCESS_COARSE_LOCATION
+                        ) == PackageManager.PERMISSION_GRANTED
+                    )
+                }
+
+                val locationPermissionLauncher = rememberLauncherForActivityResult(
+                    contract = ActivityResultContracts.RequestPermission(),
+                    onResult = { isGranted ->
+                        if (isGranted) {
+                            hasLocationPermission = true
+                            homeViewModel.generateRecommendations()
+                        } else {
+                            Toast.makeText(context, "Location permission is required for recommendations.", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                )
+
+                LaunchedEffect(Unit) {
+                    if (!hasLocationPermission) {
+                        locationPermissionLauncher.launch(Manifest.permission.ACCESS_COARSE_LOCATION)
+                    } else {
+                        homeViewModel.generateRecommendations()
+                    }
+                }
+
                 HomeScreenContent(
                     viewModel = homeViewModel,
+                    hasLocationPermission = hasLocationPermission,
                     onNavigateBack = {
                         sharedPreferences.edit { remove(KEY_SAVED_USERNAME) }
                         val intent = Intent(this, LoginActivity::class.java)
@@ -80,48 +145,76 @@ class HomeActivity : ComponentActivity() {
                         finish()
                     },
                     onNavigateToDetails = ::navigateToDetails,
+                    onRecommendationClicked = {
+                        firebaseAnalytics.logEvent("recommendation_clicked") { 
+                            param("spot_id", it.id)
+                        }
+                        navigateToDetails(it.id)
+                     },
                     onFindParkingGeneral = {
                         val arrivalCal = homeViewModel.arrivalDateTime.value
                         val leavingCal = homeViewModel.leavingDateTime.value
 
-                        val todayCal = Calendar.getInstance().apply {
-                            set(Calendar.HOUR_OF_DAY, 0); set(Calendar.MINUTE, 0); set(Calendar.SECOND, 0); set(Calendar.MILLISECOND, 0)
-                        }
-                        val arrivalDateCal = (arrivalCal.clone() as Calendar).apply {
-                            set(Calendar.HOUR_OF_DAY, 0); set(Calendar.MINUTE, 0); set(Calendar.SECOND, 0); set(Calendar.MILLISECOND, 0)
-                        }
-                        val leavingDateCal = (leavingCal.clone() as Calendar).apply {
-                            set(Calendar.HOUR_OF_DAY, 0); set(Calendar.MINUTE, 0); set(Calendar.SECOND, 0); set(Calendar.MILLISECOND, 0)
-                        }
-
-                        if (arrivalDateCal.before(todayCal)) {
-                            showToast(this, "Arriving date cannot be in the past.")
-                            return@HomeScreenContent
-                        }
-                        if (leavingDateCal.before(todayCal)) {
-                            showToast(this, "Leaving date cannot be in the past.")
-                            return@HomeScreenContent
-                        }
-                        if (leavingCal.before(arrivalCal)) {
-                            showToast(this, "Leaving date and time cannot be before arriving date and time.")
-                            return@HomeScreenContent
-                        }
+                        if (isDateTimeInvalid(arrivalCal, leavingCal)) return@HomeScreenContent
 
                         val searchState = homeViewModel.searchResults.value
                         val searchQuery = homeViewModel.searchQuery.value
 
                         if (searchState is SearchResultUiState.Success && searchState.spots.isNotEmpty()) {
-                            val topSpotId = searchState.spots[0].id
-                            navigateToDetails(topSpotId)
+                            navigateToDetails(searchState.spots[0].id)
                         } else if (searchQuery.isNotBlank()) {
-                            navigateToMap(searchQuery)
+                            lifecycleScope.launch {
+                                val coords = homeViewModel.geocodeQuery(searchQuery)
+                                if (coords != null) {
+                                    navigateToMap(coords.first, coords.second)
+                                } else {
+                                    Toast.makeText(this@HomeActivity, "Could not find location: $searchQuery", Toast.LENGTH_LONG).show()
+                                }
+                            }
                         } else {
                             Toast.makeText(this, "Please enter a search query.", Toast.LENGTH_LONG).show()
                         }
+                    },
+                    onChatbotClick = { 
+                        val intent = Intent(this, ChatbotActivity::class.java)
+                        startActivity(intent)
                     }
                 )
             }
         }
+    }
+
+    private fun navigateToDetails(spotId: String) {
+        val intent = Intent(this, ParkingResultsActivity::class.java).apply {
+            putExtra(ParkingResultsActivity.EXTRA_PARKING_SPOT_ID, spotId)
+        }
+        startActivity(intent)
+    }
+
+    private fun navigateToMap(latitude: Double, longitude: Double) {
+        val intent = Intent(this, MapActivity::class.java).apply {
+            putExtra("latitude", latitude)
+            putExtra("longitude", longitude)
+        }
+        startActivity(intent)
+    }
+
+    private fun isDateTimeInvalid(arrivalCal: Calendar, leavingCal: Calendar): Boolean {
+        val todayCal = Calendar.getInstance().apply {
+            set(Calendar.HOUR_OF_DAY, 0); set(Calendar.MINUTE, 0); set(Calendar.SECOND, 0); set(Calendar.MILLISECOND, 0)
+        }
+        val arrivalDateCal = (arrivalCal.clone() as Calendar).apply {
+            set(Calendar.HOUR_OF_DAY, 0); set(Calendar.MINUTE, 0); set(Calendar.SECOND, 0); set(Calendar.MILLISECOND, 0)
+        }
+        if (arrivalDateCal.before(todayCal)) {
+            showToast(this, "Arriving date cannot be in the past.")
+            return true
+        }
+        if (leavingCal.before(arrivalCal)) {
+            showToast(this, "Leaving date and time cannot be before arriving date and time.")
+            return true
+        }
+        return false
     }
 }
 
@@ -129,13 +222,17 @@ class HomeActivity : ComponentActivity() {
 @Composable
 fun HomeScreenContent(
     viewModel: HomeViewModel,
+    hasLocationPermission: Boolean,
     onNavigateBack: () -> Unit,
     onNavigateToDetails: (spotId: String) -> Unit,
-    onFindParkingGeneral: () -> Unit
+    onRecommendationClicked: (spot: ParkingLocation) -> Unit,
+    onFindParkingGeneral: () -> Unit,
+    onChatbotClick: () -> Unit
 ) {
     val context = LocalContext.current
     val searchQuery by viewModel.searchQuery.collectAsState()
     val searchResultsUiState by viewModel.searchResults.collectAsState()
+    val recommendedSpots by viewModel.recommendedSpots.collectAsState()
     val arrivalDateTime by viewModel.arrivalDateTime.collectAsState()
     val leavingDateTime by viewModel.leavingDateTime.collectAsState()
 
@@ -148,64 +245,45 @@ fun HomeScreenContent(
     val showLeavingTimePicker = remember { mutableStateOf(false) }
 
     if (showArrivalDatePicker.value) {
-        ShowDatePicker(context, arrivalDateTime) { calendar ->
-            viewModel.updateArrivalDateTime(calendar)
-            showArrivalDatePicker.value = false
-        }
+        ShowDatePicker(context, arrivalDateTime) { viewModel.updateArrivalDateTime(it); showArrivalDatePicker.value = false }
     }
     if (showArrivalTimePicker.value) {
-        ShowTimePicker(context, arrivalDateTime) { calendar ->
-            viewModel.updateArrivalDateTime(calendar)
-            showArrivalTimePicker.value = false
-        }
+        ShowTimePicker(context, arrivalDateTime) { viewModel.updateArrivalDateTime(it); showArrivalTimePicker.value = false }
     }
     if (showLeavingDatePicker.value) {
-        ShowDatePicker(context, leavingDateTime) { calendar ->
-            viewModel.updateLeavingDateTime(calendar)
-            showLeavingDatePicker.value = false
-        }
+        ShowDatePicker(context, leavingDateTime) { viewModel.updateLeavingDateTime(it); showLeavingDatePicker.value = false }
     }
     if (showLeavingTimePicker.value) {
-        ShowTimePicker(context, leavingDateTime) { calendar ->
-            viewModel.updateLeavingDateTime(calendar)
-            showLeavingTimePicker.value = false
-        }
+        ShowTimePicker(context, leavingDateTime) { viewModel.updateLeavingDateTime(it); showLeavingTimePicker.value = false }
     }
 
     Scaffold(
         topBar = {
             TopAppBar(
                 title = { Text("Home") },
-                navigationIcon = {
-                    IconButton(onClick = onNavigateBack) {
-                        Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Logout")
+                navigationIcon = { IconButton(onClick = onNavigateBack) { Icon(Icons.AutoMirrored.Filled.ArrowBack, "Logout") } },
+                actions = {
+                    Row(
+                        modifier = Modifier.fillMaxWidth().padding(end = 16.dp),
+                        horizontalArrangement = Arrangement.End,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text("PARK-KAR", fontWeight = FontWeight.Bold, fontSize = 20.sp, color = Color(0xFF4A4A4A))
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Image(painter = painterResource(id = R.drawable.logo), contentDescription = "Logo", modifier = Modifier.size(24.dp))
                     }
                 },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
-                    navigationIconContentColor = MaterialTheme.colorScheme.onPrimaryContainer
-                )
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
             )
-            Row(
-                modifier = Modifier.fillMaxWidth().padding(bottom = 24.dp),
-                horizontalArrangement = Arrangement.End,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(text = "PARK-KAR", fontWeight = FontWeight.Bold, fontSize = 20.sp, color = Color(0xFF4A4A4A))
-                Spacer(modifier = Modifier.width(8.dp))
-                Image(painter = painterResource(id = R.drawable.logo), contentDescription = "Park-Kar Logo", modifier = Modifier.height(20.dp))
-            }
-        }
+        },
+        floatingActionButton = { FloatingActionButton(onClick = onChatbotClick) { Icon(Icons.Filled.Chat, "Chatbot") } }
     ) { innerPadding ->
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
-                .padding(16.dp),
+            modifier = Modifier.fillMaxSize().padding(innerPadding).padding(horizontal = 16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text("Hi!", style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold), modifier = Modifier.fillMaxWidth().padding(bottom = 4.dp), textAlign = TextAlign.Start)
+            Spacer(modifier = Modifier.height(16.dp))
+            Text("Hi!", style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold), modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Start)
             Text("Where are you going?", style = MaterialTheme.typography.headlineSmall, modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp), textAlign = TextAlign.Start)
 
             OutlinedTextField(
@@ -217,75 +295,70 @@ fun HomeScreenContent(
             )
             Spacer(modifier = Modifier.height(8.dp))
 
-            Box(modifier = Modifier.fillMaxWidth().weight(0.5f)) {
+            // Recommendations Section
+            if (hasLocationPermission && recommendedSpots.isNotEmpty() && searchQuery.isBlank()) {
+                Text(
+                    text = "Recommended For You",
+                    style = MaterialTheme.typography.titleMedium,
+                    modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)
+                )
+                LazyRow(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                    items(recommendedSpots) { spot ->
+                        RecommendationCard(spot = spot) { onRecommendationClicked(spot) }
+                    }
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+                HorizontalDivider()
+                Spacer(modifier = Modifier.height(8.dp))
+            }
+            
+            Box(modifier = Modifier.fillMaxWidth().weight(1f)) {
                 when (val state = searchResultsUiState) {
                     is SearchResultUiState.Idle -> {
-                        Text("Start typing to search for parking.", textAlign = TextAlign.Center, modifier = Modifier.align(Alignment.Center))
+                        if (searchQuery.isBlank()) {
+                            // This space is now used by recommendations when available
+                             Text("Start typing to search or see recommendations above.", textAlign = TextAlign.Center, modifier = Modifier.align(Alignment.Center))
+                        } else {
+                            Text("Searching...", textAlign = TextAlign.Center, modifier = Modifier.align(Alignment.Center))
+                        }
                     }
-                    is SearchResultUiState.Loading -> {
-                        CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-                    }
+                    is SearchResultUiState.Loading -> CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
                     is SearchResultUiState.Success -> {
                         LazyColumn(modifier = Modifier.fillMaxSize()) {
                             items(state.spots) { spot ->
                                 ParkingSpotItem(spot = spot) {
-                                    viewModel.onSearchQueryChanged(spot.name ?: spot.address ?: spot.cityName ?: "")
+                                    viewModel.onSearchQueryChanged(spot.name ?: "")
                                     onNavigateToDetails(spot.id)
                                 }
                                 HorizontalDivider()
                             }
                         }
                     }
-                    is SearchResultUiState.NoResults -> {
-                        Text("No parking spots found matching your query.", textAlign = TextAlign.Center, modifier = Modifier.align(Alignment.Center))
-                    }
-                    is SearchResultUiState.Error -> {
-                        Text("Error: ${state.message}", color = MaterialTheme.colorScheme.error, textAlign = TextAlign.Center, modifier = Modifier.align(Alignment.Center))
-                    }
+                    is SearchResultUiState.NoResults -> Text("No parking spots found.", textAlign = TextAlign.Center, modifier = Modifier.align(Alignment.Center))
+                    is SearchResultUiState.Error -> Text("Error: ${state.message}", color = MaterialTheme.colorScheme.error, textAlign = TextAlign.Center, modifier = Modifier.align(Alignment.Center))
                 }
             }
 
             Spacer(modifier = Modifier.height(16.dp))
 
+            // Date and Time Pickers
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.Top
             ) {
-                Column(modifier = Modifier.weight(1f)) {
-                    Text("Arriving", style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(bottom = 8.dp))
-                    Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth().clickable { showArrivalDatePicker.value = true }.padding(vertical = 8.dp)) {
-                        Text(dateFormatter.format(arrivalDateTime.time), style = MaterialTheme.typography.bodyLarge)
-                        Spacer(Modifier.weight(1f))
-                        Icon(Icons.Filled.CalendarToday, contentDescription = "Select Arriving Date")
-                    }
-                    HorizontalDivider(modifier = Modifier.padding(vertical = 4.dp))
-                    Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth().clickable { showArrivalTimePicker.value = true }.padding(vertical = 8.dp)) {
-                        Text(timeFormatter.format(arrivalDateTime.time), style = MaterialTheme.typography.bodyLarge)
-                        Spacer(Modifier.weight(1f))
-                        Icon(Icons.Filled.Schedule, contentDescription = "Select Arriving Time")
-                    }
-                }
+                DateTimeColumn("Arriving", dateFormatter.format(arrivalDateTime.time), timeFormatter.format(arrivalDateTime.time), {
+                    showArrivalDatePicker.value = true
+                }, { showArrivalTimePicker.value = true })
                 Spacer(modifier = Modifier.width(16.dp))
                 Box(modifier = Modifier.width(1.dp).height(120.dp).background(MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f)))
                 Spacer(modifier = Modifier.width(16.dp))
-                Column(modifier = Modifier.weight(1f)) {
-                    Text("Leaving", style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(bottom = 8.dp))
-                    Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth().clickable { showLeavingDatePicker.value = true }.padding(vertical = 8.dp)) {
-                        Text(dateFormatter.format(leavingDateTime.time), style = MaterialTheme.typography.bodyLarge)
-                        Spacer(Modifier.weight(1f))
-                        Icon(Icons.Filled.CalendarToday, contentDescription = "Select Leaving Date")
-                    }
-                    HorizontalDivider(modifier = Modifier.padding(vertical = 4.dp))
-                    Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth().clickable { showLeavingTimePicker.value = true }.padding(vertical = 8.dp)) {
-                        Text(timeFormatter.format(leavingDateTime.time), style = MaterialTheme.typography.bodyLarge)
-                        Spacer(Modifier.weight(1f))
-                        Icon(Icons.Filled.Schedule, contentDescription = "Select Leaving Time")
-                    }
-                }
+                DateTimeColumn("Leaving", dateFormatter.format(leavingDateTime.time), timeFormatter.format(leavingDateTime.time), {
+                    showLeavingDatePicker.value = true
+                }, { showLeavingTimePicker.value = true })
             }
-
-            Spacer(modifier = Modifier.weight(0.5f))
+            
+            Spacer(modifier = Modifier.height(16.dp))
 
             Button(
                 onClick = onFindParkingGeneral,
@@ -294,6 +367,25 @@ fun HomeScreenContent(
             ) {
                 Text("Find Parking", fontSize = 18.sp, color = Color.White)
             }
+             Spacer(modifier = Modifier.height(16.dp))
+        }
+    }
+}
+
+@Composable
+fun RowScope.DateTimeColumn(title: String, date: String, time: String, onDateClick: () -> Unit, onTimeClick: () -> Unit) {
+    Column(modifier = Modifier.weight(1f)) {
+        Text(title, style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(bottom = 8.dp))
+        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth().clickable(onClick = onDateClick).padding(vertical = 8.dp)) {
+            Text(date, style = MaterialTheme.typography.bodyLarge)
+            Spacer(Modifier.weight(1f))
+            Icon(Icons.Filled.CalendarToday, "Select Date")
+        }
+        HorizontalDivider(modifier = Modifier.padding(vertical = 4.dp))
+        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth().clickable(onClick = onTimeClick).padding(vertical = 8.dp)) {
+            Text(time, style = MaterialTheme.typography.bodyLarge)
+            Spacer(Modifier.weight(1f))
+            Icon(Icons.Filled.Schedule, "Select Time")
         }
     }
 }
@@ -301,47 +393,67 @@ fun HomeScreenContent(
 @Composable
 fun ParkingSpotItem(spot: ParkingLocation, onClick: () -> Unit) {
     Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 4.dp)
-            .clickable { onClick() },
+        modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp).clickable { onClick() },
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
-            Text(text = spot.name ?: "Unknown Parking Name", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
-            spot.address?.let { Text(text = it, style = MaterialTheme.typography.bodyMedium) }
-            Text(text = "City: ${spot.cityName}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-            if (spot.latitude != null && spot.longitude != null) {
-                 Text(text = "Coords: ${String.format("%.4f", spot.latitude)}, ${String.format("%.4f", spot.longitude)}", style = MaterialTheme.typography.bodySmall)
-            }
-             Text(text = "4-Wheeler: ${spot.fourWheelerCapacity}, 2-Wheeler: ${spot.twoWheelerCapacity}", style = MaterialTheme.typography.bodySmall)
+            Text(spot.name ?: "Unknown Parking Name", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+            spot.address?.let { Text(it, style = MaterialTheme.typography.bodyMedium) }
+            Text("Capacity: ${spot.totalCapacity}", style = MaterialTheme.typography.bodySmall)
+        }
+    }
+}
+
+@Composable
+fun RecommendationCard(spot: ParkingLocation, onClick: () -> Unit) {
+    Card(
+        modifier = Modifier.width(220.dp).clickable { onClick() },
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+    ) {
+        Column(modifier = Modifier.padding(12.dp)) {
+            Text(spot.name ?: "Parking Spot", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, maxLines = 1)
+            Spacer(modifier = Modifier.height(4.dp))
+            spot.address?.let { Text(it, style = MaterialTheme.typography.bodySmall, maxLines = 2, color = MaterialTheme.colorScheme.onSurfaceVariant) }
+            Spacer(modifier = Modifier.height(8.dp))
+            Text("Capacity: ${spot.totalCapacity}", style = MaterialTheme.typography.bodySmall, color = Color.Gray)
         }
     }
 }
 
 @Composable
 fun ShowDatePicker(context: Context, initialCalendar: Calendar, onDateSelected: (Calendar) -> Unit) {
-    val year = initialCalendar.get(Calendar.YEAR); val month = initialCalendar.get(Calendar.MONTH); val day = initialCalendar.get(Calendar.DAY_OF_MONTH)
-    DatePickerDialog(context, { _, selectedYear, selectedMonth, selectedDayOfMonth ->
-        val newCalendar = Calendar.getInstance().apply { timeInMillis = initialCalendar.timeInMillis; set(selectedYear, selectedMonth, selectedDayOfMonth) }
+    val year = initialCalendar.get(Calendar.YEAR)
+    val month = initialCalendar.get(Calendar.MONTH)
+    val day = initialCalendar.get(Calendar.DAY_OF_MONTH)
+    DatePickerDialog(context, { _, y, m, d ->
+        val newCalendar = (initialCalendar.clone() as Calendar).apply { set(y, m, d) }
         onDateSelected(newCalendar)
     }, year, month, day).show()
 }
 
 @Composable
 fun ShowTimePicker(context: Context, initialCalendar: Calendar, onTimeSelected: (Calendar) -> Unit) {
-    val hour = initialCalendar.get(Calendar.HOUR_OF_DAY); val minute = initialCalendar.get(Calendar.MINUTE)
-    TimePickerDialog(context, { _, selectedHour, selectedMinute ->
-        val newCalendar = Calendar.getInstance().apply { timeInMillis = initialCalendar.timeInMillis; set(Calendar.HOUR_OF_DAY, selectedHour); set(Calendar.MINUTE, selectedMinute) }
+    val hour = initialCalendar.get(Calendar.HOUR_OF_DAY)
+    val minute = initialCalendar.get(Calendar.MINUTE)
+    TimePickerDialog(context, { _, h, m ->
+        val newCalendar = (initialCalendar.clone() as Calendar).apply { set(Calendar.HOUR_OF_DAY, h); set(Calendar.MINUTE, m) }
         onTimeSelected(newCalendar)
     }, hour, minute, false).show()
 }
 
-@Preview(showBackground = true, device = "spec:width=411dp,height=891dp")
+@Preview(showBackground = true)
 @Composable
 fun DefaultPreviewOfHomeScreenUpdated() {
     ParkkarTheme {
-        val dummyViewModel = HomeViewModel(LocalContext.current.applicationContext as android.app.Application)
-        HomeScreenContent(viewModel = dummyViewModel, onNavigateBack = {}, onNavigateToDetails = {}, onFindParkingGeneral = {})
+        val app = LocalContext.current.applicationContext as Application
+        HomeScreenContent(
+            viewModel = HomeViewModel(app),
+            hasLocationPermission = true,
+            onNavigateBack = {},
+            onNavigateToDetails = {},
+            onRecommendationClicked = {},
+            onFindParkingGeneral = {},
+            onChatbotClick = {}
+        )
     }
 }

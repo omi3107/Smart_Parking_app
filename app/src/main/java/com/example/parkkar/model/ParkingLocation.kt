@@ -1,3 +1,4 @@
+
 @file:OptIn(kotlinx.serialization.InternalSerializationApi::class)
 package com.example.parkkar.model
 
@@ -18,7 +19,10 @@ data class ParkingLocation(
     val coverageType: String?, // e.g., "Multi-level", "Covered", "Not Covered"
     val prices: List<PriceInfo>?,
     val openingTimes: List<OpeningTime>?
-)
+) {
+    val totalCapacity: Int
+        get() = (twoWheelerCapacity ?: 0) + (fourWheelerCapacity ?: 0)
+}
 
 @Serializable
 data class OpeningTime(

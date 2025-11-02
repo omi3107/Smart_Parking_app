@@ -1,3 +1,4 @@
+
 import java.util.Properties
 
 plugins {
@@ -31,7 +32,9 @@ android {
 
         // Make the API key available in the app's build config
         val mapTilerApiKey = localProperties.getProperty("MAPTILER_API_KEY") ?: ""
+        val geminiApiKey = localProperties.getProperty("GEMINI_API_KEY") ?: ""
         buildConfigField("String", "MAPTILER_API_KEY", "\"$mapTilerApiKey\"")
+        buildConfigField("String", "GEMINI_API_KEY", "\"$geminiApiKey\"")
         buildConfigField("String", "MAP_STYLE_URL", "\"https://api.maptiler.com/maps/019a1af3-3396-72e5-8331-011b55745b4c/style.json?key=$mapTilerApiKey\"")
     }
 
@@ -72,18 +75,32 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.maplibre.sdk)
     implementation("org.maplibre.gl:android-plugin-annotation-v9:3.0.0")
+    implementation("com.mapbox.mapboxsdk:mapbox-android-gestures:0.7.0")
+    implementation("com.mapbox.mapboxsdk:mapbox-sdk-geojson:5.8.0")
 
     // Firebase - Use the version catalog (libs) and BOM
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
+    implementation("com.google.firebase:firebase-analytics-ktx")
+
     // implementation(libs.firebase.firestore.ktx) // Disabled for local data access
     implementation(libs.firebase.auth.ktx) // Added for auth
 
     // Google Sign-In
     implementation(libs.play.services.auth)
+    implementation("com.google.android.gms:play-services-location:21.3.0")
+
+    // Ktor Client
+    implementation("io.ktor:ktor-client-core:2.3.10")
+    implementation("io.ktor:ktor-client-cio:2.3.10")
+    implementation("io.ktor:ktor-client-content-negotiation:2.3.10")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.10")
 
     // JSON Serialization
     implementation("com.google.code.gson:gson:2.10.1")
+
+    // Google AI (Gemini)
+    implementation("com.google.ai.client.generativeai:generativeai:0.9.0")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

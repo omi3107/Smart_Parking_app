@@ -1,59 +1,1237 @@
 {
-	"type": "FeatureCollection",
-	"name": "panaji_parking",
-	"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
-	"features": [
-		{
-			"type": "Feature",
-			"properties": {
-				"CityName": "Panaji",
-				"ZoneName": "North Goa",
-				"WardName": "NA",
-				"NameOfParking": "Multi-Level Car Parking, Panaji",
-				"ParkingAddress": "Multi-Level Car Park, Patto Colony, Panaji, Goa 403521",
-				"Latitude": 15.4764482,
-				"Longitude": 73.8281104,
-				"NoOf4WheelerParking": 465,
-				"NoOf2WheelerParking": "NA",
-				"Description": "",
-				"prices": [
-					{
-						"days": "Mon-Sun",
-						"timeRange": "08:00 - 22:00",
-						"rateType": "Per Hour",
-						"duration": "first 2 hours",
-						"amount": 60.00,
-						"currency": "INR"
-					},
-					{
-						"days": "Mon-Sun",
-						"timeRange": "08:00 - 22:00",
-						"rateType": "Per Hour",
-						"duration": "subsequent hour",
-						"amount": 30.00,
-						"currency": "INR"
-					},
-					{
-						"days": "Mon-Sun",
-						"timeRange": "Full Day",
-						"rateType": "Flat Rate",
-						"duration": "Max 12 hours",
-						"amount": 300.00,
-						"currency": "INR"
-					}
-				],
-				"openingTimes": [
-					{
-						"days": "Mon-Sun",
-						"timeRange": "08:00 - 23:00"
-					}
-				],
-				"CoverageType": "Multi-level"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [73.8281104, 15.4764482]
-			}
-		}
-	]
+  "?xml": "",
+  "parking_data": {
+    "parking_location": [
+      {
+        "name": "Multi-Level Car Parking, Panaji",
+        "address": "Multi-Level Car Park, Patto Colony, Panaji, Goa 403521",
+        "latitude": 15.4764482,
+        "longitude": 73.8281104,
+        "two_wheeler_parking": 150,
+        "four_wheeler_parking": 465,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "subsequent hour",
+            "amount": 30.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.00,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Multi-level"
+      },
+      {
+        "name": "INOX Parking Panjim",
+        "address": "Old GMC Complex, Panjim, Goa - 403001",
+        "latitude": 15.5,
+        "longitude": 73.82,
+        "two_wheeler_parking": 200,
+        "four_wheeler_parking": 150,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Subsequent Hour",
+            "duration": "continuous hour",
+            "amount": 30.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.00,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Multi-level"
+      },
+      {
+        "name": "KTC Parking Margao",
+        "address": "17, Madel, National Highway Road, Margao, Goa - 403601",
+        "latitude": 15.29,
+        "longitude": 73.95,
+        "two_wheeler_parking": 300,
+        "four_wheeler_parking": 100,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Subsequent Hour",
+            "duration": "continuous hour",
+            "amount": 30.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.00,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Open Lot"
+      },
+      {
+        "name": "Ravindra Bhavan Parking",
+        "address": "Margao, Borda, Goa - 403601",
+        "latitude": 15.28,
+        "longitude": 73.96,
+        "two_wheeler_parking": 150,
+        "four_wheeler_parking": 120,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Subsequent Hour",
+            "duration": "continuous hour",
+            "amount": 30.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.00,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Open Lot"
+      },
+      {
+        "name": "Benaulim Beach Parking",
+        "address": "Benaulim, Goa - 403716",
+        "latitude": 15.26,
+        "longitude": 73.92,
+        "two_wheeler_parking": 200,
+        "four_wheeler_parking": 80,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Subsequent Hour",
+            "duration": "continuous hour",
+            "amount": 30.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.00,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Open Lot"
+      },
+      {
+        "name": "Baga Parking",
+        "address": "Saunta Vaddo, Titos Lane, Baga, Goa - 403516",
+        "latitude": 15.56,
+        "longitude": 73.75,
+        "two_wheeler_parking": 350,
+        "four_wheeler_parking": 180,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Subsequent Hour",
+            "duration": "continuous hour",
+            "amount": 30.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.00,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Open Lot"
+      },
+      {
+        "name": "St. Anthony's Pay And Park",
+        "address": "Anjuna, Goa - 403509 (Praias Vaddo)",
+        "latitude": 15.58,
+        "longitude": 73.74,
+        "two_wheeler_parking": 150,
+        "four_wheeler_parking": 100,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Subsequent Hour",
+            "duration": "continuous hour",
+            "amount": 30.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.00,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Open Lot"
+      },
+      {
+        "name": "Somy Plaza (Somy Resort) Parking",
+        "address": "Calangute, Bardez, Goa - 403519",
+        "latitude": 15.54,
+        "longitude": 73.76,
+        "two_wheeler_parking": 100,
+        "four_wheeler_parking": 50,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Subsequent Hour",
+            "duration": "continuous hour",
+            "amount": 30.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.00,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Open Lot"
+      },
+      {
+        "name": "Dudhsagar Safe Parking",
+        "address": "Bazarwaddo, Colem, Kolem, Goa - 403410",
+        "latitude": 15.34,
+        "longitude": 74.24,
+        "two_wheeler_parking": 50,
+        "four_wheeler_parking": 100,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Subsequent Hour",
+            "duration": "continuous hour",
+            "amount": 30.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.00,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Open Lot"
+      },
+      {
+        "name": "Sri Mangesh Temple Parking Lot",
+        "address": "Mardol, Goa - 403115",
+        "latitude": 15.45,
+        "longitude": 73.97,
+        "two_wheeler_parking": 200,
+        "four_wheeler_parking": 100,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Subsequent Hour",
+            "duration": "continuous hour",
+            "amount": 30.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.00,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Open Lot"
+      },
+      {
+        "name": "Shri Mahalasa Temple Parking",
+        "address": "Mardol, Goa - 403404 (Behind Gate)",
+        "latitude": 15.441,
+        "longitude": 73.973,
+        "two_wheeler_parking": 200,
+        "four_wheeler_parking": 100,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Subsequent Hour",
+            "duration": "continuous hour",
+            "amount": 30.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.00,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Open Lot"
+      },
+      {
+        "name": "Dabolim Airport Parking (GOI)",
+        "address": "Goa International Airport, Dabolim, Goa 403801",
+        "latitude": 15.3808,
+        "longitude": 73.8314,
+        "two_wheeler_parking": 100,
+        "four_wheeler_parking": 300,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Subsequent Hour",
+            "duration": "continuous hour",
+            "amount": 30.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.00,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "00:00 - 23:59"
+          }
+        ],
+        "CoverageType": "Multi-level"
+      },
+      {
+        "name": "Mapusa Bus Stand Parking",
+        "address": "Mapusa, Goa 403519",
+        "latitude": 15.59,
+        "longitude": 73.81,
+        "two_wheeler_parking": 250,
+        "four_wheeler_parking": 100,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Subsequent Hour",
+            "duration": "continuous hour",
+            "amount": 30.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.00,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Open Lot"
+      },
+      {
+        "name": "Vasco da Gama Railway Station Parking",
+        "address": "Swatantra Path, Vasco da Gama, Goa",
+        "latitude": 15.3961,
+        "longitude": 73.8117,
+        "two_wheeler_parking": 200,
+        "four_wheeler_parking": 50,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Subsequent Hour",
+            "duration": "continuous hour",
+            "amount": 30.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.00,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "00:00 - 23:59"
+          }
+        ],
+        "CoverageType": "Open Lot"
+      },
+      {
+        "name": "Colva Beach Parking",
+        "address": "Colva Beach Rd, Colva, Goa 403708",
+        "latitude": 15.2761,
+        "longitude": 73.9172,
+        "two_wheeler_parking": 300,
+        "four_wheeler_parking": 150,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Subsequent Hour",
+            "duration": "continuous hour",
+            "amount": 30.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.00,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Open Lot"
+      },
+      {
+        "name": "Palolem Beach Parking",
+        "address": "Palolem Beach, Canacona, Goa 403702",
+        "latitude": 15.01,
+        "longitude": 74.02,
+        "two_wheeler_parking": 200,
+        "four_wheeler_parking": 100,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Subsequent Hour",
+            "duration": "continuous hour",
+            "amount": 30.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.00,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Open Lot"
+      },
+      {
+        "name": "Arambol Beach Parking",
+        "address": "Arambol, Goa 403524",
+        "latitude": 15.6868,
+        "longitude": 73.7045,
+        "two_wheeler_parking": 200,
+        "four_wheeler_parking": 100,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Subsequent Hour",
+            "duration": "continuous hour",
+            "amount": 30.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.00,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Open Lot"
+      },
+      {
+        "name": "Vagator Beach Parking",
+        "address": "Vagator Beach, Vagator, Goa 403509",
+        "latitude": 15.6025,
+        "longitude": 73.7336,
+        "two_wheeler_parking": 250,
+        "four_wheeler_parking": 150,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Subsequent Hour",
+            "duration": "continuous hour",
+            "amount": 30.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.00,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Open Lot"
+      },
+      {
+        "name": "Sinquerim Beach Parking",
+        "address": "Sinquerim Beach, Candolim, Goa 403515",
+        "latitude": 15.5,
+        "longitude": 73.77,
+        "two_wheeler_parking": 150,
+        "four_wheeler_parking": 80,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Subsequent Hour",
+            "duration": "continuous hour",
+            "amount": 30.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.00,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Open Lot"
+      },
+      {
+        "name": "Miramar Beach Parking",
+        "address": "Dayanand Bandodkar Marg, Miramar, Panaji, Goa 403001",
+        "latitude": 15.485,
+        "longitude": 73.809,
+        "two_wheeler_parking": 100,
+        "four_wheeler_parking": 50,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Subsequent Hour",
+            "duration": "continuous hour",
+            "amount": 30.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.00,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Open Lot"
+      },
+      {
+        "name": "Dona Paula Jetty Parking",
+        "address": "Dona Paula, Goa 403004",
+        "latitude": 15.46,
+        "longitude": 73.8,
+        "two_wheeler_parking": 100,
+        "four_wheeler_parking": 50,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Subsequent Hour",
+            "duration": "continuous hour",
+            "amount": 30.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.00,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Open Lot"
+      },
+      {
+        "name": "Fort Aguada Parking",
+        "address": "Fort Aguada, Candolim, Goa 403515",
+        "latitude": 15.50154,
+        "longitude": 73.77023,
+        "two_wheeler_parking": 150,
+        "four_wheeler_parking": 100,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Subsequent Hour",
+            "duration": "continuous hour",
+            "amount": 30.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.00,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Open Lot"
+      },
+      {
+        "name": "Reis Magos Fort Parking",
+        "address": "Reis Magos, Goa 403114",
+        "latitude": 15.5,
+        "longitude": 73.81,
+        "two_wheeler_parking": 80,
+        "four_wheeler_parking": 40,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Subsequent Hour",
+            "duration": "continuous hour",
+            "amount": 30.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.00,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Open Lot"
+      },
+      {
+        "name": "Deltin Royale Parking (Jetty)",
+        "address": "Fisheries Dept Building, Dayanand Bandodkar Road, Panjim, Goa 403001",
+        "latitude": 15.501567,
+        "longitude": 73.827717,
+        "two_wheeler_parking": 50,
+        "four_wheeler_parking": 100,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Subsequent Hour",
+            "duration": "continuous hour",
+            "amount": 30.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.00,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "00:00 - 23:59"
+          }
+        ],
+        "CoverageType": "Valet"
+      },
+      {
+        "name": "Morjim Beach Parking Area",
+        "address": "Morjim Beach, Morjim, Goa 403512",
+        "latitude": 15.62,
+        "longitude": 73.73,
+        "two_wheeler_parking": 200,
+        "four_wheeler_parking": 100,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Subsequent Hour",
+            "duration": "continuous hour",
+            "amount": 30.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.00,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Open Lot"
+      },
+      {
+        "name": "Immaculate Conception Church Parking",
+        "address": "Rua Emídio Garcia, Altinho, Panaji, Goa 403001",
+        "latitude": 15.498,
+        "longitude": 73.829,
+        "two_wheeler_parking": 100,
+        "four_wheeler_parking": 50,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Subsequent Hour",
+            "duration": "continuous hour",
+            "amount": 30.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.00,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Open Lot"
+      },
+      {
+        "name": "SGPDA Grounds Parking Lot",
+        "address": "Fatorda, Margao, Goa 403601",
+        "latitude": 15.281,
+        "longitude": 73.963,
+        "two_wheeler_parking": 400,
+        "four_wheeler_parking": 200,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Subsequent Hour",
+            "duration": "continuous hour",
+            "amount": 30.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.00,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Open Lot"
+      },
+      {
+        "name": "Zuri Beach Parking",
+        "address": "North Of Zuri Beach Resort, Fatrade, Varca, Goa 403721",
+        "latitude": 15.24,
+        "longitude": 73.91,
+        "two_wheeler_parking": 100,
+        "four_wheeler_parking": 50,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Subsequent Hour",
+            "duration": "continuous hour",
+            "amount": 30.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.00,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Open Lot"
+      },
+      {
+        "name": "Kakolem Beach Parking",
+        "address": "Kola, Cola, Goa 403702",
+        "latitude": 15.06,
+        "longitude": 73.99,
+        "two_wheeler_parking": 50,
+        "four_wheeler_parking": 20,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Subsequent Hour",
+            "duration": "continuous hour",
+            "amount": 30.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.00,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Open Lot"
+      },
+      {
+        "name": "Calangute Beach Parking Lot",
+        "address": "Calangute, Goa 403516",
+        "latitude": 15.545,
+        "longitude": 73.755,
+        "two_wheeler_parking": 500,
+        "four_wheeler_parking": 250,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Subsequent Hour",
+            "duration": "continuous hour",
+            "amount": 30.00,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.00,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Open Lot"
+      }
+    ]
+  }
 }

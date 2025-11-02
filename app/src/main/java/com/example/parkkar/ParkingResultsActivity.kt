@@ -1,11 +1,16 @@
 package com.example.parkkar
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
@@ -39,12 +44,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat
 import com.example.parkkar.model.OpeningTime
 import com.example.parkkar.model.ParkingLocation
 import com.example.parkkar.model.PriceInfo
 import com.example.parkkar.ui.parkingresults.ParkingResultsViewModel
 import com.example.parkkar.ui.parkingresults.ParkingSpotUiState
 import com.example.parkkar.ui.theme.ParkkarTheme
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.Priority
+import com.google.android.gms.tasks.CancellationTokenSource
 import java.util.Locale
 import java.util.UUID
 
@@ -82,6 +91,20 @@ class ParkingResultsActivity : ComponentActivity() {
         setContent {
             ParkkarTheme {
                 val uiState by viewModel.parkingSpotUiState.collectAsState()
+                var distance by remember { mutableStateOf<Float?>(null) }
+                var userLocation by remember { mutableStateOf<Location?>(null) }
+                val fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
+                val locationPermissionLauncher = rememberLauncherForActivityResult(
+                    contract = ActivityResultContracts.RequestPermission(),
+                    onResult = { isGranted ->
+                        if (isGranted) {
+                            // Permission is granted, the LaunchedEffect will re-trigger location fetch.
+                        } else {
+                            Toast.makeText(this, "Location permission denied", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                )
 
                 when (val state = uiState) {
                     is ParkingSpotUiState.Loading -> {
@@ -90,10 +113,34 @@ class ParkingResultsActivity : ComponentActivity() {
                         }
                     }
                     is ParkingSpotUiState.Success -> {
+                        LaunchedEffect(state.parkingSpot) { // Re-run when the parking spot data changes
+                            if (ContextCompat.checkSelfPermission(this@ParkingResultsActivity, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                                fusedLocationClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, CancellationTokenSource().token)
+                                    .addOnSuccessListener { loc: Location? ->
+                                        userLocation = loc
+                                        if (loc != null && state.parkingSpot.latitude != null && state.parkingSpot.longitude != null) {
+                                            val parkingSpotLocation = Location("parking_spot").apply {
+                                                latitude = state.parkingSpot.latitude!!
+                                                longitude = state.parkingSpot.longitude!!
+                                            }
+                                            val distanceInMeters = loc.distanceTo(parkingSpotLocation)
+                                            distance = distanceInMeters / 1000f // Convert to kilometers
+                                        }
+                                    }.addOnFailureListener {
+                                        Log.e("ParkingResultsActivity", "Failed to get current location", it)
+                                        Toast.makeText(this@ParkingResultsActivity, "Failed to get your location.", Toast.LENGTH_SHORT).show()
+                                    }
+                            } else {
+                                locationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+                            }
+                        }
+
                         ExactParkingResultsScreen(
                             parkingSpot = state.parkingSpot,
                             currentReviews = emptyList(),
-                            onCloseScreen = { finish() }
+                            distance = distance,
+                            onCloseScreen = { finish() },
+                            userLocation = userLocation
                         )
                     }
                     is ParkingSpotUiState.Error -> {
@@ -117,6 +164,8 @@ class ParkingResultsActivity : ComponentActivity() {
 fun ExactParkingResultsScreen(
     parkingSpot: ParkingLocation,
     currentReviews: List<ReviewItemData>,
+    distance: Float?,
+    userLocation: Location?,
     onCloseScreen: () -> Unit
 ) {
     val context = LocalContext.current
@@ -124,9 +173,25 @@ fun ExactParkingResultsScreen(
     var userRating by remember { mutableStateOf(0f) }
     var userReviewText by remember { mutableStateOf("") }
 
+    val distanceText = when {
+        distance == null -> "Calculating..."
+        distance < 1 -> "${(distance * 1000).toInt()} m"
+        else -> "${String.format(Locale.getDefault(), "%.1f", distance)} km"
+    }
+
     Scaffold(
         topBar = {
             ExactTopBar(onClose = onCloseScreen)
+        },
+        floatingActionButton = {
+            FloatingActionButton(onClick = {
+                val intent = Intent(context, ChatbotActivity::class.java).apply {
+                    putExtra("parking_spot_id", parkingSpot.id)
+                }
+                context.startActivity(intent)
+            }) {
+                Icon(Icons.Filled.Chat, contentDescription = "Chatbot")
+            }
         },
         containerColor = Color(0xFFF0F2F5)
     ) { innerPadding ->
@@ -140,17 +205,23 @@ fun ExactParkingResultsScreen(
                 price = parkingSpot.prices?.firstOrNull()?.amount,
                 currency = parkingSpot.prices?.firstOrNull()?.currency,
                 duration = parkingSpot.prices?.firstOrNull()?.duration,
-                timeToDestination = "Calculating...",
+                timeToDestination = distanceText,
                 locationName = parkingSpot.name ?: "-",
                 locationArea = parkingSpot.cityName ?: "-",
                 onGetDirections = {
-                    val intent = Intent(context, MapActivity::class.java).apply {
-                        putExtra("latitude", parkingSpot.latitude)
-                        putExtra("longitude", parkingSpot.longitude)
-                        putExtra("locationName", parkingSpot.name)
-                        putExtra("cityName", parkingSpot.cityName)
+                    if (userLocation != null) {
+                        val intent = Intent(context, MapActivity::class.java).apply {
+                            putExtra("latitude", parkingSpot.latitude)
+                            putExtra("longitude", parkingSpot.longitude)
+                            putExtra("user_latitude", userLocation.latitude)
+                            putExtra("user_longitude", userLocation.longitude)
+                            putExtra("locationName", parkingSpot.name)
+                            putExtra("cityName", parkingSpot.cityName)
+                        }
+                        context.startActivity(intent)
+                    } else {
+                        Toast.makeText(context, "Could not get your current location. Please ensure location services are enabled.", Toast.LENGTH_LONG).show()
                     }
-                    context.startActivity(intent)
                 }
             )
             Spacer(modifier = Modifier.height(8.dp))
@@ -202,12 +273,13 @@ fun ExactTopBar(onClose: () -> Unit) {
         },
         actions = {
             Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(end = 16.dp)
+                modifier = Modifier.fillMaxWidth().padding(end = 16.dp),
+                horizontalArrangement = Arrangement.End,
+                verticalAlignment = Alignment.CenterVertically
             ) {
                 Text("PARK-KAR", fontWeight = FontWeight.Bold, fontSize = 20.sp, color = Color(0xFF4A4A4A))
                 Spacer(modifier = Modifier.width(8.dp))
-                Image(painter = painterResource(id = R.drawable.logo), contentDescription = "Park-Kar Logo", modifier = Modifier.height(20.dp))
+                Image(painter = painterResource(id = R.drawable.logo), contentDescription = "Park-Kar Logo", modifier = Modifier.size(24.dp))
             }
         },
         colors = TopAppBarDefaults.topAppBarColors(
@@ -562,6 +634,6 @@ fun ExactParkingResultsScreenPreview() {
             prices = listOf(PriceInfo(days = "Mon-Fri", timeRange = "All Day", rateType = "Flat", duration = "1 hour", amount = 5.0, currency = "$")),
             openingTimes = listOf(OpeningTime(days = "Mon-Fri", timeRange = "09:00 - 18:00"))
         )
-        ExactParkingResultsScreen(previewSpot, emptyList(), onCloseScreen = {})
+        ExactParkingResultsScreen(previewSpot, emptyList(), null, null, onCloseScreen = {})
     }
 }

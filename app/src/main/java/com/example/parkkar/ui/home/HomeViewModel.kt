@@ -1,10 +1,18 @@
+
 package com.example.parkkar.ui.home
 
+import android.annotation.SuppressLint
 import android.app.Application
+import android.location.Address
+import android.location.Geocoder
+import android.location.Location
+import android.os.Build
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.parkkar.model.ParkingLocation
+import com.example.parkkar.recommendation.RecommendationEngine
 import com.example.parkkar.repository.ParkingRepository
+import com.google.android.gms.location.LocationServices
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -17,8 +25,13 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
+import java.io.IOException
 import java.util.Calendar
 import java.util.Locale
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 import kotlin.math.atan2
 import kotlin.math.cos
 import kotlin.math.sin
@@ -35,10 +48,17 @@ sealed class SearchResultUiState {
 @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
+    private val geocoder = Geocoder(application, Locale.getDefault())
+    private val recommendationEngine = RecommendationEngine()
+    private val fusedLocationClient = LocationServices.getFusedLocationProviderClient(application)
+
     private val _searchQuery = MutableStateFlow("")
     val searchQuery: StateFlow<String> = _searchQuery.asStateFlow()
 
     private val _allParkingSpots = MutableStateFlow<List<ParkingLocation>>(emptyList())
+
+    private val _recommendedSpots = MutableStateFlow<List<ParkingLocation>>(emptyList())
+    val recommendedSpots: StateFlow<List<ParkingLocation>> = _recommendedSpots.asStateFlow()
 
     val searchResults: StateFlow<SearchResultUiState> = _searchQuery
         .debounce(300) // Don't search on every keystroke
@@ -51,7 +71,6 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
                 emit(SearchResultUiState.Loading)
                 val spots = _allParkingSpots.value
                 if (spots.isEmpty()) {
-                    // This might happen on first launch while JSON is parsing
                     emit(SearchResultUiState.Loading)
                 } else {
                     val filteredList = performSearch(query, spots)
@@ -61,7 +80,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
                         emit(SearchResultUiState.NoResults)
                     }
                 }
-            }.flowOn(Dispatchers.Default) // Perform search on a background thread
+            }.flowOn(Dispatchers.Default)
         }
         .stateIn(
             scope = viewModelScope,
@@ -70,14 +89,67 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         )
 
     init {
-        // Load all data from the repository when the ViewModel is created.
         viewModelScope.launch(Dispatchers.IO) {
-            _allParkingSpots.value = ParkingRepository.getAllParkingSpots(application)
+            _allParkingSpots.value = ParkingRepository.getAllParkingSpots(getApplication())
+            // Generate initial recommendations when data is loaded
+            generateRecommendations()
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    fun generateRecommendations() {
+        viewModelScope.launch {
+            try {
+                val location: Location? = fusedLocationClient.lastLocation.await()
+                if (location != null) {
+                    val recommended = recommendationEngine.generateRecommendations(
+                        userLat = location.latitude,
+                        userLon = location.longitude,
+                        allParkingLocations = _allParkingSpots.value
+                    )
+                    _recommendedSpots.value = recommended
+                } else {
+                    // Handle case where location is null (e.g., location services disabled)
+                    _recommendedSpots.value = emptyList()
+                }
+            } catch (e: SecurityException) {
+                // Handle permission not being granted
+                _recommendedSpots.value = emptyList()
+            } catch (e: Exception) {
+                // Handle other exceptions
+                _recommendedSpots.value = emptyList()
+            }
         }
     }
 
     fun onSearchQueryChanged(query: String) {
         _searchQuery.value = query
+    }
+
+    suspend fun geocodeQuery(query: String): Pair<Double, Double>? {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            suspendCoroutine { continuation ->
+                try {
+                    geocoder.getFromLocationName(query, 1) { addresses ->
+                        val location = addresses.firstOrNull()
+                        continuation.resume(location?.let { Pair(it.latitude, it.longitude) })
+                    }
+                } catch (e: IOException) {
+                    continuation.resume(null)
+                }
+            }
+        } else {
+            withContext(Dispatchers.IO) {
+                try {
+                    @Suppress("DEPRECATION")
+                    val addresses: List<Address>? = geocoder.getFromLocationName(query, 1)
+                    val location = addresses?.firstOrNull()
+                    location?.let { Pair(it.latitude, it.longitude) }
+                } catch (e: IOException) {
+                    null
+                }
+            }
+        }
     }
 
     private fun performSearch(query: String, spots: List<ParkingLocation>): List<ParkingLocation> {
@@ -98,7 +170,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private fun parseCoordinates(query: String): Pair<Double, Double>? {
-        val regex = Regex("([\\d.]+°?[NSns]?)[\\s,]+([\\d.]+°?[EWew]?)")
+        val regex = Regex("([/d.]+°?[NSns]?)[/s,]+([/d.]+°?[EWew]?)")
         val matchResult = regex.find(query)
         if (matchResult != null) {
             try {

@@ -452,6 +452,826 @@
 					}
 				],
 				"CoverageType": "Multi-level"
+			},
+			{
+				"name": "Eternity Mall Parking",
+				"address": "Lal Bahadur Shastri Road, Teen Hath Naka, Thane West, Thane, Maharashtra 400604, India",
+				"latitude": 19.1931,
+				"longitude": 72.964,
+				"two_wheeler_parking": 450,
+				"four_wheeler_parking": 700,
+				"prices": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Per Hour",
+						"duration": "first 2 hours",
+						"amount": 60.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Subsequent Hour",
+						"duration": "continuous hour",
+						"amount": 30.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "Full Day",
+						"rateType": "Flat Rate",
+						"duration": "Max 12 hours",
+						"amount": 300.00,
+						"currency": "INR"
+					}
+				],
+				"openingTimes": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 23:00"
+					}
+				],
+				"CoverageType": "Underground"
+			},
+			{
+				"name": "Majiwada Public Parking",
+				"address": "Majiwada Flyover, Lodha Paradise, Majiwada, Thane, Maharashtra 400601, India",
+				"latitude": 19.2201,
+				"longitude": 72.9805,
+				"two_wheeler_parking": 150,
+				"four_wheeler_parking": 100,
+				"prices": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Per Hour",
+						"duration": "first 2 hours",
+						"amount": 60.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Subsequent Hour",
+						"duration": "continuous hour",
+						"amount": 30.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "Full Day",
+						"rateType": "Flat Rate",
+						"duration": "Max 12 hours",
+						"amount": 300.00,
+						"currency": "INR"
+					}
+				],
+				"openingTimes": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 23:00"
+					}
+				],
+				"CoverageType": "Open-air"
+			},
+			{
+				"name": "Hiranandani Estate Parking Lot",
+				"address": "Hiranandani Estate Road, Hiranandani Estate, Thane West, Thane, Maharashtra 400607, India",
+				"latitude": 19.2558,
+				"longitude": 72.9789,
+				"two_wheeler_parking": 600,
+				"four_wheeler_parking": 800,
+				"prices": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Per Hour",
+						"duration": "first 2 hours",
+						"amount": 60.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Subsequent Hour",
+						"duration": "continuous hour",
+						"amount": 30.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "Full Day",
+						"rateType": "Flat Rate",
+						"duration": "Max 12 hours",
+						"amount": 300.00,
+						"currency": "INR"
+					}
+				],
+				"openingTimes": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 23:00"
+					}
+				],
+				"CoverageType": "Multi-level"
+			},
+			{
+				"name": "Wagle Estate Parking Zone",
+				"address": "Road Number 16, Wagle Industrial Estate, Thane West, Thane, Maharashtra 400604, India",
+				"latitude": 19.1978,
+				"longitude": 72.9555,
+				"two_wheeler_parking": 700,
+				"four_wheeler_parking": 500,
+				"prices": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Per Hour",
+						"duration": "first 2 hours",
+						"amount": 60.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Subsequent Hour",
+						"duration": "continuous hour",
+						"amount": 30.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "Full Day",
+						"rateType": "Flat Rate",
+						"duration": "Max 12 hours",
+						"amount": 300.00,
+						"currency": "INR"
+					}
+				],
+				"openingTimes": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 23:00"
+					}
+				],
+				"CoverageType": "Open-air"
+			},
+			{
+				"name": "Kapurbawdi Circle Pay & Park",
+				"address": "Kapurbawdi Circle, Ghodbunder Road, Thane West, Thane, Maharashtra 400607, India",
+				"latitude": 19.2212,
+				"longitude": 72.9734,
+				"two_wheeler_parking": 120,
+				"four_wheeler_parking": 90,
+				"prices": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Per Hour",
+						"duration": "first 2 hours",
+						"amount": 60.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Subsequent Hour",
+						"duration": "continuous hour",
+						"amount": 30.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "Full Day",
+						"rateType": "Flat Rate",
+						"duration": "Max 12 hours",
+						"amount": 300.00,
+						"currency": "INR"
+					}
+				],
+				"openingTimes": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 23:00"
+					}
+				],
+				"CoverageType": "Open-air"
+			},
+			{
+				"name": "Thane Civil Hospital Parking",
+				"address": "Tembhi Naka, Thane West, Thane, Maharashtra 400601, India",
+				"latitude": 19.1891,
+				"longitude": 72.9715,
+				"two_wheeler_parking": 100,
+				"four_wheeler_parking": 80,
+				"prices": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Per Hour",
+						"duration": "first 2 hours",
+						"amount": 60.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Subsequent Hour",
+						"duration": "continuous hour",
+						"amount": 30.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "Full Day",
+						"rateType": "Flat Rate",
+						"duration": "Max 12 hours",
+						"amount": 300.00,
+						"currency": "INR"
+					}
+				],
+				"openingTimes": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 23:00"
+					}
+				],
+				"CoverageType": "Multi-level"
+			},
+			{
+				"name": "Lake City Mall Parking",
+				"address": "Kapurbawdi, Balkum Naka, Thane West, Thane, Maharashtra 400608, India",
+				"latitude": 19.2195,
+				"longitude": 72.993,
+				"two_wheeler_parking": 250,
+				"four_wheeler_parking": 350,
+				"prices": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Per Hour",
+						"duration": "first 2 hours",
+						"amount": 60.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Subsequent Hour",
+						"duration": "continuous hour",
+						"amount": 30.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "Full Day",
+						"rateType": "Flat Rate",
+						"duration": "Max 12 hours",
+						"amount": 300.00,
+						"currency": "INR"
+					}
+				],
+				"openingTimes": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 23:00"
+					}
+				],
+				"CoverageType": "Underground"
+			},
+			{
+				"name": "Manpada Public Parking Lot",
+				"address": "Manpada, Thane West, Thane, Maharashtra 400607, India",
+				"latitude": 19.2372,
+				"longitude": 72.9798,
+				"two_wheeler_parking": 80,
+				"four_wheeler_parking": 60,
+				"prices": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Per Hour",
+						"duration": "first 2 hours",
+						"amount": 60.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Subsequent Hour",
+						"duration": "continuous hour",
+						"amount": 30.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "Full Day",
+						"rateType": "Flat Rate",
+						"duration": "Max 12 hours",
+						"amount": 300.00,
+						"currency": "INR"
+					}
+				],
+				"openingTimes": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 23:00"
+					}
+				],
+				"CoverageType": "Open-air"
+			},
+			{
+				"name": "Mulund Check Naka Parking",
+				"address": "Lal Bahadur Shastri Marg, Naupada, Thane West, Thane, Maharashtra 400602, India",
+				"latitude": 19.1764,
+				"longitude": 72.9556,
+				"two_wheeler_parking": 300,
+				"four_wheeler_parking": 200,
+				"prices": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Per Hour",
+						"duration": "first 2 hours",
+						"amount": 60.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Subsequent Hour",
+						"duration": "continuous hour",
+						"amount": 30.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "Full Day",
+						"rateType": "Flat Rate",
+						"duration": "Max 12 hours",
+						"amount": 300.00,
+						"currency": "INR"
+					}
+				],
+				"openingTimes": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 23:00"
+					}
+				],
+				"CoverageType": "Multi-level"
+			},
+			{
+				"name": "Tikuji-Ni-Wadi Parking",
+				"address": "Manpada, Chitalsar, Thane, Maharashtra 400607, India",
+				"latitude": 19.241,
+				"longitude": 72.9711,
+				"two_wheeler_parking": 500,
+				"four_wheeler_parking": 300,
+				"prices": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Per Hour",
+						"duration": "first 2 hours",
+						"amount": 60.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Subsequent Hour",
+						"duration": "continuous hour",
+						"amount": 30.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "Full Day",
+						"rateType": "Flat Rate",
+						"duration": "Max 12 hours",
+						"amount": 300.00,
+						"currency": "INR"
+					}
+				],
+				"openingTimes": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 23:00"
+					}
+				],
+				"CoverageType": "Open-air"
+			},
+			{
+				"name": "High Street Mall Parking",
+				"address": "Majiwada Flyover, Kapurbawdi, Thane West, Thane, Maharashtra 400607, India",
+				"latitude": 19.2185,
+				"longitude": 72.9752,
+				"two_wheeler_parking": 150,
+				"four_wheeler_parking": 250,
+				"prices": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Per Hour",
+						"duration": "first 2 hours",
+						"amount": 60.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Subsequent Hour",
+						"duration": "continuous hour",
+						"amount": 30.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "Full Day",
+						"rateType": "Flat Rate",
+						"duration": "Max 12 hours",
+						"amount": 300.00,
+						"currency": "INR"
+					}
+				],
+				"openingTimes": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 23:00"
+					}
+				],
+				"CoverageType": "Underground"
+			},
+			{
+				"name": "Suraj Water Park Parking",
+				"address": "Ghodbunder Highway, Waghbil, Thane West, Thane, Maharashtra 400615, India",
+				"latitude": 19.273,
+				"longitude": 72.9782,
+				"two_wheeler_parking": 400,
+				"four_wheeler_parking": 350,
+				"prices": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Per Hour",
+						"duration": "first 2 hours",
+						"amount": 60.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Subsequent Hour",
+						"duration": "continuous hour",
+						"amount": 30.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "Full Day",
+						"rateType": "Flat Rate",
+						"duration": "Max 12 hours",
+						"amount": 300.00,
+						"currency": "INR"
+					}
+				],
+				"openingTimes": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 23:00"
+					}
+				],
+				"CoverageType": "Open-air"
+			},
+			{
+				"name": "Vartak Nagar Pay & Park",
+				"address": "Vartak Nagar, Thane West, Thane, Maharashtra 400606, India",
+				"latitude": 19.2045,
+				"longitude": 72.9558,
+				"two_wheeler_parking": 180,
+				"four_wheeler_parking": 120,
+				"prices": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Per Hour",
+						"duration": "first 2 hours",
+						"amount": 60.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Subsequent Hour",
+						"duration": "continuous hour",
+						"amount": 30.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "Full Day",
+						"rateType": "Flat Rate",
+						"duration": "Max 12 hours",
+						"amount": 300.00,
+						"currency": "INR"
+					}
+				],
+				"openingTimes": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 23:00"
+					}
+				],
+				"CoverageType": "Multi-level"
+			},
+			{
+				"name": "Airoli Station Parking Lot",
+				"address": "Airoli Station Road, Sector 3, Airoli, Navi Mumbai, Maharashtra 400708, India",
+				"latitude": 19.1558,
+				"longitude": 72.9967,
+				"two_wheeler_parking": 350,
+				"four_wheeler_parking": 150,
+				"prices": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Per Hour",
+						"duration": "first 2 hours",
+						"amount": 60.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Subsequent Hour",
+						"duration": "continuous hour",
+						"amount": 30.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "Full Day",
+						"rateType": "Flat Rate",
+						"duration": "Max 12 hours",
+						"amount": 300.00,
+						"currency": "INR"
+					}
+				],
+				"openingTimes": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 23:00"
+					}
+				],
+				"CoverageType": "Open-air"
+			},
+			{
+				"name": "Cine Wonder Mall Parking",
+				"address": "Kapurbawdi, Ghodbunder Road, Thane West, Thane, Maharashtra 400607, India",
+				"latitude": 19.222,
+				"longitude": 72.974,
+				"two_wheeler_parking": 200,
+				"four_wheeler_parking": 300,
+				"prices": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Per Hour",
+						"duration": "first 2 hours",
+						"amount": 60.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Subsequent Hour",
+						"duration": "continuous hour",
+						"amount": 30.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "Full Day",
+						"rateType": "Flat Rate",
+						"duration": "Max 12 hours",
+						"amount": 300.00,
+						"currency": "INR"
+					}
+				],
+				"openingTimes": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 23:00"
+					}
+				],
+				"CoverageType": "Underground"
+			},
+			{
+				"name": "Dombivli Station Parking (West)",
+				"address": "Near Railway Station, Dombivli West, Dombivli, Maharashtra 421202, India",
+				"latitude": 19.2173,
+				"longitude": 73.0827,
+				"two_wheeler_parking": 800,
+				"four_wheeler_parking": 250,
+				"prices": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Per Hour",
+						"duration": "first 2 hours",
+						"amount": 60.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Subsequent Hour",
+						"duration": "continuous hour",
+						"amount": 30.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "Full Day",
+						"rateType": "Flat Rate",
+						"duration": "Max 12 hours",
+						"amount": 300.00,
+						"currency": "INR"
+					}
+				],
+				"openingTimes": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 23:00"
+					}
+				],
+				"CoverageType": "Multi-level"
+			},
+			{
+				"name": "Kalyan Station Parking Plaza",
+				"address": "Kalyan Station Road, Kalyan West, Kalyan, Maharashtra 421301, India",
+				"latitude": 19.2435,
+				"longitude": 73.1352,
+				"two_wheeler_parking": 1000,
+				"four_wheeler_parking": 400,
+				"prices": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Per Hour",
+						"duration": "first 2 hours",
+						"amount": 60.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Subsequent Hour",
+						"duration": "continuous hour",
+						"amount": 30.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "Full Day",
+						"rateType": "Flat Rate",
+						"duration": "Max 12 hours",
+						"amount": 300.00,
+						"currency": "INR"
+					}
+				],
+				"openingTimes": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 23:00"
+					}
+				],
+				"CoverageType": "Multi-level"
+			},
+			{
+				"name": "Thane One Corporate Park Parking",
+				"address": "Thane One, DIL Complex, Ghodbunder Road, Majiwada, Thane, Maharashtra 400610, India",
+				"latitude": 19.2291,
+				"longitude": 72.9839,
+				"two_wheeler_parking": 300,
+				"four_wheeler_parking": 500,
+				"prices": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Per Hour",
+						"duration": "first 2 hours",
+						"amount": 60.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Subsequent Hour",
+						"duration": "continuous hour",
+						"amount": 30.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "Full Day",
+						"rateType": "Flat Rate",
+						"duration": "Max 12 hours",
+						"amount": 300.00,
+						"currency": "INR"
+					}
+				],
+				"openingTimes": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 23:00"
+					}
+				],
+				"CoverageType": "Underground"
+			},
+			{
+				"name": "R Mall Parking",
+				"address": "Ghodbunder Road, Anand Nagar, Thane West, Thane, Maharashtra 400607, India",
+				"latitude": 19.2483,
+				"longitude": 72.9754,
+				"two_wheeler_parking": 250,
+				"four_wheeler_parking": 400,
+				"prices": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Per Hour",
+						"duration": "first 2 hours",
+						"amount": 60.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Subsequent Hour",
+						"duration": "continuous hour",
+						"amount": 30.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "Full Day",
+						"rateType": "Flat Rate",
+						"duration": "Max 12 hours",
+						"amount": 300.00,
+						"currency": "INR"
+					}
+				],
+				"openingTimes": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 23:00"
+					}
+				],
+				"CoverageType": "Multi-level"
+			},
+			{
+				"name": "Bethany Hospital Parking",
+				"address": "Pokhran Road Number 2, Vasant Vihar, Thane West, Thane, Maharashtra 400610, India",
+				"latitude": 19.2135,
+				"longitude": 72.9818,
+				"two_wheeler_parking": 100,
+				"four_wheeler_parking": 150,
+				"prices": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Per Hour",
+						"duration": "first 2 hours",
+						"amount": 60.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 22:00",
+						"rateType": "Subsequent Hour",
+						"duration": "continuous hour",
+						"amount": 30.00,
+						"currency": "INR"
+					},
+					{
+						"days": "Mon-Sun",
+						"timeRange": "Full Day",
+						"rateType": "Flat Rate",
+						"duration": "Max 12 hours",
+						"amount": 300.00,
+						"currency": "INR"
+					}
+				],
+				"openingTimes": [
+					{
+						"days": "Mon-Sun",
+						"timeRange": "08:00 - 23:00"
+					}
+				],
+				"CoverageType": "Underground"
 			}
 		]
 	}

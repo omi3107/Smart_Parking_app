@@ -1,3173 +1,1237 @@
 {
-	"?xml": "",
-	"DATASET": {
-		"ROW1": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "Old East (varachha) Zone",
-			"WARD_NAME": "PunaWest",
-			"NAME_OF_PARKING": "Below Sitanagar Fly Over Bridge",
-			"PARKING_ADDRESS": "Under Sitanagar Flyover Bridge Pune Village.",
-			"LATITUDE": 21.202553,
-			"LONGITUDE": 72.867081,
-			"NO._OF_4_WHEELER_PARKING": 97,
-			"NO._OF_2_WHEELER_PARKING": 252,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW2": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "Old East (varachha) Zone",
-			"WARD_NAME": "Kapodra",
-			"NAME_OF_PARKING": "Open Plot Near Gayatri Soc. FPNo.108 TP03 (Karanj)",
-			"PARKING_ADDRESS": "TP03 (Karanj) Fa.Plot no.In the plot near 108 Gayatri Society.",
-			"LATITUDE": 21.211754,
-			"LONGITUDE": 72.865652,
-			"NO._OF_4_WHEELER_PARKING": 107,
-			"NO._OF_2_WHEELER_PARKING": 377,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW3": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "Old East (varachha) Zone",
-			"WARD_NAME": "Umarwada Matawadi",
-			"NAME_OF_PARKING": "Open Plot at FPNo.269 TP04 (AshvanikumarNavagam)",
-			"PARKING_ADDRESS": "TP4 (Ashwani Kumar Navagam) Fa.Plot no.In the open plot of 269",
-			"LATITUDE": 21.204786,
-			"LONGITUDE": 72.841967,
-			"NO._OF_4_WHEELER_PARKING": 90,
-			"NO._OF_2_WHEELER_PARKING": 300,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW4": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "Old East (varachha) Zone",
-			"WARD_NAME": "Umarwada Matawadi",
-			"NAME_OF_PARKING": "Multi level parking at FPNo.M5 TP04 (Ashvanikumar)",
-			"PARKING_ADDRESS": "TP04 (Ashwani Kumar) FP no.Multilevel parking at M5 Mini Bazaar",
-			"LATITUDE": 21.208912,
-			"LONGITUDE": 72.851701,
-			"NO._OF_4_WHEELER_PARKING": 87,
-			"NO._OF_2_WHEELER_PARKING": 684,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW5": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "Old East (varachha) Zone",
-			"WARD_NAME": "Phulpada Ashwani Kumar",
-			"NAME_OF_PARKING": "TP04 (Ashwani Kumar) FP no.M3 Multilevel parking near Sardar Smriti Bhavan",
-			"PARKING_ADDRESS": "TP04 (Ashwani Kumar) FP no.M3 Multilevel parking near Sardar Smriti Bhavan",
-			"LATITUDE": 21.213746,
-			"LONGITUDE": 72.850707,
-			"NO._OF_4_WHEELER_PARKING": 182,
-			"NO._OF_2_WHEELER_PARKING": 613,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW6": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "Old East (varachha) Zone",
-			"WARD_NAME": "Karanj Magob",
-			"NAME_OF_PARKING": "Under the Arch's School Flyover Bridge from Budheshwar Mahadev",
-			"PARKING_ADDRESS": "Under the Arch's School Flyover Bridge from Budheshwar Mahadev",
-			"LATITUDE": 21.200665,
-			"LONGITUDE": 72.860136,
-			"NO._OF_4_WHEELER_PARKING": 29,
-			"NO._OF_2_WHEELER_PARKING": 252,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW7": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "Old East (varachha) Zone",
-			"WARD_NAME": "PunaWest",
-			"NAME_OF_PARKING": "Under the flyover bridge near Vishwakarma junction",
-			"PARKING_ADDRESS": "Under the flyover bridge near Vishwakarma junction",
-			"LATITUDE": 21.193607,
-			"LONGITUDE": 72.869664,
-			"NO._OF_4_WHEELER_PARKING": 94,
-			"NO._OF_2_WHEELER_PARKING": 244,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW8": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "Old East (varachha) Zone",
-			"WARD_NAME": "PunaWest",
-			"NAME_OF_PARKING": "Under Flyover Bridge at Parvat Patiya Junction on SuratBardoli Main Road",
-			"PARKING_ADDRESS": "Under Flyover Bridge at Parvat Patiya Junction on SuratBardoli Main Road",
-			"LATITUDE": 21.191451,
-			"LONGITUDE": 72.860968,
-			"NO._OF_4_WHEELER_PARKING": 64,
-			"NO._OF_2_WHEELER_PARKING": 252,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW9": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "Old East (varachha) Zone",
-			"WARD_NAME": "PunaWest",
-			"NAME_OF_PARKING": "Under newly constructed flyover bridge at Kangaroo junction on SuratBardoli main road",
-			"PARKING_ADDRESS": "Under newly constructed flyover bridge at Kangaroo junction on SuratBardoli main road",
-			"LATITUDE": 21.190493,
-			"LONGITUDE": 72.870462,
-			"NO._OF_4_WHEELER_PARKING": 168,
-			"NO._OF_2_WHEELER_PARKING": 405,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW10": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "Old East (varachha) Zone",
-			"WARD_NAME": "Phulpada Ashwani Kumar",
-			"NAME_OF_PARKING": "In the space allotted under Shri Nathji Flyover Bridge on Varachha Main Road",
-			"PARKING_ADDRESS": "In the space allotted under Shri Nathji Flyover Bridge on Varachha Main Road",
-			"LATITUDE": 21.21539,
-			"LONGITUDE": 72.862653,
-			"NO._OF_4_WHEELER_PARKING": 52,
-			"NO._OF_2_WHEELER_PARKING": 278,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW11": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "Old East (varachha) Zone",
-			"WARD_NAME": "Kapodra",
-			"NAME_OF_PARKING": "TP Scheme No.16 (Kapodra) Fa.Plot no.Plot at 44 (Local Commercial Center) and space allotted for 'Pay and Park'",
-			"PARKING_ADDRESS": "TP Scheme No.16 (Kapodra) Fa.Plot no.Plot at 44 (Local Commercial Center) and space allotted for 'Pay and Park'",
-			"LATITUDE": 21.21494,
-			"LONGITUDE": 72.867162,
-			"NO._OF_4_WHEELER_PARKING": 197,
-			"NO._OF_2_WHEELER_PARKING": 705,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW12": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "Old East (varachha) Zone",
-			"WARD_NAME": "Umarwada Matawadi",
-			"NAME_OF_PARKING": "Under the new bridge opposite New Bombay Market.",
-			"PARKING_ADDRESS": "Under the new bridge opposite New Bombay Market.",
-			"LATITUDE": 21.194881,
-			"LONGITUDE": 72.848523,
-			"NO._OF_4_WHEELER_PARKING": 21,
-			"NO._OF_2_WHEELER_PARKING": 194,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW13": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "Old East (varachha) Zone",
-			"WARD_NAME": "PunaWest",
-			"NAME_OF_PARKING": "TP53 (Magob Dumbhal) Fa.Plot No.88 Multilevel Parking",
-			"PARKING_ADDRESS": "TP53 (Magob Dumbhal) Fa.Plot No.88 Multilevel Parking",
-			"LATITUDE": 21.1943937,
-			"LONGITUDE": 72.8682365,
-			"NO._OF_4_WHEELER_PARKING": 344,
-			"NO._OF_2_WHEELER_PARKING": 506,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW14": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "South ZoneA (Udhana)",
-			"WARD_NAME": "18 (Udhana)",
-			"NAME_OF_PARKING": "\"Pay & Park\" Scheme for On Street Pay & Park at bothside of Udhana main road from Udhana Darwaja to Satyanagar gate in Udhana ZoneA",
-			"PARKING_ADDRESS": "Udhana Darwaja Udhana Main Road",
-			"LATITUDE": 21.182803,
-			"LONGITUDE": 72.8317627,
-			"NO._OF_4_WHEELER_PARKING": 250,
-			"NO._OF_2_WHEELER_PARKING": 307,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW15": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "South ZoneA (Udhana)",
-			"WARD_NAME": "18 (Udhana)",
-			"NAME_OF_PARKING": "\"Pay & Park\" Scheme Below Flyover Bridge near Kharvar nagar junction at T.P 06 (MajuraKhatoara) in Udhana Zone A",
-			"PARKING_ADDRESS": "Kharvar nagar junction Udhana Main Road",
-			"LATITUDE": 21.178026,
-			"LONGITUDE": 72.8353471,
-			"NO._OF_4_WHEELER_PARKING": 40,
-			"NO._OF_2_WHEELER_PARKING": 360,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW16": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "South ZoneA (Udhana)",
-			"WARD_NAME": "29 (Bamroli)",
-			"NAME_OF_PARKING": "\"Pay & Park\" Scheme at Open Plot at BamroliAlthan Road Near BalajiNagar Opp. DMart F.P.No.200 (Sale For Commercial) T.P.S.58 (Bamroli) in SouthZone (Udhana)A",
-			"PARKING_ADDRESS": "Opp. DMart BamroliAlthan Road",
-			"LATITUDE": 21.148325,
-			"LONGITUDE": 72.8180654,
-			"NO._OF_4_WHEELER_PARKING": 62,
-			"NO._OF_2_WHEELER_PARKING": 580,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW17": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "NORTH ZONE",
-			"WARD_NAME": "KATARGAM",
-			"NAME_OF_PARKING": "BELOW KATARGAM FLY OVER BRIDGE",
-			"PARKING_ADDRESS": "KATARGAM FLY OVER BRIDGEKATARGAMSURAT",
-			"LATITUDE": "NA",
-			"LONGITUDE": "NA",
-			"NO._OF_4_WHEELER_PARKING": 575,
-			"NO._OF_2_WHEELER_PARKING": 1500,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW18": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "NORTH ZONE",
-			"WARD_NAME": "KATARGAM",
-			"NAME_OF_PARKING": "MULTI LEVEL PARKING",
-			"PARKING_ADDRESS": "TP 12FP 18 NEAR PARAS MARKETKATARGAM SURAT",
-			"LATITUDE": "NA",
-			"LONGITUDE": "NA",
-			"NO._OF_4_WHEELER_PARKING": 260,
-			"NO._OF_2_WHEELER_PARKING": 250,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW19": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "NORTH ZONE",
-			"WARD_NAME": "KATARGAM",
-			"NAME_OF_PARKING": "ON STREET PARKING",
-			"PARKING_ADDRESS": "KIRAN HOSPITAL TO MEGHVAL COLONY",
-			"LATITUDE": "NA",
-			"LONGITUDE": "NA",
-			"NO._OF_4_WHEELER_PARKING": 85,
-			"NO._OF_2_WHEELER_PARKING": 200,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW20": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "NORTH ZONE",
-			"WARD_NAME": "KATARGAM",
-			"NAME_OF_PARKING": "ON STREET PARKING",
-			"PARKING_ADDRESS": "KATARGAM VAHAN DEPO TO JENITH MILL",
-			"LATITUDE": "NA",
-			"LONGITUDE": "NA",
-			"NO._OF_4_WHEELER_PARKING": 55,
-			"NO._OF_2_WHEELER_PARKING": 140,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW21": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "NORTH ZONE",
-			"WARD_NAME": "KATARGAM",
-			"NAME_OF_PARKING": "ON STREET PARKING",
-			"PARKING_ADDRESS": "NANDU DOSHI NI WADI",
-			"LATITUDE": "NA",
-			"LONGITUDE": "NA",
-			"NO._OF_4_WHEELER_PARKING": 65,
-			"NO._OF_2_WHEELER_PARKING": 160,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW22": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "NORTH ZONE",
-			"WARD_NAME": "KATARGAM",
-			"NAME_OF_PARKING": "ON STREET PARKING",
-			"PARKING_ADDRESS": "GAJERA SCHOOL TO AKUR SCHOOL",
-			"LATITUDE": "NA",
-			"LONGITUDE": "NA",
-			"NO._OF_4_WHEELER_PARKING": 40,
-			"NO._OF_2_WHEELER_PARKING": 105,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW23": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "NORTH ZONE",
-			"WARD_NAME": "KATARGAM",
-			"NAME_OF_PARKING": "ON STREET PARKING",
-			"PARKING_ADDRESS": "PRANNATH HOSPITAL TO SINGANPOR CHAR RASTA",
-			"LATITUDE": "NA",
-			"LONGITUDE": "NA",
-			"NO._OF_4_WHEELER_PARKING": 105,
-			"NO._OF_2_WHEELER_PARKING": 270,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW24": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "NORTH ZONE",
-			"WARD_NAME": "KATARGAM",
-			"NAME_OF_PARKING": "BELOW ALKAPURI FLY OVER BRIDGE",
-			"PARKING_ADDRESS": "ALKAPURI FLY OVER BRIDGEKATARGAM",
-			"LATITUDE": "NA",
-			"LONGITUDE": "NA",
-			"NO._OF_4_WHEELER_PARKING": 350,
-			"NO._OF_2_WHEELER_PARKING": 940,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW25": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "NORTH ZONE",
-			"WARD_NAME": "AMROLI",
-			"NAME_OF_PARKING": "BELOW UTRANAMROLI BRIDGE",
-			"PARKING_ADDRESS": "UTRANAMROLI BRIDGENEAR MANISHA GARNALA",
-			"LATITUDE": "NA",
-			"LONGITUDE": "NA",
-			"NO._OF_4_WHEELER_PARKING": 625,
-			"NO._OF_2_WHEELER_PARKING": 1650,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW26": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "South East (Limbayat) Zone",
-			"WARD_NAME": "NA",
-			"NAME_OF_PARKING": "Multi level Parking",
-			"PARKING_ADDRESS": "TP08 (Umarwada) FP 147 Multi level Parking Umarwada",
-			"LATITUDE": "21?11'17.1\" N",
-			"LONGITUDE": "72?50'39.1\" E",
-			"NO._OF_4_WHEELER_PARKING": 750,
-			"NO._OF_2_WHEELER_PARKING": 250,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW27": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "South East (Limbayat) Zone",
-			"WARD_NAME": "NA",
-			"NAME_OF_PARKING": "Under Fly Over Bridge",
-			"PARKING_ADDRESS": "TP07 (Anjana) Under Anjana Fly Over Bridge Anjana",
-			"LATITUDE": "21?11'02.3\" N",
-			"LONGITUDE": "72?50'48.4\" E",
-			"NO._OF_4_WHEELER_PARKING": 400,
-			"NO._OF_2_WHEELER_PARKING": 30,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW28": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "South East (Limbayat) Zone",
-			"WARD_NAME": "NA",
-			"NAME_OF_PARKING": "Open Plot",
-			"PARKING_ADDRESS": "TP07 (Anjana) FP 77Beside Raghukul Textile Market Anjana",
-			"LATITUDE": "21?11'11.3\" N",
-			"LONGITUDE": "72?50'42.8\" E",
-			"NO._OF_4_WHEELER_PARKING": 250,
-			"NO._OF_2_WHEELER_PARKING": 15,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW29": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "South East (Limbayat) Zone",
-			"WARD_NAME": "NA",
-			"NAME_OF_PARKING": "Open Plot",
-			"PARKING_ADDRESS": "TP08 (Umarwada) FP 153 Opp. Anupam Textile Market Umarwada",
-			"LATITUDE": "21?11'14.4\" N",
-			"LONGITUDE": "72?50'44.2\" E",
-			"NO._OF_4_WHEELER_PARKING": 300,
-			"NO._OF_2_WHEELER_PARKING": 18,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW30": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "South East (Limbayat) Zone",
-			"WARD_NAME": "NA",
-			"NAME_OF_PARKING": "Open Plot",
-			"PARKING_ADDRESS": "TP08 (Umarwada) FP 150 Opp. Sagar Textile Market Umarwada",
-			"LATITUDE": "21?11'17.4\" N",
-			"LONGITUDE": "72?50'43.2\" E",
-			"NO._OF_4_WHEELER_PARKING": 500,
-			"NO._OF_2_WHEELER_PARKING": 30,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW31": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "South East (Limbayat) Zone",
-			"WARD_NAME": "NA",
-			"NAME_OF_PARKING": "Open Plot",
-			"PARKING_ADDRESS": "TP08 (Umarwada) FP 146 Opp. Multi level Parking Umarwada",
-			"LATITUDE": "21?11'15.0\" N",
-			"LONGITUDE": "72?50'39.1\" E",
-			"NO._OF_4_WHEELER_PARKING": 300,
-			"NO._OF_2_WHEELER_PARKING": 30,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW32": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "South East (Limbayat) Zone",
-			"WARD_NAME": "NA",
-			"NAME_OF_PARKING": "Open Plot",
-			"PARKING_ADDRESS": "TP08 (Umarwada) FP 143 Beside Surat Textile Market Umarwada",
-			"LATITUDE": "21?11'22.7\" N",
-			"LONGITUDE": "72?50'30.0\" E",
-			"NO._OF_4_WHEELER_PARKING": 200,
-			"NO._OF_2_WHEELER_PARKING": 25,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW33": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "South East (Limbayat) Zone",
-			"WARD_NAME": "NA",
-			"NAME_OF_PARKING": "Open Plot",
-			"PARKING_ADDRESS": "TP34 (magobDumbhal) FP 56 Beside Fruit Market Magob",
-			"LATITUDE": "21?11'31.1\" N",
-			"LONGITUDE": "72?51'18.0\" E",
-			"NO._OF_4_WHEELER_PARKING": 400,
-			"NO._OF_2_WHEELER_PARKING": 30,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW34": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "South East (Limbayat) Zone",
-			"WARD_NAME": "NA",
-			"NAME_OF_PARKING": "On Street Parking",
-			"PARKING_ADDRESS": "On Steet Parking On Kamela main Road Millnium Market To Anjana Garnala (Both Side) & On Steet Parking On Salasar Gate To Sai Darshan Market (Both side)",
-			"LATITUDE": "21?11'14.8\" N",
-			"LONGITUDE": "72?50'35.5\" E",
-			"NO._OF_4_WHEELER_PARKING": 450,
-			"NO._OF_2_WHEELER_PARKING": 60,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW35": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "WEST ZONE (RANDER)",
-			"WARD_NAME": "01Jahangirpura Variav Chhaprabhatha Kosad",
-			"NAME_OF_PARKING": "Under DabholiJahangirpura bridge",
-			"PARKING_ADDRESS": "Opp. Salimabad society Surat Olpad road Jahangirpura in T.P.S. No.30 (Rander) in West Zone (Rander).",
-			"LATITUDE": 21.135984,
-			"LONGITUDE": 72.472582,
-			"NO._OF_4_WHEELER_PARKING": "NA",
-			"NO._OF_2_WHEELER_PARKING": 100,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW36": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "WEST ZONE (RANDER)",
-			"WARD_NAME": "09Rander Jahangirabad Palanpur",
-			"NAME_OF_PARKING": "At Open plot Nr. Saitirth junction in T.P.S. No.8 (Palanpur) F.P. No.129 in West Zone (Rander)",
-			"PARKING_ADDRESS": "At Open plot Nr. Saitirth junction in T.P.S. No.8 (Palanpur) F.P. No.129 in West Zone (Rander)",
-			"LATITUDE": 21.207861,
-			"LONGITUDE": 72.77401,
-			"NO._OF_4_WHEELER_PARKING": 40,
-			"NO._OF_2_WHEELER_PARKING": 245,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW37": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "WEST ZONE (RANDER)",
-			"WARD_NAME": "10Adajan Pal Ichhapor",
-			"NAME_OF_PARKING": "Under Star Bazar Flyover bridge",
-			"PARKING_ADDRESS": "Surat Hazira road Opp. Star Bazar Adajan",
-			"LATITUDE": 21.18614,
-			"LONGITUDE": 72.79359,
-			"NO._OF_4_WHEELER_PARKING": 40,
-			"NO._OF_2_WHEELER_PARKING": 230,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW38": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "WEST ZONE (RANDER)",
-			"WARD_NAME": "",
-			"NAME_OF_PARKING": "Under Gujarat Gas circle Flyover bridge",
-			"PARKING_ADDRESS": "Surat Hazira road Nr. Gujarat gas circle Adajan",
-			"LATITUDE": 21.19339,
-			"LONGITUDE": 72.80081,
-			"NO._OF_4_WHEELER_PARKING": "NA",
-			"NO._OF_2_WHEELER_PARKING": 100,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW39": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "WEST ZONE (RANDER)",
-			"WARD_NAME": "",
-			"NAME_OF_PARKING": "Under Sardar bridge (Laxmibai kelkar circle to vijay dairy)",
-			"PARKING_ADDRESS": "Under Sardar bridge (Laxmibai kelkar circle to vijay dairy)",
-			"LATITUDE": 21.1926,
-			"LONGITUDE": 72.80362,
-			"NO._OF_4_WHEELER_PARKING": "NA",
-			"NO._OF_2_WHEELER_PARKING": 85,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW40": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "WEST ZONE (RANDER)",
-			"WARD_NAME": "",
-			"NAME_OF_PARKING": "At Open plot Nr. Lilashahwadi in T.P.S. No.29 (Rander) F.P. No.140 in West Zone (Rander).",
-			"PARKING_ADDRESS": "At Open plot Nr. Lilashahwadi in T.P.S. No.29 (Rander) F.P. No.140 in West Zone (Rander).",
-			"LATITUDE": 21.213515,
-			"LONGITUDE": 72.787969,
-			"NO._OF_4_WHEELER_PARKING": 18,
-			"NO._OF_2_WHEELER_PARKING": 105,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW41": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "WEST ZONE (RANDER)",
-			"WARD_NAME": "",
-			"NAME_OF_PARKING": "At Open plot Opp. Bhumi Complex in T.P.S. No.13 (Adajan) F.P. No.178 in West Zone (Rander).",
-			"PARKING_ADDRESS": "At Open plot Opp. Bhumi Complex in T.P.S. No.13 (Adajan) F.P. No.178 in West Zone (Rander).",
-			"LATITUDE": 21.206544,
-			"LONGITUDE": 72.789,
-			"NO._OF_4_WHEELER_PARKING": 36,
-			"NO._OF_2_WHEELER_PARKING": 195,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW42": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "WEST ZONE (RANDER)",
-			"WARD_NAME": "",
-			"NAME_OF_PARKING": "At Open plot Surat Hazira road in T.P.S. No.16 (Pal) F.P. No.103 in West Zone (Rander).",
-			"PARKING_ADDRESS": "At Open plot Surat Hazira road at Pal Patiya in T.P.S. No.16 (Pal) F.P. No.103 in West Zone (Rander).",
-			"LATITUDE": 21.182473,
-			"LONGITUDE": 72.779654,
-			"NO._OF_4_WHEELER_PARKING": 30,
-			"NO._OF_2_WHEELER_PARKING": 165,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW43": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "WEST ZONE (RANDER)",
-			"WARD_NAME": "",
-			"NAME_OF_PARKING": "At Open plot Beside Kelly Residency Nr. Galaxy circle in T.P.S. No.16 (Pal) F.P. No.120 in West Zone (Rander).",
-			"PARKING_ADDRESS": "At Open plot Beside Kelly Residency Nr. Galaxy circle in T.P.S. No.16 (Pal) F.P. No.120 in West Zone (Rander).",
-			"LATITUDE": 21.188581,
-			"LONGITUDE": 72.778614,
-			"NO._OF_4_WHEELER_PARKING": 55,
-			"NO._OF_2_WHEELER_PARKING": 290,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW44": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "WEST ZONE (RANDER)",
-			"WARD_NAME": "10Adajan Pal Ichhapor",
-			"NAME_OF_PARKING": "At Open plot Beside Siddhchakra Residency Opp. Fortune Mall Nr. Galaxy circle in T.P.S. No.16 (Pal) F.P. No.119 in West Zone (Rander).",
-			"PARKING_ADDRESS": "At Open plot Beside Siddhchakra Residency Opp. Fortune Mall Nr. Galaxy circle in T.P.S. No.16 (Pal) F.P. No.119 in West Zone (Rander).",
-			"LATITUDE": 21.19091,
-			"LONGITUDE": 72.77849,
-			"NO._OF_4_WHEELER_PARKING": 35,
-			"NO._OF_2_WHEELER_PARKING": 175,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW45": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "WEST ZONE (RANDER)",
-			"WARD_NAME": "",
-			"NAME_OF_PARKING": "At Open plot Nr. Raj corner On L.P. Savani to Gauravpath road in T.P.S. No.10 (Pal) F.P. No.213 in West Zone (Rander).",
-			"PARKING_ADDRESS": "At Open plot Nr. Raj corner On L.P. Savani to Gauravpath road in T.P.S. No.10 (Pal) F.P. No.213 in West Zone (Rander).",
-			"LATITUDE": 21.200877,
-			"LONGITUDE": 72.772273,
-			"NO._OF_4_WHEELER_PARKING": 30,
-			"NO._OF_2_WHEELER_PARKING": 165,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW46": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "WEST ZONE (RANDER)",
-			"WARD_NAME": "",
-			"NAME_OF_PARKING": "On Street Parking at from Siddhi Vinayak temple to Pal R.T.O. Surat Hazira main road in T.P.S. No.74 (Pal) in West Zone (Rander).",
-			"PARKING_ADDRESS": "On Street Parking at from Siddhi Vinayak temple to Pal R.T.O. Surat Hazira main road in T.P.S. No.74 (Pal) in West Zone (Rander).",
-			"LATITUDE": 21.182451,
-			"LONGITUDE": 72.783439,
-			"NO._OF_4_WHEELER_PARKING": "NA",
-			"NO._OF_2_WHEELER_PARKING": 100,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW47": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "WEST ZONE (RANDER)",
-			"WARD_NAME": "",
-			"NAME_OF_PARKING": "At Open plot Opp Bhagat Party Plot L.P. Savani road in T.P.S. No.32 (Adajan) F.P. No.82 in West Zone (Rander).",
-			"PARKING_ADDRESS": "At Open plot Opp Bhagat Party Plot L.P. Savani road in T.P.S. No.32 (Adajan) F.P. No.82 in West Zone (Rander).",
-			"LATITUDE": 21.19826,
-			"LONGITUDE": 72.78446,
-			"NO._OF_4_WHEELER_PARKING": 10,
-			"NO._OF_2_WHEELER_PARKING": 100,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW48": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "WEST ZONE (RANDER)",
-			"WARD_NAME": "",
-			"NAME_OF_PARKING": "Under Flyover Bridge Opp. Ascon Plaza Nr. Bhulka Bhavan school Adajan in West Zone (Rander)",
-			"PARKING_ADDRESS": "Under Flyover Bridge Opp. Ascon Plaza Nr. Bhulka Bhavan school Adajan in West Zone (Rander)",
-			"LATITUDE": 21.19312,
-			"LONGITUDE": 72.79939,
-			"NO._OF_4_WHEELER_PARKING": "NA",
-			"NO._OF_2_WHEELER_PARKING": 75,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW49": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "Central Zone",
-			"WARD_NAME": "NA",
-			"NAME_OF_PARKING": "near gandhi smruti bhava multilevel",
-			"PARKING_ADDRESS": "nanpura",
-			"LATITUDE": 21.18542,
-			"LONGITUDE": 72.81403,
-			"NO._OF_4_WHEELER_PARKING": 60,
-			"NO._OF_2_WHEELER_PARKING": 200,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW50": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "Central Zone",
-			"WARD_NAME": "NA",
-			"NAME_OF_PARKING": "near rang upvan bhavan Mutilelvel",
-			"PARKING_ADDRESS": "near makkai pool nanpura",
-			"LATITUDE": 21.193577,
-			"LONGITUDE": 72.816755,
-			"NO._OF_4_WHEELER_PARKING": 100,
-			"NO._OF_2_WHEELER_PARKING": 200,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW51": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "Central Zone",
-			"WARD_NAME": "NA",
-			"NAME_OF_PARKING": "near sai baba temple multilevel",
-			"PARKING_ADDRESS": "chauta pool",
-			"LATITUDE": 21.19921,
-			"LONGITUDE": 72.824714,
-			"NO._OF_4_WHEELER_PARKING": 91,
-			"NO._OF_2_WHEELER_PARKING": 96,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW52": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "Central Zone",
-			"WARD_NAME": "NA",
-			"NAME_OF_PARKING": "open plot at chauta pool pani ni parab",
-			"PARKING_ADDRESS": "chauta pool",
-			"LATITUDE": 21.198476,
-			"LONGITUDE": 72.825082,
-			"NO._OF_4_WHEELER_PARKING": 0,
-			"NO._OF_2_WHEELER_PARKING": 25,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW53": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "Central Zone",
-			"WARD_NAME": "NA",
-			"NAME_OF_PARKING": "opp.maskati hospital multilevel",
-			"PARKING_ADDRESS": "rajmarg",
-			"LATITUDE": 21.19795,
-			"LONGITUDE": 72.831943,
-			"NO._OF_4_WHEELER_PARKING": 166,
-			"NO._OF_2_WHEELER_PARKING": 60,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW54": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "Central Zone",
-			"WARD_NAME": "NA",
-			"NAME_OF_PARKING": "nanpura pumping multilevel",
-			"PARKING_ADDRESS": "nanpura smc vahan depo",
-			"LATITUDE": 21.185112,
-			"LONGITUDE": 72.812578,
-			"NO._OF_4_WHEELER_PARKING": 48,
-			"NO._OF_2_WHEELER_PARKING": 53,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW55": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "Central Zone",
-			"WARD_NAME": "NA",
-			"NAME_OF_PARKING": "khan saheb no della pase aavel multilevel",
-			"PARKING_ADDRESS": "mahidharpura",
-			"LATITUDE": 21.205395,
-			"LONGITUDE": 72.833833,
-			"NO._OF_4_WHEELER_PARKING": 360,
-			"NO._OF_2_WHEELER_PARKING": 200,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW56": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "Central Zone",
-			"WARD_NAME": "NA",
-			"NAME_OF_PARKING": "Majura to kadiwala junction",
-			"PARKING_ADDRESS": "ring road",
-			"LATITUDE": 21.180951,
-			"LONGITUDE": 72.818368,
-			"NO._OF_4_WHEELER_PARKING": 150,
-			"NO._OF_2_WHEELER_PARKING": 500,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW57": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "Central Zone",
-			"WARD_NAME": "NA",
-			"NAME_OF_PARKING": "majura junction to old subjail junction",
-			"PARKING_ADDRESS": "ring road",
-			"LATITUDE": 21.181364,
-			"LONGITUDE": 72.812905,
-			"NO._OF_4_WHEELER_PARKING": 400,
-			"NO._OF_2_WHEELER_PARKING": 200,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW58": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "Central Zone",
-			"WARD_NAME": "NA",
-			"NAME_OF_PARKING": "zone 1",
-			"PARKING_ADDRESS": "ring road",
-			"LATITUDE": 21.193298,
-			"LONGITUDE": 72.844127,
-			"NO._OF_4_WHEELER_PARKING": 450,
-			"NO._OF_2_WHEELER_PARKING": 150,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW59": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "Central Zone",
-			"WARD_NAME": "NA",
-			"NAME_OF_PARKING": "zone 2",
-			"PARKING_ADDRESS": "ring road",
-			"LATITUDE": 21.191803,
-			"LONGITUDE": 72.841184,
-			"NO._OF_4_WHEELER_PARKING": 500,
-			"NO._OF_2_WHEELER_PARKING": 200,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW60": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "Central Zone",
-			"WARD_NAME": "NA",
-			"NAME_OF_PARKING": "zone 3",
-			"PARKING_ADDRESS": "ring road",
-			"LATITUDE": 21.191216,
-			"LONGITUDE": 72.843358,
-			"NO._OF_4_WHEELER_PARKING": 300,
-			"NO._OF_2_WHEELER_PARKING": 90,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW61": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "Central Zone",
-			"WARD_NAME": "NA",
-			"NAME_OF_PARKING": "delhigate fly over bridge",
-			"PARKING_ADDRESS": "ring road",
-			"LATITUDE": 21.2029,
-			"LONGITUDE": 72.839,
-			"NO._OF_4_WHEELER_PARKING": 50,
-			"NO._OF_2_WHEELER_PARKING": 180,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW62": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "Central Zone",
-			"WARD_NAME": "NA",
-			"NAME_OF_PARKING": "ekta textile maket to kohinoor textile market",
-			"PARKING_ADDRESS": "ring road",
-			"LATITUDE": 21.185456,
-			"LONGITUDE": 72.838482,
-			"NO._OF_4_WHEELER_PARKING": 80,
-			"NO._OF_2_WHEELER_PARKING": 140,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW63": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "Central Zone",
-			"WARD_NAME": "NA",
-			"NAME_OF_PARKING": "21st century building to empair state building",
-			"PARKING_ADDRESS": "ring road",
-			"LATITUDE": 21.184047,
-			"LONGITUDE": 72.83318,
-			"NO._OF_4_WHEELER_PARKING": 0,
-			"NO._OF_2_WHEELER_PARKING": 100,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW64": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "Central Zone",
-			"WARD_NAME": "NA",
-			"NAME_OF_PARKING": "japan market to belgium tower",
-			"PARKING_ADDRESS": "ring road",
-			"LATITUDE": 21.201167,
-			"LONGITUDE": 72.840263,
-			"NO._OF_4_WHEELER_PARKING": 0,
-			"NO._OF_2_WHEELER_PARKING": 100,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW65": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "Central Zone",
-			"WARD_NAME": "NA",
-			"NAME_OF_PARKING": "rajhansh market to mulchand market",
-			"PARKING_ADDRESS": "ring road",
-			"LATITUDE": 21.1911,
-			"LONGITUDE": 72.841494,
-			"NO._OF_4_WHEELER_PARKING": 60,
-			"NO._OF_2_WHEELER_PARKING": 450,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW66": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "Central Zone",
-			"WARD_NAME": "NA",
-			"NAME_OF_PARKING": "millenium market to textile chowki",
-			"PARKING_ADDRESS": "ring road",
-			"LATITUDE": 21.188891,
-			"LONGITUDE": 72.840965,
-			"NO._OF_4_WHEELER_PARKING": 41,
-			"NO._OF_2_WHEELER_PARKING": 250,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW67": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "Central Zone",
-			"WARD_NAME": "NA",
-			"NAME_OF_PARKING": "MAHILA VIDHALAY GOPIPURA",
-			"PARKING_ADDRESS": "GOPIPURA",
-			"LATITUDE": "21..194892",
-			"LONGITUDE": 72.823716,
-			"NO._OF_4_WHEELER_PARKING": 10,
-			"NO._OF_2_WHEELER_PARKING": 0,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW68": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "Central Zone",
-			"WARD_NAME": "NA",
-			"NAME_OF_PARKING": "NEAR GUMBAJWALI MASJID",
-			"PARKING_ADDRESS": "BHAGA TALAV",
-			"LATITUDE": 21.197551,
-			"LONGITUDE": 72.823359,
-			"NO._OF_4_WHEELER_PARKING": 30,
-			"NO._OF_2_WHEELER_PARKING": 2,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW69": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "Central Zone",
-			"WARD_NAME": "NA",
-			"NAME_OF_PARKING": "RAJHANS BUILDING TO SUNDRAM BUILDING",
-			"PARKING_ADDRESS": "RING ROAD",
-			"LATITUDE": 21.181617,
-			"LONGITUDE": 72.824648,
-			"NO._OF_4_WHEELER_PARKING": 20,
-			"NO._OF_2_WHEELER_PARKING": 30,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW70": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "Central Zone",
-			"WARD_NAME": "NA",
-			"NAME_OF_PARKING": "ATHWAGATE TO ORNET HOUSE",
-			"PARKING_ADDRESS": "RING ROAD",
-			"LATITUDE": 21.18281,
-			"LONGITUDE": 72.812266,
-			"NO._OF_4_WHEELER_PARKING": 25,
-			"NO._OF_2_WHEELER_PARKING": 50,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW71": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "Central Zone",
-			"WARD_NAME": "NA",
-			"NAME_OF_PARKING": "KRUSIMANGAL HOLL TO SID HOSPITAL",
-			"PARKING_ADDRESS": "RING ROAD",
-			"LATITUDE": 21.181665,
-			"LONGITUDE": 72.81508,
-			"NO._OF_4_WHEELER_PARKING": 20,
-			"NO._OF_2_WHEELER_PARKING": 30,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		},
-		"ROW72": {
-			"CITYNAME": "Surat",
-			"ZONE_NAME": "Central Zone",
-			"WARD_NAME": "NA",
-			"NAME_OF_PARKING": "JUSBRIENT HOSPITAL TO ATHWAGATE",
-			"PARKING_ADDRESS": "RING ROAD",
-			"LATITUDE": 21.18321,
-			"LONGITUDE": 72.81386,
-			"NO._OF_4_WHEELER_PARKING": 20,
-			"NO._OF_2_WHEELER_PARKING": 60,
-			"prices": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "first 2 hours",
-					"amount": 60.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 22:00",
-					"rateType": "Per Hour",
-					"duration": "subsequent hour",
-					"amount": 30.00,
-					"currency": "INR"
-				},
-				{
-					"days": "Mon-Sun",
-					"timeRange": "Full Day",
-					"rateType": "Flat Rate",
-					"duration": "Max 12 hours",
-					"amount": 300.00,
-					"currency": "INR"
-				}
-			],
-			"openingTimes": [
-				{
-					"days": "Mon-Sun",
-					"timeRange": "08:00 - 23:00"
-				}
-			],
-			"CoverageType": "Multi-level"
-		}
-	}
+  "?xml": "",
+  "parking_data": {
+    "parking_location": [
+      {
+        "name": "Below Sitanagar Fly Over Bridge",
+        "address": "Under Sitanagar Flyover Bridge Pune Village.",
+        "latitude": 21.202553,
+        "longitude": 72.867081,
+        "two_wheeler_parking": 252,
+        "four_wheeler_parking": 97,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "subsequent hour",
+            "amount": 30.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.0,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Multi-level"
+      },
+      {
+        "name": "Open Plot Near Gayatri Soc. FPNo.108 TP03 (Karanj)",
+        "address": "TP03 (Karanj) Fa.Plot no.In the plot near 108 Gayatri Society.",
+        "latitude": 21.211754,
+        "longitude": 72.865652,
+        "two_wheeler_parking": 377,
+        "four_wheeler_parking": 107,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "subsequent hour",
+            "amount": 30.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.0,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Multi-level"
+      },
+      {
+        "name": "Open Plot at FPNo.269 TP04 (AshvanikumarNavagam)",
+        "address": "TP4 (Ashwani Kumar Navagam) Fa.Plot no.In the open plot of 269",
+        "latitude": 21.204786,
+        "longitude": 72.841967,
+        "two_wheeler_parking": 300,
+        "four_wheeler_parking": 90,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "subsequent hour",
+            "amount": 30.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.0,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Multi-level"
+      },
+      {
+        "name": "Multi level parking at FPNo.M5 TP04 (Ashvanikumar)",
+        "address": "TP04 (Ashwani Kumar) FP no.Multilevel parking at M5 Mini Bazaar",
+        "latitude": 21.208912,
+        "longitude": 72.851701,
+        "two_wheeler_parking": 684,
+        "four_wheeler_parking": 87,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "subsequent hour",
+            "amount": 30.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.0,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Multi-level"
+      },
+      {
+        "name": "TP04 (Ashwani Kumar) FP no.M3 Multilevel parking near Sardar Smriti Bhavan",
+        "address": "TP04 (Ashwani Kumar) FP no.M3 Multilevel parking near Sardar Smriti Bhavan",
+        "latitude": 21.213746,
+        "longitude": 72.850707,
+        "two_wheeler_parking": 613,
+        "four_wheeler_parking": 182,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "subsequent hour",
+            "amount": 30.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.0,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Multi-level"
+      },
+      {
+        "name": "Under the Arch's School Flyover Bridge from Budheshwar Mahadev",
+        "address": "Under the Arch's School Flyover Bridge from Budheshwar Mahadev",
+        "latitude": 21.200665,
+        "longitude": 72.860136,
+        "two_wheeler_parking": 252,
+        "four_wheeler_parking": 29,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "subsequent hour",
+            "amount": 30.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.0,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Multi-level"
+      },
+      {
+        "name": "Under the flyover bridge near Vishwakarma junction",
+        "address": "Under the flyover bridge near Vishwakarma junction",
+        "latitude": 21.193607,
+        "longitude": 72.869664,
+        "two_wheeler_parking": 244,
+        "four_wheeler_parking": 94,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "subsequent hour",
+            "amount": 30.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.0,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Multi-level"
+      },
+      {
+        "name": "Under Flyover Bridge at Parvat Patiya Junction on SuratBardoli Main Road",
+        "address": "Under Flyover Bridge at Parvat Patiya Junction on SuratBardoli Main Road",
+        "latitude": 21.191451,
+        "longitude": 72.860968,
+        "two_wheeler_parking": 252,
+        "four_wheeler_parking": 64,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "subsequent hour",
+            "amount": 30.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.0,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Multi-level"
+      },
+      {
+        "name": "Under newly constructed flyover bridge at Kangaroo junction on SuratBardoli main road",
+        "address": "Under newly constructed flyover bridge at Kangaroo junction on SuratBardoli main road",
+        "latitude": 21.190493,
+        "longitude": 72.870462,
+        "two_wheeler_parking": 405,
+        "four_wheeler_parking": 168,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "subsequent hour",
+            "amount": 30.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.0,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Multi-level"
+      },
+      {
+        "name": "In the space allotted under Shri Nathji Flyover Bridge on Varachha Main Road",
+        "address": "In the space allotted under Shri Nathji Flyover Bridge on Varachha Main Road",
+        "latitude": 21.21539,
+        "longitude": 72.862653,
+        "two_wheeler_parking": 278,
+        "four_wheeler_parking": 52,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "subsequent hour",
+            "amount": 30.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.0,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Multi-level"
+      },
+      {
+        "name": "TP Scheme No.16 (Kapodra) Fa.Plot no.Plot at 44 (Local Commercial Center) and space allotted for 'Pay and Park'",
+        "address": "TP Scheme No.16 (Kapodra) Fa.Plot no.Plot at 44 (Local Commercial Center) and space allotted for 'Pay and Park'",
+        "latitude": 21.21494,
+        "longitude": 72.867162,
+        "two_wheeler_parking": 705,
+        "four_wheeler_parking": 197,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "subsequent hour",
+            "amount": 30.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.0,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Multi-level"
+      },
+      {
+        "name": "Under the new bridge opposite New Bombay Market.",
+        "address": "Under the new bridge opposite New Bombay Market.",
+        "latitude": 21.194881,
+        "longitude": 72.848523,
+        "two_wheeler_parking": 194,
+        "four_wheeler_parking": 21,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "subsequent hour",
+            "amount": 30.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.0,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Multi-level"
+      },
+      {
+        "name": "TP53 (Magob Dumbhal) Fa.Plot No.88 Multilevel Parking",
+        "address": "TP53 (Magob Dumbhal) Fa.Plot No.88 Multilevel Parking",
+        "latitude": 21.1943937,
+        "longitude": 72.8682365,
+        "two_wheeler_parking": 506,
+        "four_wheeler_parking": 344,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "subsequent hour",
+            "amount": 30.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.0,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Multi-level"
+      },
+      {
+        "name": "\"Pay & Park\" Scheme for On Street Pay & Park at bothside of Udhana main road from Udhana Darwaja to Satyanagar gate in Udhana ZoneA",
+        "address": "Udhana Darwaja Udhana Main Road",
+        "latitude": 21.182803,
+        "longitude": 72.8317627,
+        "two_wheeler_parking": 307,
+        "four_wheeler_parking": 250,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "subsequent hour",
+            "amount": 30.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.0,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Multi-level"
+      },
+      {
+        "name": "\"Pay & Park\" Scheme Below Flyover Bridge near Kharvar nagar junction at T.P 06 (MajuraKhatoara) in Udhana Zone A",
+        "address": "Kharvar nagar junction Udhana Main Road",
+        "latitude": 21.178026,
+        "longitude": 72.8353471,
+        "two_wheeler_parking": 360,
+        "four_wheeler_parking": 40,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "subsequent hour",
+            "amount": 30.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.0,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Multi-level"
+      },
+      {
+        "name": "\"Pay & Park\" Scheme at Open Plot at BamroliAlthan Road Near BalajiNagar Opp. DMart F.P.No.200 (Sale For Commercial) T.P.S.58 (Bamroli) in SouthZone (Udhana)A",
+        "address": "Opp. DMart BamroliAlthan Road",
+        "latitude": 21.148325,
+        "longitude": 72.8180654,
+        "two_wheeler_parking": 580,
+        "four_wheeler_parking": 62,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "subsequent hour",
+            "amount": 30.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.0,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Multi-level"
+      },
+      {
+        "name": "BELOW KATARGAM FLY OVER BRIDGE",
+        "address": "KATARGAM FLY OVER BRIDGEKATARGAMSURAT",
+        "latitude": 21.1702,
+        "longitude": 72.8311,
+        "two_wheeler_parking": 1500,
+        "four_wheeler_parking": 575,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "subsequent hour",
+            "amount": 30.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.0,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Multi-level"
+      },
+      {
+        "name": "MULTI LEVEL PARKING",
+        "address": "TP 12FP 18 NEAR PARAS MARKETKATARGAM SURAT",
+        "latitude": 21.1702,
+        "longitude": 72.8311,
+        "two_wheeler_parking": 250,
+        "four_wheeler_parking": 260,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "subsequent hour",
+            "amount": 30.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.0,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Multi-level"
+      },
+      {
+        "name": "ON STREET PARKING",
+        "address": "KIRAN HOSPITAL TO MEGHVAL COLONY",
+        "latitude": 21.1702,
+        "longitude": 72.8311,
+        "two_wheeler_parking": 200,
+        "four_wheeler_parking": 85,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "subsequent hour",
+            "amount": 30.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.0,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Multi-level"
+      },
+      {
+        "name": "ON STREET PARKING",
+        "address": "KATARGAM VAHAN DEPO TO JENITH MILL",
+        "latitude": 21.1702,
+        "longitude": 72.8311,
+        "two_wheeler_parking": 140,
+        "four_wheeler_parking": 55,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "subsequent hour",
+            "amount": 30.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.0,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Multi-level"
+      },
+      {
+        "name": "ON STREET PARKING",
+        "address": "NANDU DOSHI NI WADI",
+        "latitude": 21.1702,
+        "longitude": 72.8311,
+        "two_wheeler_parking": 160,
+        "four_wheeler_parking": 65,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "subsequent hour",
+            "amount": 30.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.0,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Multi-level"
+      },
+      {
+        "name": "ON STREET PARKING",
+        "address": "GAJERA SCHOOL TO AKUR SCHOOL",
+        "latitude": 21.1702,
+        "longitude": 72.8311,
+        "two_wheeler_parking": 105,
+        "four_wheeler_parking": 40,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "subsequent hour",
+            "amount": 30.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.0,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Multi-level"
+      },
+      {
+        "name": "ON STREET PARKING",
+        "address": "PRANNATH HOSPITAL TO SINGANPOR CHAR RASTA",
+        "latitude": 21.1702,
+        "longitude": 72.8311,
+        "two_wheeler_parking": 270,
+        "four_wheeler_parking": 105,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "subsequent hour",
+            "amount": 30.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.0,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Multi-level"
+      },
+      {
+        "name": "BELOW ALKAPURI FLY OVER BRIDGE",
+        "address": "ALKAPURI FLY OVER BRIDGEKATARGAM",
+        "latitude": 21.1702,
+        "longitude": 72.8311,
+        "two_wheeler_parking": 940,
+        "four_wheeler_parking": 350,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "subsequent hour",
+            "amount": 30.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.0,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Multi-level"
+      },
+      {
+        "name": "BELOW UTRANAMROLI BRIDGE",
+        "address": "UTRANAMROLI BRIDGENEAR MANISHA GARNALA",
+        "latitude": 21.1702,
+        "longitude": 72.8311,
+        "two_wheeler_parking": 1650,
+        "four_wheeler_parking": 625,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "subsequent hour",
+            "amount": 30.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.0,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Multi-level"
+      },
+      {
+        "name": "Multi level Parking",
+        "address": "TP08 (Umarwada) FP 147 Multi level Parking Umarwada",
+        "latitude": 21.1702,
+        "longitude": 72.8311,
+        "two_wheeler_parking": 250,
+        "four_wheeler_parking": 750,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "subsequent hour",
+            "amount": 30.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.0,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Multi-level"
+      },
+      {
+        "name": "Under Fly Over Bridge",
+        "address": "TP07 (Anjana) Under Anjana Fly Over Bridge Anjana",
+        "latitude": 21.1702,
+        "longitude": 72.8311,
+        "two_wheeler_parking": 30,
+        "four_wheeler_parking": 400,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "subsequent hour",
+            "amount": 30.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.0,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Multi-level"
+      },
+      {
+        "name": "Open Plot",
+        "address": "TP07 (Anjana) FP 77Beside Raghukul Textile Market Anjana",
+        "latitude": 21.1702,
+        "longitude": 72.8311,
+        "two_wheeler_parking": 15,
+        "four_wheeler_parking": 250,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "subsequent hour",
+            "amount": 30.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.0,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Multi-level"
+      },
+      {
+        "name": "Open Plot",
+        "address": "TP08 (Umarwada) FP 153 Opp. Anupam Textile Market Umarwada",
+        "latitude": 21.1702,
+        "longitude": 72.8311,
+        "two_wheeler_parking": 18,
+        "four_wheeler_parking": 300,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "subsequent hour",
+            "amount": 30.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.0,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Multi-level"
+      },
+      {
+        "name": "Open Plot",
+        "address": "TP08 (Umarwada) FP 150 Opp. Sagar Textile Market Umarwada",
+        "latitude": 21.1702,
+        "longitude": 72.8311,
+        "two_wheeler_parking": 30,
+        "four_wheeler_parking": 500,
+        "prices": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "first 2 hours",
+            "amount": 60.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 22:00",
+            "rateType": "Per Hour",
+            "duration": "subsequent hour",
+            "amount": 30.0,
+            "currency": "INR"
+          },
+          {
+            "days": "Mon-Sun",
+            "timeRange": "Full Day",
+            "rateType": "Flat Rate",
+            "duration": "Max 12 hours",
+            "amount": 300.0,
+            "currency": "INR"
+          }
+        ],
+        "openingTimes": [
+          {
+            "days": "Mon-Sun",
+            "timeRange": "08:00 - 23:00"
+          }
+        ],
+        "CoverageType": "Multi-level"
+      }
+    ]
+  }
 }

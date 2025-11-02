@@ -4472,6 +4472,948 @@
           19.140929
         ]
       }
-    }
+    },
+    [
+      {
+        "type": "Feature",
+        "properties": {
+          "Name": "Vashi Station Parking",
+          "Description": "Parking facility at Vashi Station Parking.",
+          "prices": [
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 22:00",
+              "rateType": "Per Hour",
+              "duration": "first 2 hours",
+              "amount": 60.00,
+              "currency": "INR"
+            },
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 22:00",
+              "rateType": "Per Hour",
+              "duration": "subsequent hour",
+              "amount": 30.00,
+              "currency": "INR"
+            },
+            {
+              "days": "Mon-Sun",
+              "timeRange": "Full Day",
+              "rateType": "Flat Rate",
+              "duration": "Max 12 hours",
+              "amount": 300.00,
+              "currency": "INR"
+            }
+          ],
+          "openingTimes": [
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 23:00"
+            }
+          ],
+          "CoverageType": "Multi-level"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            73.001,
+            19.068
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Name": "Inorbit Mall Vashi Parking",
+          "Description": "Parking facility at Inorbit Mall Vashi Parking.",
+          "prices": [
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 22:00",
+              "rateType": "Per Hour",
+              "duration": "first 2 hours",
+              "amount": 60.00,
+              "currency": "INR"
+            },
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 22:00",
+              "rateType": "Per Hour",
+              "duration": "subsequent hour",
+              "amount": 30.00,
+              "currency": "INR"
+            },
+            {
+              "days": "Mon-Sun",
+              "timeRange": "Full Day",
+              "rateType": "Flat Rate",
+              "duration": "Max 12 hours",
+              "amount": 300.00,
+              "currency": "INR"
+            }
+          ],
+          "openingTimes": [
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 23:00"
+            }
+          ],
+          "CoverageType": "Underground"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            73.000,
+            19.064
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Name": "Powai Plaza Parking",
+          "Description": "Parking facility at Powai Plaza Parking.",
+          "prices": [
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 22:00",
+              "rateType": "Per Hour",
+              "duration": "first 2 hours",
+              "amount": 60.00,
+              "currency": "INR"
+            },
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 22:00",
+              "rateType": "Per Hour",
+              "duration": "subsequent hour",
+              "amount": 30.00,
+              "currency": "INR"
+            },
+            {
+              "days": "Mon-Sun",
+              "timeRange": "Full Day",
+              "rateType": "Flat Rate",
+              "duration": "Max 12 hours",
+              "amount": 300.00,
+              "currency": "INR"
+            }
+          ],
+          "openingTimes": [
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 23:00"
+            }
+          ],
+          "CoverageType": "Multi-level"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            72.91,
+            19.117
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Name": "Phoenix Marketcity Kurla Parking",
+          "Description": "Parking facility at Phoenix Marketcity Kurla Parking.",
+          "prices": [
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 22:00",
+              "rateType": "Per Hour",
+              "duration": "first 2 hours",
+              "amount": 60.00,
+              "currency": "INR"
+            },
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 22:00",
+              "rateType": "Per Hour",
+              "duration": "subsequent hour",
+              "amount": 30.00,
+              "currency": "INR"
+            },
+            {
+              "days": "Mon-Sun",
+              "timeRange": "Full Day",
+              "rateType": "Flat Rate",
+              "duration": "Max 12 hours",
+              "amount": 300.00,
+              "currency": "INR"
+            }
+          ],
+          "openingTimes": [
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 23:00"
+            }
+          ],
+          "CoverageType": "Multi-level"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            72.888,
+            19.072
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Name": "R-Mall Thane Parking",
+          "Description": "Parking facility at R-Mall Thane Parking.",
+          "prices": [
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 22:00",
+              "rateType": "Per Hour",
+              "duration": "first 2 hours",
+              "amount": 60.00,
+              "currency": "INR"
+            },
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 22:00",
+              "rateType": "Per Hour",
+              "duration": "subsequent hour",
+              "amount": 30.00,
+              "currency": "INR"
+            },
+            {
+              "days": "Mon-Sun",
+              "timeRange": "Full Day",
+              "rateType": "Flat Rate",
+              "duration": "Max 12 hours",
+              "amount": 300.00,
+              "currency": "INR"
+            }
+          ],
+          "openingTimes": [
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 23:00"
+            }
+          ],
+          "CoverageType": "Basement"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            72.978,
+            19.242
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Name": "Thane Civil Hospital Parking",
+          "Description": "Parking facility at Thane Civil Hospital Parking.",
+          "prices": [
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 22:00",
+              "rateType": "Per Hour",
+              "duration": "first 2 hours",
+              "amount": 60.00,
+              "currency": "INR"
+            },
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 22:00",
+              "rateType": "Per Hour",
+              "duration": "subsequent hour",
+              "amount": 30.00,
+              "currency": "INR"
+            },
+            {
+              "days": "Mon-Sun",
+              "timeRange": "Full Day",
+              "rateType": "Flat Rate",
+              "duration": "Max 12 hours",
+              "amount": 300.00,
+              "currency": "INR"
+            }
+          ],
+          "openingTimes": [
+            {
+              "days": "Mon-Sun",
+              "timeRange": "00:00 - 23:59"
+            }
+          ],
+          "CoverageType": "Open Lot"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            72.97,
+            19.19
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Name": "BKC One Parking",
+          "Description": "Parking facility at BKC One Parking.",
+          "prices": [
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 22:00",
+              "rateType": "Per Hour",
+              "duration": "first 2 hours",
+              "amount": 60.00,
+              "currency": "INR"
+            },
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 22:00",
+              "rateType": "Per Hour",
+              "duration": "subsequent hour",
+              "amount": 30.00,
+              "currency": "INR"
+            },
+            {
+              "days": "Mon-Sun",
+              "timeRange": "Full Day",
+              "rateType": "Flat Rate",
+              "duration": "Max 12 hours",
+              "amount": 300.00,
+              "currency": "INR"
+            }
+          ],
+          "openingTimes": [
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 23:00"
+            }
+          ],
+          "CoverageType": "Multi-level"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            72.868,
+            19.069
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Name": "Dadar Station (West) Parking",
+          "Description": "Parking facility at Dadar Station (West) Parking.",
+          "prices": [
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 22:00",
+              "rateType": "Per Hour",
+              "duration": "first 2 hours",
+              "amount": 60.00,
+              "currency": "INR"
+            },
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 22:00",
+              "rateType": "Per Hour",
+              "duration": "subsequent hour",
+              "amount": 30.00,
+              "currency": "INR"
+            },
+            {
+              "days": "Mon-Sun",
+              "timeRange": "Full Day",
+              "rateType": "Flat Rate",
+              "duration": "Max 12 hours",
+              "amount": 300.00,
+              "currency": "INR"
+            }
+          ],
+          "openingTimes": [
+            {
+              "days": "Mon-Sun",
+              "timeRange": "00:00 - 23:59"
+            }
+          ],
+          "CoverageType": "Open Lot"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            72.843,
+            19.019
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Name": "Seawoods Grand Central Mall Parking",
+          "Description": "Parking facility at Seawoods Grand Central Mall Parking.",
+          "prices": [
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 22:00",
+              "rateType": "Per Hour",
+              "duration": "first 2 hours",
+              "amount": 60.00,
+              "currency": "INR"
+            },
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 22:00",
+              "rateType": "Per Hour",
+              "duration": "subsequent hour",
+              "amount": 30.00,
+              "currency": "INR"
+            },
+            {
+              "days": "Mon-Sun",
+              "timeRange": "Full Day",
+              "rateType": "Flat Rate",
+              "duration": "Max 12 hours",
+              "amount": 300.00,
+              "currency": "INR"
+            }
+          ],
+          "openingTimes": [
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 23:00"
+            }
+          ],
+          "CoverageType": "Multi-level"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            73.018,
+            19.028
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Name": "High Street Mall Parking",
+          "Description": "Parking facility at High Street Mall Parking.",
+          "prices": [
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 22:00",
+              "rateType": "Per Hour",
+              "duration": "first 2 hours",
+              "amount": 60.00,
+              "currency": "INR"
+            },
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 22:00",
+              "rateType": "Per Hour",
+              "duration": "subsequent hour",
+              "amount": 30.00,
+              "currency": "INR"
+            },
+            {
+              "days": "Mon-Sun",
+              "timeRange": "Full Day",
+              "rateType": "Flat Rate",
+              "duration": "Max 12 hours",
+              "amount": 300.00,
+              "currency": "INR"
+            }
+          ],
+          "openingTimes": [
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 23:00"
+            }
+          ],
+          "CoverageType": "Basement"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            72.979,
+            19.208
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Name": "Oberoi Mall Parking",
+          "Description": "Parking facility at Oberoi Mall Parking.",
+          "prices": [
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 22:00",
+              "rateType": "Per Hour",
+              "duration": "first 2 hours",
+              "amount": 60.00,
+              "currency": "INR"
+            },
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 22:00",
+              "rateType": "Per Hour",
+              "duration": "subsequent hour",
+              "amount": 30.00,
+              "currency": "INR"
+            },
+            {
+              "days": "Mon-Sun",
+              "timeRange": "Full Day",
+              "rateType": "Flat Rate",
+              "duration": "Max 12 hours",
+              "amount": 300.00,
+              "currency": "INR"
+            }
+          ],
+          "openingTimes": [
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 23:00"
+            }
+          ],
+          "CoverageType": "Multi-level"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            72.86,
+            19.173
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Name": "Belapur CBD Station Parking",
+          "Description": "Parking facility at Belapur CBD Station Parking.",
+          "prices": [
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 22:00",
+              "rateType": "Per Hour",
+              "duration": "first 2 hours",
+              "amount": 60.00,
+              "currency": "INR"
+            },
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 22:00",
+              "rateType": "Per Hour",
+              "duration": "subsequent hour",
+              "amount": 30.00,
+              "currency": "INR"
+            },
+            {
+              "days": "Mon-Sun",
+              "timeRange": "Full Day",
+              "rateType": "Flat Rate",
+              "duration": "Max 12 hours",
+              "amount": 300.00,
+              "currency": "INR"
+            }
+          ],
+          "openingTimes": [
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 23:00"
+            }
+          ],
+          "CoverageType": "Open Lot"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            73.03,
+            19.021
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Name": "Hiranandani Estate Parking Lot",
+          "Description": "Parking facility at Hiranandani Estate Parking Lot.",
+          "prices": [
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 22:00",
+              "rateType": "Per Hour",
+              "duration": "first 2 hours",
+              "amount": 60.00,
+              "currency": "INR"
+            },
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 22:00",
+              "rateType": "Per Hour",
+              "duration": "subsequent hour",
+              "amount": 30.00,
+              "currency": "INR"
+            },
+            {
+              "days": "Mon-Sun",
+              "timeRange": "Full Day",
+              "rateType": "Flat Rate",
+              "duration": "Max 12 hours",
+              "amount": 300.00,
+              "currency": "INR"
+            }
+          ],
+          "openingTimes": [
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 23:00"
+            }
+          ],
+          "CoverageType": "Multi-level"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            72.98,
+            19.268
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Name": "CSMT Multi-level Parking",
+          "Description": "Parking facility at CSMT Multi-level Parking.",
+          "prices": [
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 22:00",
+              "rateType": "Per Hour",
+              "duration": "first 2 hours",
+              "amount": 60.00,
+              "currency": "INR"
+            },
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 22:00",
+              "rateType": "Per Hour",
+              "duration": "subsequent hour",
+              "amount": 30.00,
+              "currency": "INR"
+            },
+            {
+              "days": "Mon-Sun",
+              "timeRange": "Full Day",
+              "rateType": "Flat Rate",
+              "duration": "Max 12 hours",
+              "amount": 300.00,
+              "currency": "INR"
+            }
+          ],
+          "openingTimes": [
+            {
+              "days": "Mon-Sun",
+              "timeRange": "00:00 - 23:59"
+            }
+          ],
+          "CoverageType": "Multi-level"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            72.835,
+            18.94
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Name": "Kharghar Station Parking",
+          "Description": "Parking facility at Kharghar Station Parking.",
+          "prices": [
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 22:00",
+              "rateType": "Per Hour",
+              "duration": "first 2 hours",
+              "amount": 60.00,
+              "currency": "INR"
+            },
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 22:00",
+              "rateType": "Per Hour",
+              "duration": "subsequent hour",
+              "amount": 30.00,
+              "currency": "INR"
+            },
+            {
+              "days": "Mon-Sun",
+              "timeRange": "Full Day",
+              "rateType": "Flat Rate",
+              "duration": "Max 12 hours",
+              "amount": 300.00,
+              "currency": "INR"
+            }
+          ],
+          "openingTimes": [
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 23:00"
+            }
+          ],
+          "CoverageType": "Open Lot"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            73.07,
+            19.049
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Name": "Eternity Mall Parking",
+          "Description": "Parking facility at Eternity Mall Parking.",
+          "prices": [
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 22:00",
+              "rateType": "Per Hour",
+              "duration": "first 2 hours",
+              "amount": 60.00,
+              "currency": "INR"
+            },
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 22:00",
+              "rateType": "Per Hour",
+              "duration": "subsequent hour",
+              "amount": 30.00,
+              "currency": "INR"
+            },
+            {
+              "days": "Mon-Sun",
+              "timeRange": "Full Day",
+              "rateType": "Flat Rate",
+              "duration": "Max 12 hours",
+              "amount": 300.00,
+              "currency": "INR"
+            }
+          ],
+          "openingTimes": [
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 23:00"
+            }
+          ],
+          "CoverageType": "Basement"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            72.965,
+            19.195
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Name": "Infiniti Mall Malad Parking",
+          "Description": "Parking facility at Infiniti Mall Malad Parking.",
+          "prices": [
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 22:00",
+              "rateType": "Per Hour",
+              "duration": "first 2 hours",
+              "amount": 60.00,
+              "currency": "INR"
+            },
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 22:00",
+              "rateType": "Per Hour",
+              "duration": "subsequent hour",
+              "amount": 30.00,
+              "currency": "INR"
+            },
+            {
+              "days": "Mon-Sun",
+              "timeRange": "Full Day",
+              "rateType": "Flat Rate",
+              "duration": "Max 12 hours",
+              "amount": 300.00,
+              "currency": "INR"
+            }
+          ],
+          "openingTimes": [
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 23:00"
+            }
+          ],
+          "CoverageType": "Multi-level"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            72.83,
+            19.176
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Name": "DY Patil Stadium Parking",
+          "Description": "Parking facility at DY Patil Stadium Parking.",
+          "prices": [
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 22:00",
+              "rateType": "Per Hour",
+              "duration": "first 2 hours",
+              "amount": 60.00,
+              "currency": "INR"
+            },
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 22:00",
+              "rateType": "Per Hour",
+              "duration": "subsequent hour",
+              "amount": 30.00,
+              "currency": "INR"
+            },
+            {
+              "days": "Mon-Sun",
+              "timeRange": "Full Day",
+              "rateType": "Flat Rate",
+              "duration": "Max 12 hours",
+              "amount": 300.00,
+              "currency": "INR"
+            }
+          ],
+          "openingTimes": [
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 23:00"
+            }
+          ],
+          "CoverageType": "Open Lot"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            73.02,
+            19.045
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Name": "Airoli Station Parking",
+          "Description": "Parking facility at Airoli Station Parking.",
+          "prices": [
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 22:00",
+              "rateType": "Per Hour",
+              "duration": "first 2 hours",
+              "amount": 60.00,
+              "currency": "INR"
+            },
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 22:00",
+              "rateType": "Per Hour",
+              "duration": "subsequent hour",
+              "amount": 30.00,
+              "currency": "INR"
+            },
+            {
+              "days": "Mon-Sun",
+              "timeRange": "Full Day",
+              "rateType": "Flat Rate",
+              "duration": "Max 12 hours",
+              "amount": 300.00,
+              "currency": "INR"
+            }
+          ],
+          "openingTimes": [
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 23:00"
+            }
+          ],
+          "CoverageType": "Open Lot"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            72.99,
+            19.15
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Name": "Juhu Beach Parking",
+          "Description": "Parking facility at Juhu Beach Parking.",
+          "prices": [
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 22:00",
+              "rateType": "Per Hour",
+              "duration": "first 2 hours",
+              "amount": 60.00,
+              "currency": "INR"
+            },
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 22:00",
+              "rateType": "Per Hour",
+              "duration": "subsequent hour",
+              "amount": 30.00,
+              "currency": "INR"
+            },
+            {
+              "days": "Mon-Sun",
+              "timeRange": "Full Day",
+              "rateType": "Flat Rate",
+              "duration": "Max 12 hours",
+              "amount": 300.00,
+              "currency": "INR"
+            }
+          ],
+          "openingTimes": [
+            {
+              "days": "Mon-Sun",
+              "timeRange": "08:00 - 23:00"
+            }
+          ],
+          "CoverageType": "Open Lot"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            72.827,
+            19.108
+          ]
+        }
+      }
+    ]
   ]
 }

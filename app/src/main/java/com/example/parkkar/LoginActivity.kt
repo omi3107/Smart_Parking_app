@@ -13,7 +13,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
@@ -25,22 +24,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.edit
 import com.example.parkkar.data.DatabaseHelper
+import com.example.parkkar.ui.common.CommonTopAppBar
 import com.example.parkkar.ui.theme.ParkkarTheme
 import com.example.parkkar.utils.showToast
-import com.google.android.gms.auth.api.identity.Identity
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
@@ -62,16 +60,12 @@ class LoginActivity : ComponentActivity() {
         dbHelper = DatabaseHelper(this)
         auth = Firebase.auth
 
-        val oneTapClient = Identity.getSignInClient(this)
-        val signInRequest = com.google.android.gms.auth.api.identity.BeginSignInRequest.builder()
-            .setGoogleIdTokenRequestOptions(
-                com.google.android.gms.auth.api.identity.BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
-                    .setSupported(true)
-                    .setServerClientId(getString(R.string.default_web_client_id))
-                    .setFilterByAuthorizedAccounts(false)
-                    .build()
-            )
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
             .build()
+
+        val googleSignInClient = GoogleSignIn.getClient(this, gso)
 
         setContent {
             ParkkarTheme {
@@ -80,14 +74,12 @@ class LoginActivity : ComponentActivity() {
                 val initialRememberMe = savedUsername.isNotEmpty()
 
                 val googleSignInLauncher = rememberLauncherForActivityResult(
-                    contract = ActivityResultContracts.StartIntentSenderForResult(),
+                    contract = ActivityResultContracts.StartActivityForResult(),
                     onResult = { result ->
+                        val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
                         try {
-                            val credential = oneTapClient.getSignInCredentialFromIntent(result.data)
-                            val idToken = credential.googleIdToken
-                            if (idToken != null) {
-                                firebaseAuthWithGoogle(idToken)
-                            }
+                            val account = task.getResult(ApiException::class.java)!!
+                            firebaseAuthWithGoogle(account.idToken!!)
                         } catch (e: ApiException) {
                             Log.w(TAG, "Google sign in failed", e)
                             showToast(context, "Google Sign-In failed.")
@@ -114,15 +106,8 @@ class LoginActivity : ComponentActivity() {
                     onSignUpClicked = { navigateTo(SignUpActivity::class.java) },
                     onForgotPasswordClicked = { navigateTo(ForgotPasswordActivity::class.java) },
                     onGoogleSignInClicked = {
-                        oneTapClient.beginSignIn(signInRequest)
-                            .addOnSuccessListener(this) { result ->
-                                val intentSenderRequest = androidx.activity.result.IntentSenderRequest.Builder(result.pendingIntent.intentSender).build()
-                                googleSignInLauncher.launch(intentSenderRequest)
-                            }
-                            .addOnFailureListener(this) { e ->
-                                Log.e(TAG, "Google Sign-In failed: ${e.localizedMessage}")
-                                showToast(this, "Google Sign-In is not available at the moment.")
-                            }
+                        val signInIntent = googleSignInClient.signInIntent
+                        googleSignInLauncher.launch(signInIntent)
                     }
                 )
             }
@@ -169,6 +154,7 @@ class LoginActivity : ComponentActivity() {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(
     initialUsername: String,
@@ -183,23 +169,15 @@ fun LoginScreen(
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
     var rememberMe by rememberSaveable { mutableStateOf(initialRememberMe) }
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    Scaffold(
+        topBar = { CommonTopAppBar() }
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
+                .padding(it)
                 .padding(16.dp),
         ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 16.dp),
-                horizontalArrangement = Arrangement.End,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text("PARK-KAR", fontWeight = FontWeight.Bold, fontSize = 20.sp, color = Color(0xFF4A4A4A))
-                Spacer(modifier = Modifier.width(8.dp))
-                Image(painter = painterResource(id = R.drawable.logo), contentDescription = "Park-Kar Logo", modifier = Modifier.height(20.dp))
-            }
             Column(
                 modifier = Modifier
                     .weight(1f)

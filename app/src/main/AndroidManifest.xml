@@ -50,6 +50,11 @@
             android:exported="false"
             android:label="Map"
             android:theme="@style/Theme.Parkkar" />
+        <activity
+            android:name=".ChatbotActivity"
+            android:exported="false"
+            android:label="Chatbot"
+            android:theme="@style/Theme.Parkkar" />
     </application>
 
 </manifest>
