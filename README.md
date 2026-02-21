@@ -6,25 +6,26 @@
 
 ## 📋 Table of Contents
 
-- [Lab Experiment Requirements](#-lab-experiment-requirements)
-- [Features](#-features)
-- [Screenshots & App Flow](#-screenshots--app-flow)
-- [Tech Stack](#-tech-stack)
-- [Architecture Overview](#-architecture-overview)
-- [Project Structure](#-project-structure)
-- [Prerequisites](#-prerequisites)
-- [Setup & Installation](#-setup--installation)
-- [Configuration](#-configuration)
-- [City Data Coverage](#-city-data-coverage)
-- [Key Modules Deep Dive](#-key-modules-deep-dive)
-- [Build & Run](#-build--run)
-- [Testing](#-testing)
-- [Known Limitations & Scope for Improvement](#-known-limitations--scope-for-improvement)
-- [Disclaimer](#-disclaimer)
+- [Lab Experiment Requirements](#lab-experiment-requirements)
+- [Features](#features)
+- [Screenshots & App Flow](#screenshots--app-flow)
+- [Tech Stack](#tech-stack)
+- [Architecture Overview](#architecture-overview)
+- [Project Structure](#project-structure)
+- [Prerequisites](#prerequisites)
+- [Setup & Installation](#setup--installation)
+- [City Data Coverage](#city-data-coverage)
+- [Key Modules Deep Dive](#key-modules-deep-dive)
+- [Build & Run](#build--run)
+- [Testing](#testing)
+- [Known Limitations & Scope for Improvement](#known-limitations--scope-for-improvement)
+- [Future Enhancements](#future-enhancements)
+- [Support](#support)
+- [Disclaimer](#disclaimer)
 
 ---
 
-## 🧪 Lab Experiment Requirements
+## <a id="lab-experiment-requirements"></a> 🧪 Lab Experiment Requirements
 
 This project was developed to fulfill the following practicals from our lab syllabus:
 
@@ -34,7 +35,7 @@ This project was developed to fulfill the following practicals from our lab syll
 
 ---
 
-## ✨ Features
+## <a id="features"></a> ✨ Features
 
 ### Core Functionality
 - **🗺️ Interactive Map** — Full-screen dark-themed MapLibre GL map powered by MapTiler, with custom parking markers and tap-to-view details.
@@ -58,7 +59,7 @@ This project was developed to fulfill the following practicals from our lab syll
 
 ---
 
-## 📸 Screenshots & App Flow
+## <a id="screenshots--app-flow"></a> 📸 Screenshots & App Flow
 
 <table>
   <tr>
@@ -108,7 +109,7 @@ App Flow:  Login → Home (Search + Recommendations) → Parking Results → Map
 
 ---
 
-## 🛠️ Tech Stack
+## <a id="tech-stack"></a> 🛠️ Tech Stack
 
 | Layer | Technology | Version |
 |-------|-----------|---------|
@@ -131,7 +132,7 @@ App Flow:  Login → Home (Search + Recommendations) → Parking Results → Map
 
 ---
 
-## 🏗️ Architecture Overview
+## <a id="architecture-overview"></a> 🏗️ Architecture Overview
 
 The app follows a **multi-Activity architecture** with Jetpack Compose for the UI layer and ViewModels for state management. Each major feature is encapsulated in its own Activity + Composable screen pair.
 
@@ -167,7 +168,7 @@ The app follows a **multi-Activity architecture** with Jetpack Compose for the U
 
 ---
 
-## 📁 Project Structure
+## <a id="project-structure"></a> 📁 Project Structure
 
 ```
 Parkkar/
@@ -264,7 +265,7 @@ Parkkar/
 
 ---
 
-## ✅ Prerequisites
+## <a id="prerequisites"></a> ✅ Prerequisites
 
 - **Android Studio** Ladybug (2024.2.1) or newer
 - **JDK 11** or higher
@@ -275,7 +276,7 @@ Parkkar/
 
 ---
 
-## ⚙️ Setup & Installation
+## <a id="setup--installation"></a> ⚙️ Setup & Installation
 
 ### 1. Clone the Repository
 
@@ -317,7 +318,7 @@ Open the project in Android Studio and let Gradle sync. Resolve any SDK installa
 
 ---
 
-## 🏙️ City Data Coverage
+## <a id="city-data-coverage"></a> 🏙️ City Data Coverage
 
 The app ships with pre-bundled parking data for **5 Indian cities**:
 
@@ -333,7 +334,7 @@ Each parking location can include: name, address, lat/lng coordinates, 2-wheeler
 
 ---
 
-## 🔬 Key Modules Deep Dive
+## <a id="key-modules-deep-dive"></a> 🔬 Key Modules Deep Dive
 
 ### Recommendation Engine (`RecommendationEngine.kt`)
 
@@ -380,7 +381,7 @@ Passwords are hashed with **SHA-256** before storage.
 
 ---
 
-## 🚀 Build & Run
+## <a id="build--run"></a> 🚀 Build & Run
 
 ```bash
 # Debug build
@@ -397,7 +398,7 @@ The app launches on `LoginActivity` as the entry point.
 
 ---
 
-## 🧪 Testing
+## <a id="testing"></a> 🧪 Testing
 
 ```bash
 # Unit tests
@@ -411,7 +412,7 @@ The project includes test infrastructure with JUnit, AndroidX Test, Espresso, an
 
 ---
 
-## ⚠️ Known Limitations & Scope for Improvement
+## <a id="known-limitations--scope-for-improvement"></a> ⚠️ Known Limitations & Scope for Improvement
 
 ### Architecture
 - **Multi-Activity pattern** — The app uses 13 separate Activities instead of Single-Activity architecture with Jetpack Navigation. Migrating to Navigation Compose would reduce memory overhead and improve transition animations.
@@ -440,9 +441,42 @@ The project includes test infrastructure with JUnit, AndroidX Test, Espresso, an
 
 ---
 
-## 📄 Disclaimer
+## <a id="future-enhancements"></a> 🚀 Future Enhancements
 
-This project is a **college-level academic project**, developed by considering the experiments prescribed in our **lab syllabus**. It is intended **solely for educational and demonstration purposes** and is not production-ready. Please add an appropriate license before open-sourcing.
+The following features are feasible next steps to elevate Parkkar beyond its current scope:
+
+| # | Enhancement | Description |
+|:-:|-------------|-------------|
+| 1 | **Real-Time Availability** | Integrate IoT sensor data or a live backend API to show real-time slot occupancy instead of static JSON data. |
+| 2 | **In-App Payment Gateway** | Add Razorpay/UPI payment integration for seamless booking and pre-payment of parking fees. |
+| 3 | **Single-Activity + Navigation Compose** | Migrate from multi-Activity to Jetpack Navigation for smoother transitions and lower memory usage. |
+| 4 | **Room Database Migration** | Replace raw `SQLiteOpenHelper` with Room for compile-time query safety, coroutine-native DAOs, and versioned migrations. |
+| 5 | **Hilt Dependency Injection** | Introduce Hilt to decouple ViewModels from repositories and enable easier unit testing. |
+| 6 | **Offline Map Caching** | Cache MapTiler tiles locally so the map remains usable in low-connectivity areas. |
+| 7 | **Multi-Language Support** | Add `strings.xml` translations for Hindi, Marathi, Gujarati, and Kannada to serve users across covered cities. |
+| 8 | **Live ETA Notifications** | Replace the hardcoded 7-min travel time with real-time ETA from OSRM, dynamically scheduling "Time to Leave" alerts. |
+| 9 | **User Reviews & Ratings** | Allow users to rate and review parking spots, stored in Firebase Firestore for community-driven data. |
+| 10 | **Admin Dashboard** | Build a companion web panel for parking lot owners to manage spots, pricing, and view analytics. |
+
+---
+
+## <a id="support"></a> 📬 Support
+
+Have questions, suggestions, or want to contribute? Feel free to reach out:
+
+| Platform | Link |
+|----------|------|
+| **GitHub** | [omi3107](https://github.com/omi3107) |
+| **Email** | [omkardesai3107@gmail.com](mailto:omkardesai3107@gmail.com) |
+| **LinkedIn** | [Omkar Desai](https://www.linkedin.com/in/omkar-desai-726037333/) |
+
+> 💡 **Found a bug?** Open an [issue](https://github.com/omi3107/Smart_Parking_app/issues) on the repository.
+
+---
+
+## <a id="disclaimer"></a> 📄 Disclaimer
+
+This project is a **college-level academic project**, developed by considering the experiments prescribed in our **lab syllabus**. It is intended **solely for educational and demonstration purposes**. Please add an appropriate license before open-sourcing.
 
 ---
 
