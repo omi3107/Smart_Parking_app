@@ -1,4 +1,3 @@
-
 import java.util.Properties
 
 plugins {
@@ -7,7 +6,6 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.serialization)
     id("com.google.gms.google-services")
-
 }
 
 // Load MAPTILER_API_KEY from local.properties
@@ -20,7 +18,6 @@ if (localPropertiesFile.exists()) {
 android {
     namespace = "com.example.parkkar"
     compileSdk = 36
-
     defaultConfig {
         applicationId = "com.example.parkkar"
         minSdk = 26
@@ -30,12 +27,19 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        // Make the API key available in the app's build config
+        // ✅ Safely load API keys
         val mapTilerApiKey = localProperties.getProperty("MAPTILER_API_KEY") ?: ""
         val geminiApiKey = localProperties.getProperty("GEMINI_API_KEY") ?: ""
+
         buildConfigField("String", "MAPTILER_API_KEY", "\"$mapTilerApiKey\"")
         buildConfigField("String", "GEMINI_API_KEY", "\"$geminiApiKey\"")
-        buildConfigField("String", "MAP_STYLE_URL", "\"https://api.maptiler.com/maps/019a1af3-3396-72e5-8331-011b55745b4c/style.json?key=$mapTilerApiKey\"")
+
+        // ✅ Use stable, compatible MapTiler style (v1 instead of v2-dark)
+        buildConfigField(
+            "String",
+            "MAP_STYLE_URL",
+            "\"https://api.maptiler.com/maps/streets-v4-dark/style.json?key=$mapTilerApiKey\""
+        )
     }
 
     buildTypes {
@@ -47,13 +51,16 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
     kotlinOptions {
         jvmTarget = "11"
     }
+
     buildFeatures {
         compose = true
         buildConfig = true
@@ -61,7 +68,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -72,27 +78,28 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation("androidx.compose.material:material-icons-core")
     implementation("androidx.compose.material:material-icons-extended")
+
     implementation(libs.kotlinx.serialization.json)
-    implementation(libs.maplibre.sdk)
+
+    // ✅ Use latest stable MapLibre SDK
+    implementation("org.maplibre.gl:android-sdk:11.5.0")
     implementation("org.maplibre.gl:android-plugin-annotation-v9:3.0.0")
     implementation("com.mapbox.mapboxsdk:mapbox-android-gestures:0.7.0")
     implementation("com.mapbox.mapboxsdk:mapbox-sdk-geojson:5.8.0")
 
-    // Firebase - Use the version catalog (libs) and BOM
+    // Firebase
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
     implementation("com.google.firebase:firebase-analytics-ktx")
+    implementation(libs.firebase.auth.ktx)
 
-    // implementation(libs.firebase.firestore.ktx) // Disabled for local data access
-    implementation(libs.firebase.auth.ktx) // Added for auth
-
-    // Google Sign-In
+    // Google Sign-In + Location
     implementation(libs.play.services.auth)
     implementation("com.google.android.gms:play-services-location:21.3.0")
 
-    // Ktor Client
+    // ✅ Ktor Client (OkHttp)
     implementation("io.ktor:ktor-client-core:2.3.10")
-    implementation("io.ktor:ktor-client-cio:2.3.10")
+    implementation("io.ktor:ktor-client-okhttp:2.3.10")
     implementation("io.ktor:ktor-client-content-negotiation:2.3.10")
     implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.10")
 
@@ -102,6 +109,19 @@ dependencies {
     // Google AI (Gemini)
     implementation("com.google.ai.client.generativeai:generativeai:0.9.0")
 
+    // QR Code Generator
+    implementation("com.google.zxing:core:3.5.3")
+
+    // Jetpack DataStore
+    implementation("androidx.datastore:datastore-preferences:1.1.7")
+
+    // ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.9.0")
+
+    // WorkManager
+    implementation("androidx.work:work-runtime-ktx:2.9.0")
+
+    // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

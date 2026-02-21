@@ -4,10 +4,10 @@
     <selectionStates>
       <SelectionState runConfigName="Parkkar">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2025-10-31T18:53:58.219098700Z">
+        <DropdownSelection timestamp="2025-11-10T05:45:05.218782100Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="PhysicalDevice" identifier="serial=RZ8R815YQ1R" />
+              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\omini\.android\avd\Pixel_7a_3.avd" />
             </handle>
           </Target>
         </DropdownSelection>

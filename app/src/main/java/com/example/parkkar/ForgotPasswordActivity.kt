@@ -18,7 +18,6 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -45,7 +44,8 @@ class ForgotPasswordActivity : ComponentActivity() {
         dbHelper = DatabaseHelper(this)
 
         setContent {
-            ParkkarTheme {
+            val isDarkTheme = (application as MainApplication).isDarkTheme
+            ParkkarTheme(darkTheme = isDarkTheme) {
                 val context = LocalContext.current
                 ForgotPasswordScreen(
                     onNavigateBack = { finish() }, // Action for AppBar back navigation
@@ -119,7 +119,7 @@ fun ForgotPasswordScreen(
                         horizontalArrangement = Arrangement.End,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Text("PARK-KAR", fontWeight = FontWeight.Bold, fontSize = 20.sp, color = Color(0xFF4A4A4A))
+                        Text("PARK-KAR", fontWeight = FontWeight.Bold, fontSize = 20.sp, color = MaterialTheme.colorScheme.secondary)
                         Spacer(modifier = Modifier.width(8.dp))
                         Image(painter = painterResource(id = R.drawable.logo), contentDescription = "Park-Kar Logo", modifier = Modifier.size(24.dp))
                     }
@@ -141,7 +141,6 @@ fun ForgotPasswordScreen(
                 text = "Reset Your Password",
                 fontSize = 28.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color.Black,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth()
             )
@@ -149,7 +148,7 @@ fun ForgotPasswordScreen(
             Text(
                 text = "Enter your username/email and new password.",
                 fontSize = 16.sp,
-                color = Color.Gray,
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
                 textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth()
             )
@@ -160,11 +159,7 @@ fun ForgotPasswordScreen(
                 onValueChange = { usernameOrEmail = it },
                 label = { Text("Username, Email or Phone Number") },
                 modifier = Modifier.fillMaxWidth(),
-                singleLine = true,
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = MaterialTheme.colorScheme.primary,
-                    unfocusedBorderColor = Color.LightGray
-                )
+                singleLine = true
             )
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -182,11 +177,7 @@ fun ForgotPasswordScreen(
                         Icon(imageVector = image, if (newPasswordVisible) "Hide password" else "Show password")
                     }
                 },
-                supportingText = { Text("Must contain a number and least of 6 characters") },
-                 colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = MaterialTheme.colorScheme.primary,
-                    unfocusedBorderColor = Color.LightGray
-                )
+                supportingText = { Text("Must contain a number and least of 6 characters") }
             )
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -203,11 +194,7 @@ fun ForgotPasswordScreen(
                     IconButton(onClick = { confirmNewPasswordVisible = !confirmNewPasswordVisible }) {
                         Icon(imageVector = image, if (confirmNewPasswordVisible) "Hide password" else "Show password")
                     }
-                },
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = MaterialTheme.colorScheme.primary,
-                    unfocusedBorderColor = Color.LightGray
-                )
+                }
             )
             Spacer(modifier = Modifier.height(24.dp))
 
@@ -216,10 +203,9 @@ fun ForgotPasswordScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(50.dp),
-                shape = RoundedCornerShape(8.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF301934))
+                shape = RoundedCornerShape(8.dp)
             ) {
-                Text("Reset Password", fontSize = 18.sp, color = Color.White)
+                Text("Reset Password", fontSize = 18.sp)
             }
             Spacer(modifier = Modifier.height(16.dp))
             TextButton(onClick = onNavigateBack ) { // Uses onNavigateBack from AppBar

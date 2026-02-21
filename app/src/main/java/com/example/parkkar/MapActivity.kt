@@ -1,13 +1,12 @@
-
 package com.example.parkkar
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
-import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -34,8 +33,9 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.Chat
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Chat
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Remove
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
@@ -50,7 +50,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -61,8 +60,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -71,13 +71,18 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.compose.LocalLifecycleOwner
+import com.example.parkkar.data.DatabaseHelper
+import com.example.parkkar.data.UserPreferencesRepository
+import com.example.parkkar.model.FavoriteSpot
 import com.example.parkkar.model.ParkingLocation
 import com.example.parkkar.network.Route
 import com.example.parkkar.ui.map.MapViewModel
 import com.example.parkkar.ui.map.SearchResultUiState
 import com.example.parkkar.ui.theme.ParkkarTheme
+import com.example.parkkar.utils.NotificationHelper
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
-import com.google.firebase.analytics.ktx.logEvent
 import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
 import com.mapbox.geojson.LineString
@@ -102,15 +107,19 @@ class MapActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         MapLibre.getInstance(this)
+        Log.d("MAP_DEBUG", "MAP_STYLE_URL=${BuildConfig.MAP_STYLE_URL}")
 
         val latitude = intent.getDoubleExtra("latitude", 0.0)
         val longitude = intent.getDoubleExtra("longitude", 0.0)
         val userLatitude = intent.getDoubleExtra("user_latitude", 0.0)
         val userLongitude = intent.getDoubleExtra("user_longitude", 0.0)
         val locationName = intent.getStringExtra("locationName")
+        val arrivalTime = intent.getLongExtra("arrival_time", System.currentTimeMillis())
+        val leavingTime = intent.getLongExtra("leaving_time", System.currentTimeMillis() + 3600000) // Default 1 hour
 
         setContent {
-            ParkkarTheme {
+            val isDarkTheme = (application as MainApplication).isDarkTheme
+            ParkkarTheme(darkTheme = isDarkTheme) {
                 MapScreen(
                     viewModel = viewModel,
                     initialLatitude = latitude,
@@ -118,7 +127,10 @@ class MapActivity : ComponentActivity() {
                     userLatitude = userLatitude,
                     userLongitude = userLongitude,
                     locationName = locationName,
-                    onNavigateBack = { onBackPressedDispatcher.onBackPressed() }
+                    arrivalTime = arrivalTime,
+                    leavingTime = leavingTime,
+                    onNavigateBack = { onBackPressedDispatcher.onBackPressed() },
+                    onNavigateToProfile = { startActivity(Intent(this, ProfileActivity::class.java)) }
                 )
             }
         }
@@ -134,7 +146,10 @@ fun MapScreen(
     userLatitude: Double,
     userLongitude: Double,
     locationName: String?,
-    onNavigateBack: () -> Unit
+    arrivalTime: Long,
+    leavingTime: Long,
+    onNavigateBack: () -> Unit,
+    onNavigateToProfile: () -> Unit
 ) {
     val context = LocalContext.current
     val searchQuery by viewModel.searchQuery.collectAsState()
@@ -180,16 +195,14 @@ fun MapScreen(
                     }
                 },
                 actions = {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(end = 16.dp),
-                        horizontalArrangement = Arrangement.End,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text("PARK-KAR", fontWeight = FontWeight.Bold, fontSize = 20.sp, color = androidx.compose.ui.graphics.Color(0xFF4A4A4A))
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text("PARK-KAR", fontWeight = FontWeight.Bold, fontSize = 20.sp, color = MaterialTheme.colorScheme.secondary)
                         Spacer(modifier = Modifier.width(8.dp))
                         Image(painter = painterResource(id = R.drawable.logo), contentDescription = "Park-Kar Logo", modifier = Modifier.size(24.dp))
+                        Spacer(modifier = Modifier.width(8.dp))
+                        IconButton(onClick = onNavigateToProfile) {
+                            Icon(Icons.Default.Person, contentDescription = "Profile")
+                        }
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -206,7 +219,7 @@ fun MapScreen(
                 }
                 context.startActivity(intent)
             }) {
-                Icon(Icons.Filled.Chat, contentDescription = "Chatbot")
+                Icon(Icons.AutoMirrored.Filled.Chat, contentDescription = "Chatbot")
             }
         }
     ) { innerPadding ->
@@ -242,9 +255,9 @@ fun MapScreen(
                         modifier = Modifier.fillMaxWidth(),
                         placeholder = { Text("Search Here") },
                         leadingIcon = { Icon(Icons.Default.Search, contentDescription = "Search Icon") },
-                        colors = TextFieldDefaults.colors(
-                            focusedIndicatorColor = androidx.compose.ui.graphics.Color.Transparent,
-                            unfocusedIndicatorColor = androidx.compose.ui.graphics.Color.Transparent
+                        colors = androidx.compose.material3.TextFieldDefaults.colors(
+                            focusedIndicatorColor = Color.Transparent,
+                            unfocusedIndicatorColor = Color.Transparent
                         ),
                         singleLine = true
                     )
@@ -281,8 +294,7 @@ fun MapScreen(
                     .align(Alignment.CenterEnd)
                     .padding(16.dp),
                 shape = RoundedCornerShape(8.dp),
-                elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
-                colors = CardDefaults.cardColors(containerColor = androidx.compose.ui.graphics.Color.White)
+                elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
             ) {
                 Column {
                     IconButton(onClick = { mapView.getMapAsync { it.moveCamera(CameraUpdateFactory.zoomIn()) } }) {
@@ -301,7 +313,7 @@ fun MapScreen(
                 modifier = Modifier.align(Alignment.BottomCenter)
             ) {
                 selectedParkingSpot?.let {
-                    ParkingDetailsSheet(parkingSpot = it)
+                    ParkingDetailsSheet(parkingSpot = it, arrivalTime = arrivalTime, leavingTime = leavingTime)
                     if (it.latitude != null && it.longitude != null) {
                         mapView.getMapAsync { map ->
                             map.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(it.latitude, it.longitude), 16.0))
@@ -327,6 +339,8 @@ fun MapContentView(
 ) {
     val context = LocalContext.current
     val gson = remember { Gson() }
+    val routeLineColor = MaterialTheme.colorScheme.primary.toArgb()
+    val routeCasingColor = MaterialTheme.colorScheme.secondary.toArgb()
 
     val homeIcon = remember(context) {
         val vectorDrawable = ContextCompat.getDrawable(context, R.drawable.ic_home)
@@ -356,7 +370,7 @@ fun MapContentView(
 
     AndroidView({ mapView }) { view ->
         view.getMapAsync { maplibreMap ->
-            maplibreMap.setStyle("https://api.maptiler.com/maps/019a1af3-3396-72e5-8331-011b55745b4c/style.json?key=EnaRQtianLhrW7vEu1Z8") { style ->
+            maplibreMap.setStyle(BuildConfig.MAP_STYLE_URL) { style ->
                 if (initialLatitude != 0.0 && initialLongitude != 0.0 && maplibreMap.cameraPosition.zoom < 1.0) {
                     maplibreMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(initialLatitude, initialLongitude), 15.0))
                 }
@@ -369,9 +383,9 @@ fun MapContentView(
                 if(userLatitude != 0.0 && userLongitude != 0.0){
                     symbolManager.create(
                         SymbolOptions()
-                        .withLatLng(LatLng(userLatitude, userLongitude))
-                        .withIconImage("home-icon")
-                        .withIconSize(1.5f)
+                            .withLatLng(LatLng(userLatitude, userLongitude))
+                            .withIconImage("home-icon")
+                            .withIconSize(1.5f)
                     )
                 }
 
@@ -402,7 +416,7 @@ fun MapContentView(
                     val casingLayerId = "route-layer-casing"
                     style.getLayer(casingLayerId) ?: style.addLayerBelow(
                         LineLayer(casingLayerId, sourceId).withProperties(
-                            PropertyFactory.lineColor(Color.parseColor("#00FFFF")),
+                            PropertyFactory.lineColor(routeCasingColor),
                             PropertyFactory.lineWidth(12f),
                             PropertyFactory.lineCap(Property.LINE_CAP_ROUND),
                             PropertyFactory.lineJoin(Property.LINE_JOIN_ROUND),
@@ -413,7 +427,7 @@ fun MapContentView(
                     val layerId = "route-layer"
                     style.getLayer(layerId) ?: style.addLayer(
                         LineLayer(layerId, sourceId).withProperties(
-                            PropertyFactory.lineColor(Color.parseColor("#00BFFF")),
+                            PropertyFactory.lineColor(routeLineColor),
                             PropertyFactory.lineWidth(7f),
                             PropertyFactory.lineCap(Property.LINE_CAP_ROUND),
                             PropertyFactory.lineJoin(Property.LINE_JOIN_ROUND)
@@ -443,9 +457,13 @@ fun MapContentView(
 }
 
 @Composable
-fun ParkingDetailsSheet(parkingSpot: ParkingLocation) {
+fun ParkingDetailsSheet(parkingSpot: ParkingLocation, arrivalTime: Long, leavingTime: Long) {
     val context = LocalContext.current
     val firebaseAnalytics = Firebase.analytics
+    val dbHelper = DatabaseHelper(context)
+    val userPreferencesRepository = UserPreferencesRepository.getInstance(context)
+    val notificationsEnabled by userPreferencesRepository.notificationsEnabled.collectAsState(initial = true)
+
 
     Card(
         modifier = Modifier
@@ -457,7 +475,7 @@ fun ParkingDetailsSheet(parkingSpot: ParkingLocation) {
         Column(modifier = Modifier.padding(16.dp)) {
             Text(text = parkingSpot.name ?: "", fontWeight = FontWeight.Bold, fontSize = 20.sp)
             Spacer(modifier = Modifier.height(8.dp))
-            Text(text = "Price: ${parkingSpot.prices?.firstOrNull()?.currency ?: ""}${parkingSpot.prices?.firstOrNull()?.amount ?: "N/A"}", style = MaterialTheme.typography.bodyLarge)
+            Text(text = "Price: ${parkingSpot.prices?.firstOrNull()?.currency ?: "₹"}${parkingSpot.prices?.firstOrNull()?.amount ?: "N/A"}", style = MaterialTheme.typography.bodyLarge)
             Text(text = "Duration: ${parkingSpot.prices?.firstOrNull()?.duration ?: "N/A"}", style = MaterialTheme.typography.bodyLarge)
             Spacer(modifier = Modifier.height(16.dp))
             Row(
@@ -465,12 +483,18 @@ fun ParkingDetailsSheet(parkingSpot: ParkingLocation) {
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 Button(
-                    onClick = { 
-                        firebaseAnalytics.logEvent("book_now_clicked") {
-                            param("spot_id", parkingSpot.id)
+                    onClick = {
+                        val bundle = Bundle()
+                        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, parkingSpot.id)
+                        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
+
+                        val intent = Intent(context, BookingConfirmationActivity::class.java).apply {
+                            putExtra(BookingConfirmationActivity.EXTRA_PARKING_SPOT, Gson().toJson(parkingSpot))
+                            putExtra(BookingConfirmationActivity.EXTRA_ARRIVAL_TIME, arrivalTime)
+                            putExtra(BookingConfirmationActivity.EXTRA_LEAVING_TIME, leavingTime)
                         }
-                        Toast.makeText(context, "Booking feature not yet implemented", Toast.LENGTH_SHORT).show()
-                     },
+                        context.startActivity(intent)
+                    },
                     modifier = Modifier.weight(1f)
                 ) {
                     Text(text = "Book Now")
@@ -494,6 +518,28 @@ fun ParkingDetailsSheet(parkingSpot: ParkingLocation) {
                 ) {
                     Text(text = "360° View")
                 }
+            }
+            Spacer(modifier = Modifier.height(8.dp))
+            Button(
+                onClick = { 
+                    val favoriteSpot = FavoriteSpot(
+                        id = 0, // DB will auto-increment
+                        userId = 1, // Replace with actual user ID
+                        parkingId = parkingSpot.id,
+                        parkingName = parkingSpot.name ?: "N/A",
+                        address = parkingSpot.address ?: "N/A",
+                        latitude = parkingSpot.latitude,
+                        longitude = parkingSpot.longitude
+                    )
+                    dbHelper.addFavoriteSpot(favoriteSpot)
+                    if (notificationsEnabled) {
+                        NotificationHelper.showBookingConfirmationNotification(context, "${parkingSpot.name} added to favourites")
+                    }
+                    Toast.makeText(context, "Added to favourites", Toast.LENGTH_SHORT).show()
+                 },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Add to Favourites")
             }
         }
     }

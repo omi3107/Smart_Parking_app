@@ -1,4 +1,4 @@
-@file:OptIn(ExperimentalSerializationApi::class, kotlinx.serialization.InternalSerializationApi::class)
+@file:OptIn(ExperimentalSerializationApi::class)
 package com.example.parkkar.repository
 
 import android.content.Context
@@ -6,49 +6,33 @@ import android.util.Log
 import com.example.parkkar.model.OpeningTime
 import com.example.parkkar.model.ParkingLocation
 import com.example.parkkar.model.PriceInfo
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.InternalSerializationApi
-import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.descriptors.PrimitiveKind
-import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
-import kotlinx.serialization.descriptors.SerialDescriptor
-import kotlinx.serialization.encoding.Decoder
-import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.decodeFromJsonElement
 import java.io.IOException
-
-// Custom serializer to handle "NA" or other non-double strings gracefully
-object DoubleAsStringSerializer : KSerializer<Double?> {
-    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("DoubleAsString", PrimitiveKind.STRING)
-
-    override fun serialize(encoder: Encoder, value: Double?) {
-        encoder.encodeString(value?.toString() ?: "NA")
-    }
-
-    override fun deserialize(decoder: Decoder): Double? {
-        return decoder.decodeString().toDoubleOrNull()
-    }
-}
 
 object ParkingRepository {
 
     private var allParkingSpots: List<ParkingLocation>? = null
     private val json = Json { ignoreUnknownKeys = true; isLenient = true; }
 
-    @Synchronized
-    fun getAllParkingSpots(context: Context): List<ParkingLocation> {
+    suspend fun getAllParkingSpots(context: Context): List<ParkingLocation> {
         if (allParkingSpots == null) {
             Log.d("ParkingRepository", "Parking data is not cached. Loading from JSON assets...")
-            allParkingSpots = loadAndParseAllData(context)
+            allParkingSpots = withContext(Dispatchers.IO) {
+                loadAndParseAllData(context)
+            }
         }
         return allParkingSpots!!
     }
 
-    fun searchParkingSpots(context: Context, query: String): List<ParkingLocation> {
+    suspend fun searchParkingSpots(context: Context, query: String): List<ParkingLocation> {
         val allSpots = getAllParkingSpots(context)
         if (query.isBlank()) {
             return emptyList()
@@ -60,7 +44,7 @@ object ParkingRepository {
         }
     }
 
-    fun getSpotById(context: Context, id: String): ParkingLocation? {
+    suspend fun getSpotById(context: Context, id: String): ParkingLocation? {
         getAllParkingSpots(context)
         return allParkingSpots?.firstOrNull { it.id == id }
     }
@@ -80,12 +64,35 @@ object ParkingRepository {
         return try {
             val jsonString = context.assets.open(fileName).bufferedReader().use { it.readText() }
             parser(jsonString)
-        } catch (e: IOException) {
-            Log.e("ParkingRepository", "Error reading $fileName", e)
+        } catch (_: IOException) {
+            Log.e("ParkingRepository", "Error reading $fileName")
             emptyList()
-        } catch (e: Exception) {
-            Log.e("ParkingRepository", "Error parsing $fileName", e)
+        } catch (_: Exception) {
+            Log.e("ParkingRepository", "Error parsing $fileName")
             emptyList()
+        }
+    }
+
+    private fun processMumbaiFeature(featureElement: JsonElement, locations: MutableList<ParkingLocation>) {
+        try {
+            val feature = json.decodeFromJsonElement<MumbaiFeature>(featureElement)
+            val props = feature.properties ?: return
+            val name = props.name ?: return
+            locations.add(ParkingLocation(
+                id = "mumbai_${name.toSafeId()}",
+                name = name,
+                address = props.description,
+                latitude = feature.geometry?.coordinates?.getOrNull(1),
+                longitude = feature.geometry?.coordinates?.getOrNull(0),
+                cityName = "Mumbai",
+                twoWheelerCapacity = null, // These JSONs don't have capacity info
+                fourWheelerCapacity = null,
+                coverageType = props.coverageType,
+                prices = props.prices,
+                openingTimes = props.openingTimes
+            ))
+        } catch (_: Exception) {
+            Log.w("ParkingRepository", "Skipping malformed feature/element in Mumbai JSON: $featureElement")
         }
     }
 
@@ -93,25 +100,12 @@ object ParkingRepository {
         val root = json.decodeFromString<MumbaiRoot>(jsonString)
         val locations = mutableListOf<ParkingLocation>()
         root.features.forEach { featureElement ->
-            try {
-                val feature = json.decodeFromJsonElement<MumbaiFeature>(featureElement)
-                val props = feature.properties ?: return@forEach
-                val name = props.name ?: return@forEach
-                locations.add(ParkingLocation(
-                    id = "mumbai_${name.toSafeId()}",
-                    name = name,
-                    address = props.description,
-                    latitude = feature.geometry?.coordinates?.getOrNull(1),
-                    longitude = feature.geometry?.coordinates?.getOrNull(0),
-                    cityName = "Mumbai",
-                    twoWheelerCapacity = null, // These JSONs don't have capacity info
-                    fourWheelerCapacity = null,
-                    coverageType = props.coverageType,
-                    prices = props.prices, 
-                    openingTimes = props.openingTimes
-                ))
-            } catch (e: Exception) {
-                Log.w("ParkingRepository", "Skipping malformed feature in Mumbai JSON: $featureElement")
+            if (featureElement is JsonArray) {
+                featureElement.forEach { innerElement ->
+                    processMumbaiFeature(innerElement, locations)
+                }
+            } else {
+                processMumbaiFeature(featureElement, locations)
             }
         }
         return locations
@@ -145,9 +139,9 @@ object ParkingRepository {
 @Serializable private data class MumbaiRoot(val features: List<JsonElement>)
 @Serializable private data class MumbaiFeature(val properties: MumbaiProperties?, val geometry: MumbaiGeometry?)
 @Serializable private data class MumbaiProperties(
-    @SerialName("Name") val name: String?, 
-    @SerialName("Description") val description: String?, 
-    val prices: List<PriceInfo>?, 
+    @SerialName("Name") val name: String?,
+    @SerialName("Description") val description: String?,
+    val prices: List<PriceInfo>?,
     val openingTimes: List<OpeningTime>?,
     @SerialName("CoverageType") val coverageType: String? = null
 )
@@ -156,13 +150,13 @@ object ParkingRepository {
 @Serializable private data class StandardParkingRoot(@SerialName("parking_data") val parkingData: StandardParkingData)
 @Serializable private data class StandardParkingData(@SerialName("parking_location") val parkingLocation: List<StandardParkingLocation>)
 @Serializable private data class StandardParkingLocation(
-    val name: String?, 
-    val address: String?, 
-    val latitude: Double?, 
-    val longitude: Double?, 
-    @SerialName("two_wheeler_parking") val twoWheelerParking: Int?, 
-    @SerialName("four_wheeler_parking") val fourWheelerParking: Int?, 
-    val prices: List<PriceInfo>?, 
+    val name: String?,
+    val address: String?,
+    val latitude: Double?,
+    val longitude: Double?,
+    @SerialName("two_wheeler_parking") val twoWheelerParking: Int?,
+    @SerialName("four_wheeler_parking") val fourWheelerParking: Int?,
+    val prices: List<PriceInfo>?,
     val openingTimes: List<OpeningTime>?,
     @SerialName("CoverageType") val coverageType: String? = null
 )

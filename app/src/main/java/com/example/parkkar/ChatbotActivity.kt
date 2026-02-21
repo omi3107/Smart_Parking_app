@@ -1,41 +1,72 @@
+
 package com.example.parkkar
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.Send
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.parkkar.ui.chatbot.ChatbotViewModel
 import com.example.parkkar.ui.chatbot.ChatbotViewModelFactory
 import com.example.parkkar.ui.chatbot.Message
-import com.example.parkkar.ui.chatbot.UiState
 import com.example.parkkar.ui.theme.ParkkarTheme
 
 class ChatbotActivity : ComponentActivity() {
 
-    private val viewModel: ChatbotViewModel by viewModels { 
-        ChatbotViewModelFactory(this.application, intent.getStringExtra("parking_spot_id")) 
+    private val viewModel: ChatbotViewModel by viewModels {
+        ChatbotViewModelFactory(this.application, intent.getStringExtra("parking_spot_id"))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ParkkarTheme {
+            val isDarkTheme = (application as MainApplication).isDarkTheme
+            ParkkarTheme(darkTheme = isDarkTheme) {
                 ChatScreen(viewModel = viewModel, onNavigateBack = { finish() })
             }
         }
@@ -56,6 +87,17 @@ fun ChatScreen(viewModel: ChatbotViewModel, onNavigateBack: () -> Unit) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
                     }
                 },
+                actions = {
+                    Row(
+                        modifier = Modifier.fillMaxWidth().padding(end = 16.dp),
+                        horizontalArrangement = Arrangement.End,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text("PARK-KAR", fontWeight = FontWeight.Bold, fontSize = 20.sp, color = Color(0xFF4A4A4A))
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Image(painter = painterResource(id = R.drawable.logo), contentDescription = "Park-Kar Logo", modifier = Modifier.size(24.dp))
+                    }
+                },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
                     titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
@@ -69,6 +111,7 @@ fun ChatScreen(viewModel: ChatbotViewModel, onNavigateBack: () -> Unit) {
                 .fillMaxSize()
                 .padding(paddingValues)
                 .background(Color(0xFFF0F2F5))
+                .verticalScroll(rememberScrollState())
         ) {
             LazyColumn(
                 modifier = Modifier

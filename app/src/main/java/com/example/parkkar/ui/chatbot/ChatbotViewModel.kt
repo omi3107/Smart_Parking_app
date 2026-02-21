@@ -83,10 +83,14 @@ class ChatbotViewModel(application: Application, private val parkingSpotId: Stri
         Do not mention that you are working with a JSON file, just provide the information as if you know it. 
         If the user asks about traffic, check the provided data for a nearby alternative and advise them to use a map application for real-time traffic information. 
         If a question cannot be answered from the provided data, say "I do not have information on that."
+        You can also answer questions related to "Help and Support".
+
+        When the user asks for parking locations near them, you should ask for their current location.
+
+        When the user asks for parking locations near a selected location, you should provide a list of parking spots within a 5km radius of the selected location.
 
         Here is the full list of available parking spots:
-        $allSpotsJson
-        
+        ${'$'}allSpotsJson
         """
 
         return if (selectedSpot != null) {

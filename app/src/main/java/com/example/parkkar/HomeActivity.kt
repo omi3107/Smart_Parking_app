@@ -34,13 +34,15 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.CalendarToday
 import androidx.compose.material.icons.filled.Chat
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Schedule
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -64,7 +66,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -79,6 +80,7 @@ import com.example.parkkar.model.ParkingLocation
 import com.example.parkkar.ui.home.HomeViewModel
 import com.example.parkkar.ui.home.SearchResultUiState
 import com.example.parkkar.ui.theme.ParkkarTheme
+import com.example.parkkar.utils.NotificationHelper
 import com.example.parkkar.utils.showToast
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
@@ -101,9 +103,11 @@ class HomeActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
         firebaseAnalytics = Firebase.analytics
+        NotificationHelper.requestNotificationPermission(this)
 
         setContent {
-            ParkkarTheme {
+            val isDarkTheme = (application as MainApplication).isDarkTheme
+            ParkkarTheme(darkTheme = isDarkTheme) {
                 val context = LocalContext.current
                 var hasLocationPermission by remember {
                     mutableStateOf(
@@ -144,9 +148,12 @@ class HomeActivity : ComponentActivity() {
                         startActivity(intent)
                         finish()
                     },
+                    onNavigateToProfile = {
+                        startActivity(Intent(this, ProfileActivity::class.java))
+                    },
                     onNavigateToDetails = ::navigateToDetails,
                     onRecommendationClicked = {
-                        firebaseAnalytics.logEvent("recommendation_clicked") { 
+                        firebaseAnalytics.logEvent("recommendation_clicked") {
                             param("spot_id", it.id)
                         }
                         navigateToDetails(it.id)
@@ -175,7 +182,7 @@ class HomeActivity : ComponentActivity() {
                             Toast.makeText(this, "Please enter a search query.", Toast.LENGTH_LONG).show()
                         }
                     },
-                    onChatbotClick = { 
+                    onChatbotClick = {
                         val intent = Intent(this, ChatbotActivity::class.java)
                         startActivity(intent)
                     }
@@ -224,6 +231,7 @@ fun HomeScreenContent(
     viewModel: HomeViewModel,
     hasLocationPermission: Boolean,
     onNavigateBack: () -> Unit,
+    onNavigateToProfile: () -> Unit,
     onNavigateToDetails: (spotId: String) -> Unit,
     onRecommendationClicked: (spot: ParkingLocation) -> Unit,
     onFindParkingGeneral: () -> Unit,
@@ -263,14 +271,14 @@ fun HomeScreenContent(
                 title = { Text("Home") },
                 navigationIcon = { IconButton(onClick = onNavigateBack) { Icon(Icons.AutoMirrored.Filled.ArrowBack, "Logout") } },
                 actions = {
-                    Row(
-                        modifier = Modifier.fillMaxWidth().padding(end = 16.dp),
-                        horizontalArrangement = Arrangement.End,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text("PARK-KAR", fontWeight = FontWeight.Bold, fontSize = 20.sp, color = Color(0xFF4A4A4A))
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text("PARK-KAR", fontWeight = FontWeight.Bold, fontSize = 20.sp, color = MaterialTheme.colorScheme.secondary)
                         Spacer(modifier = Modifier.width(8.dp))
                         Image(painter = painterResource(id = R.drawable.logo), contentDescription = "Logo", modifier = Modifier.size(24.dp))
+                        Spacer(modifier = Modifier.width(8.dp))
+                        IconButton(onClick = onNavigateToProfile) {
+                            Icon(Icons.Default.Person, contentDescription = "Profile")
+                        }
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
@@ -279,7 +287,7 @@ fun HomeScreenContent(
         floatingActionButton = { FloatingActionButton(onClick = onChatbotClick) { Icon(Icons.Filled.Chat, "Chatbot") } }
     ) { innerPadding ->
         Column(
-            modifier = Modifier.fillMaxSize().padding(innerPadding).padding(horizontal = 16.dp),
+            modifier = Modifier.fillMaxSize().padding(innerPadding).padding(horizontal = 16.dp).verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Spacer(modifier = Modifier.height(16.dp))
@@ -311,7 +319,7 @@ fun HomeScreenContent(
                 HorizontalDivider()
                 Spacer(modifier = Modifier.height(8.dp))
             }
-            
+
             Box(modifier = Modifier.fillMaxWidth().weight(1f)) {
                 when (val state = searchResultsUiState) {
                     is SearchResultUiState.Idle -> {
@@ -357,15 +365,14 @@ fun HomeScreenContent(
                     showLeavingDatePicker.value = true
                 }, { showLeavingTimePicker.value = true })
             }
-            
+
             Spacer(modifier = Modifier.height(16.dp))
 
             Button(
                 onClick = onFindParkingGeneral,
-                modifier = Modifier.fillMaxWidth().height(50.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF301934))
+                modifier = Modifier.fillMaxWidth().height(50.dp)
             ) {
-                Text("Find Parking", fontSize = 18.sp, color = Color.White)
+                Text("Find Parking", fontSize = 18.sp)
             }
              Spacer(modifier = Modifier.height(16.dp))
         }
@@ -415,7 +422,7 @@ fun RecommendationCard(spot: ParkingLocation, onClick: () -> Unit) {
             Spacer(modifier = Modifier.height(4.dp))
             spot.address?.let { Text(it, style = MaterialTheme.typography.bodySmall, maxLines = 2, color = MaterialTheme.colorScheme.onSurfaceVariant) }
             Spacer(modifier = Modifier.height(8.dp))
-            Text("Capacity: ${spot.totalCapacity}", style = MaterialTheme.typography.bodySmall, color = Color.Gray)
+            Text("Capacity: ${spot.totalCapacity}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f))
         }
     }
 }
@@ -450,6 +457,7 @@ fun DefaultPreviewOfHomeScreenUpdated() {
             viewModel = HomeViewModel(app),
             hasLocationPermission = true,
             onNavigateBack = {},
+            onNavigateToProfile = {},
             onNavigateToDetails = {},
             onRecommendationClicked = {},
             onFindParkingGeneral = {},

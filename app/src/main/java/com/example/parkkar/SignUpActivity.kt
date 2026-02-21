@@ -18,7 +18,6 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -42,29 +41,30 @@ class SignUpActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ParkkarTheme {
+            val isDarkTheme = (application as MainApplication).isDarkTheme
+            ParkkarTheme(darkTheme = isDarkTheme) {
                 val context = LocalContext.current
                 val dbHelper = remember { DatabaseHelper(context) }
 
                 SignUpScreen(
                     onSignUpClicked = {
-                        if (it.first.isBlank() || it.second.isBlank() || it.third.isBlank() || it.fourth.isBlank() || it.fifth.isBlank()) {
+                        if (it.first.isBlank() || it.second.isBlank() || it.third.isBlank() || it.fourth.isBlank() || it.fifth.isBlank() || it.sixth.isBlank()) {
                             showToast(context, "All fields are required.")
                             return@SignUpScreen
                         }
-                        if (!isValidPassword(it.fourth)) {
+                        if (!isValidPassword(it.fifth)) {
                             showToast(context, "Password must be at least 6 characters and contain a number.")
                             return@SignUpScreen
                         }
-                        if (it.fourth != it.fifth) {
+                        if (it.fifth != it.sixth) {
                             showToast(context, "Passwords do not match.")
                             return@SignUpScreen
                         }
-                        if (dbHelper.checkUserExists(it.third, it.first)) {
-                            showToast(context, "Username or Email/Phone already exists.")
+                        if (dbHelper.checkUserExists(it.fourth, it.first)) {
+                            showToast(context, "Username or Email already exists.")
                             return@SignUpScreen
                         }
-                        val hashedPassword = sha256(it.fourth)
+                        val hashedPassword = sha256(it.fifth)
                         if (hashedPassword.isEmpty()) {
                             showToast(context, "Error hashing password. Please try again.")
                             return@SignUpScreen
@@ -73,7 +73,7 @@ class SignUpActivity : ComponentActivity() {
                         val sdfTimestamp = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
                         val currentDate = sdfDate.format(Date())
                         val currentTimestamp = sdfTimestamp.format(Date())
-                        val newUserId = dbHelper.addUser(it.first, it.second, it.third, hashedPassword, currentDate, currentTimestamp)
+                        val newUserId = dbHelper.addUser(email=it.first, phone=it.second, fullName=it.third, username=it.fourth, passwordHash=hashedPassword, date=currentDate, timestamp=currentTimestamp)
                         if (newUserId > -1) {
                             showToast(context, "Account Created Successfully")
                             val intent = Intent(context, LoginActivity::class.java)
@@ -94,10 +94,11 @@ class SignUpActivity : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SignUpScreen(
-    onSignUpClicked: (Quintuple<String, String, String, String, String>) -> Unit,
+    onSignUpClicked: (Sextuple<String, String, String, String, String, String>) -> Unit,
     onLoginClicked: () -> Unit
 ) {
-    var emailOrPhone by rememberSaveable { mutableStateOf("") }
+    var email by rememberSaveable { mutableStateOf("") }
+    var phone by rememberSaveable { mutableStateOf("") }
     var fullName by rememberSaveable { mutableStateOf("") }
     var username by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
@@ -119,7 +120,6 @@ fun SignUpScreen(
                 text = "Hi! Welcome",
                 fontSize = 36.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color.Black,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth()
             )
@@ -127,22 +127,28 @@ fun SignUpScreen(
             Text(
                 text = "Let's create an account",
                 fontSize = 16.sp,
-                color = Color.Gray,
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
                 textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth()
             )
             Spacer(modifier = Modifier.height(32.dp))
 
             OutlinedTextField(
-                value = emailOrPhone,
-                onValueChange = { emailOrPhone = it },
-                label = { Text("Email or Phone Number") },
+                value = email,
+                onValueChange = { email = it },
+                label = { Text("Email") },
+                modifier = Modifier.fillMaxWidth(),
+                singleLine = true
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+
+            OutlinedTextField(
+                value = phone,
+                onValueChange = { phone = it },
+                label = { Text("Phone Number") },
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true,
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = MaterialTheme.colorScheme.primary,
-                    unfocusedBorderColor = Color.LightGray
-                )
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone)
             )
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -151,11 +157,7 @@ fun SignUpScreen(
                 onValueChange = { fullName = it },
                 label = { Text("Full Name") },
                 modifier = Modifier.fillMaxWidth(),
-                singleLine = true,
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = MaterialTheme.colorScheme.primary,
-                    unfocusedBorderColor = Color.LightGray
-                )
+                singleLine = true
             )
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -164,11 +166,7 @@ fun SignUpScreen(
                 onValueChange = { username = it },
                 label = { Text("Username") },
                 modifier = Modifier.fillMaxWidth(),
-                singleLine = true,
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = MaterialTheme.colorScheme.primary,
-                    unfocusedBorderColor = Color.LightGray
-                )
+                singleLine = true
             )
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -187,11 +185,7 @@ fun SignUpScreen(
                         Icon(imageVector = image, description)
                     }
                 },
-                supportingText = { Text("Must contain a number and least of 6 characters") },
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = MaterialTheme.colorScheme.primary,
-                    unfocusedBorderColor = Color.LightGray
-                )
+                supportingText = { Text("Must contain a number and least of 6 characters") }
             )
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -209,23 +203,18 @@ fun SignUpScreen(
                     IconButton(onClick = { confirmPasswordVisible = !confirmPasswordVisible }) {
                         Icon(imageVector = image, description)
                     }
-                },
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = MaterialTheme.colorScheme.primary,
-                    unfocusedBorderColor = Color.LightGray
-                )
+                }
             )
             Spacer(modifier = Modifier.height(24.dp))
 
             Button(
-                onClick = { onSignUpClicked(Quintuple(emailOrPhone, fullName, username, password, confirmPassword)) },
+                onClick = { onSignUpClicked(Sextuple(email, phone, fullName, username, password, confirmPassword)) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(50.dp),
-                shape = RoundedCornerShape(8.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF301934))
+                shape = RoundedCornerShape(8.dp)
             ) {
-                Text("Sign Up", fontSize = 18.sp, color = Color.White)
+                Text("Sign Up", fontSize = 18.sp)
             }
             Spacer(modifier = Modifier.height(24.dp))
 
@@ -236,11 +225,11 @@ fun SignUpScreen(
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text("Have an account? ", fontSize = 14.sp, color = Color.Gray)
+                Text("Have an account? ", fontSize = 14.sp, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f))
                 Text(
                     text = "Log In",
                     modifier = Modifier.clickable { onLoginClicked() },
-                    color = Color(0xFF4A4A4A),
+                    color = MaterialTheme.colorScheme.secondary,
                     fontWeight = FontWeight.Bold,
                     fontSize = 14.sp
                 )
@@ -249,7 +238,7 @@ fun SignUpScreen(
     }
 }
 
-data class Quintuple<A, B, C, D, E>(val first: A, val second: B, val third: C, val fourth: D, val fifth: E)
+data class Sextuple<A, B, C, D, E, F>(val first: A, val second: B, val third: C, val fourth: D, val fifth: E, val sixth: F)
 
 @Preview(showBackground = true, device = "spec:width=411dp,height=891dp")
 @Composable

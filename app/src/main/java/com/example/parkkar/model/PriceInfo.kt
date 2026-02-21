@@ -10,5 +10,5 @@ data class PriceInfo(
     @SerialName("rateType") val rateType: String? = null,
     val duration: String? = null,
     val amount: Double? = null,
-    val currency: String? = null
+    val currency: String? = "₹"
 )

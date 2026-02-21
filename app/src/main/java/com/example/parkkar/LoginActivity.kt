@@ -12,7 +12,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
@@ -21,7 +23,6 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -33,7 +34,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.edit
+import androidx.lifecycle.lifecycleScope
 import com.example.parkkar.data.DatabaseHelper
+import com.example.parkkar.data.UserPreferencesRepository
 import com.example.parkkar.ui.common.CommonTopAppBar
 import com.example.parkkar.ui.theme.ParkkarTheme
 import com.example.parkkar.utils.showToast
@@ -44,6 +47,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.launch
 
 private const val PREFS_NAME = "ParkkarPrefs"
 private const val KEY_SAVED_USERNAME = "saved_username"
@@ -53,12 +57,15 @@ class LoginActivity : ComponentActivity() {
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var dbHelper: DatabaseHelper
     private lateinit var auth: FirebaseAuth
+    private lateinit var userPreferencesRepository: UserPreferencesRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         dbHelper = DatabaseHelper(this)
         auth = Firebase.auth
+        userPreferencesRepository = UserPreferencesRepository.getInstance(this)
+
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
@@ -68,7 +75,8 @@ class LoginActivity : ComponentActivity() {
         val googleSignInClient = GoogleSignIn.getClient(this, gso)
 
         setContent {
-            ParkkarTheme {
+            val isDarkTheme = (application as MainApplication).isDarkTheme
+            ParkkarTheme(darkTheme = isDarkTheme) {
                 val context = LocalContext.current
                 val savedUsername = sharedPreferences.getString(KEY_SAVED_USERNAME, "") ?: ""
                 val initialRememberMe = savedUsername.isNotEmpty()
@@ -106,6 +114,7 @@ class LoginActivity : ComponentActivity() {
                     onSignUpClicked = { navigateTo(SignUpActivity::class.java) },
                     onForgotPasswordClicked = { navigateTo(ForgotPasswordActivity::class.java) },
                     onGoogleSignInClicked = {
+                        auth.signOut() // Add this line to sign out from Firebase
                         val signInIntent = googleSignInClient.signInIntent
                         googleSignInLauncher.launch(signInIntent)
                     }
@@ -131,17 +140,21 @@ class LoginActivity : ComponentActivity() {
     }
 
     private fun handleSuccessfulLogin(username: String, shouldRemember: Boolean, isGoogleSignIn: Boolean) {
-        val userId = dbHelper.getUserIdByUsername(username)
-        dbHelper.addLogEntry(userId, if(isGoogleSignIn) "Successful Google Login" else "Successful Login")
-        showToast(this, "Login Successful")
+        lifecycleScope.launch {
+            userPreferencesRepository.setUserName(username)
+            userPreferencesRepository.setGoogleSignIn(isGoogleSignIn)
+            val userId = dbHelper.getUserIdByUsername(username)
+            dbHelper.addLogEntry(userId, if (isGoogleSignIn) "Successful Google Login" else "Successful Login")
+            showToast(this@LoginActivity, "Login Successful")
 
-        if (shouldRemember) {
-            sharedPreferences.edit { putString(KEY_SAVED_USERNAME, username) }
-        } else {
-            sharedPreferences.edit { remove(KEY_SAVED_USERNAME) }
+            if (shouldRemember) {
+                sharedPreferences.edit { putString(KEY_SAVED_USERNAME, username) }
+            } else {
+                sharedPreferences.edit { remove(KEY_SAVED_USERNAME) }
+            }
+
+            navigateTo(HomeActivity::class.java, clearTask = true)
         }
-
-        navigateTo(HomeActivity::class.java, clearTask = true)
     }
 
     private fun <T> navigateTo(activity: Class<T>, clearTask: Boolean = false) {
@@ -176,7 +189,8 @@ fun LoginScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(it)
-                .padding(16.dp),
+                .padding(16.dp)
+                .verticalScroll(rememberScrollState()),
         ) {
             Column(
                 modifier = Modifier
@@ -187,7 +201,7 @@ fun LoginScreen(
             ) {
                 Text("Hi! Welcome", fontSize = 36.sp, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth())
                 Spacer(modifier = Modifier.height(8.dp))
-                Text("I'm waiting for you, please enter your detail", fontSize = 16.sp, color = Color.Gray, textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth())
+                Text("I'm waiting for you, please enter your detail", fontSize = 16.sp, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f), textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth())
                 Spacer(modifier = Modifier.height(32.dp))
                 OutlinedTextField(
                     value = username,
@@ -218,7 +232,7 @@ fun LoginScreen(
                 ) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Checkbox(checked = rememberMe, onCheckedChange = { rememberMe = it })
-                        Text("Remember Me", fontSize = 14.sp, color = Color.DarkGray)
+                        Text("Remember Me", fontSize = 14.sp, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8f))
                     }
                     Text(
                         text = "Forgot Password?",
@@ -233,16 +247,15 @@ fun LoginScreen(
                     onClick = { onLoginClicked(Triple(username, password, rememberMe)) },
                     modifier = Modifier.fillMaxWidth().height(50.dp),
                     shape = RoundedCornerShape(8.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF301934))
                 ) {
-                    Text("Log In", fontSize = 18.sp, color = Color.White)
+                    Text("Log In", fontSize = 18.sp)
                 }
 
-                // --- Google Sign-In Button --- 
+                // --- Google Sign-In Button ---
                 Spacer(modifier = Modifier.height(16.dp))
                 Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)) {
                     HorizontalDivider(modifier = Modifier.weight(1f))
-                    Text(" OR ", color = Color.Gray, modifier = Modifier.padding(horizontal = 8.dp))
+                    Text(" OR ", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f), modifier = Modifier.padding(horizontal = 8.dp))
                     HorizontalDivider(modifier = Modifier.weight(1f))
                 }
                 Spacer(modifier = Modifier.height(16.dp))
@@ -253,23 +266,26 @@ fun LoginScreen(
                     shape = RoundedCornerShape(8.dp)
                 ) {
                     Image(painter = painterResource(id = R.drawable.ic_google_logo), contentDescription = "Google Logo", modifier = Modifier.size(24.dp))
-                    Spacer(modifier = Modifier.width(12.dp))
-                    Text("Sign in with Google", color = Color.DarkGray, fontSize = 16.sp)
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text("Sign in with Google")
                 }
-            }
-            Row(
-                modifier = Modifier.fillMaxWidth().padding(vertical = 24.dp),
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text("Don't have an account? ", fontSize = 14.sp, color = Color.Gray)
-                Text(
-                    text = "Sign Up",
-                    modifier = Modifier.clickable { onSignUpClicked() },
-                    color = MaterialTheme.colorScheme.primary,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 14.sp
-                )
+
+                Spacer(modifier = Modifier.height(24.dp))
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text("Don't have an account? ", fontSize = 14.sp, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f))
+                    Text(
+                        text = "Sign Up",
+                        modifier = Modifier.clickable { onSignUpClicked() },
+                        color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 14.sp
+                    )
+                }
             }
         }
     }
@@ -280,8 +296,8 @@ fun LoginScreen(
 fun LoginScreenPreview() {
     ParkkarTheme {
         LoginScreen(
-            initialUsername = "previewUser",
-            initialRememberMe = true,
+            initialUsername = "",
+            initialRememberMe = false,
             onLoginClicked = {},
             onSignUpClicked = {},
             onForgotPasswordClicked = {},
